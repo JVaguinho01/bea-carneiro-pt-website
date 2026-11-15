@@ -69,5 +69,8 @@
   // ---- Efeitos --------------------------------------------------------------
   --shadow-card: 0 16px 40px -8px rgb(10 15 33 / 0.12);
   --shadow-panel: 0 24px 64px -12px rgb(10 15 33 / 0.35);
-  --glow-color: rgb(255 107 69 / 0.18);
+  // manchas de luz no fundo do hero
+  --spot-coral: rgb(255 107 69 / 0.16);
+  --spot-green: rgb(59 122 92 / 0.12);
+  --spot-ivory: rgb(227 218 196 / 0.55);
 }

@@ -1,5 +1,21 @@
-<section #section id="inicio" class="hero" aria-labelledby="hero-title">
-  <div class="glow-layer" aria-hidden="true"><div #glow class="glow"></div></div>
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <!-- Manchas de luz decorativas, espalhadas ao acaso por trás do hero -->
+  <div class="spots" aria-hidden="true">
+    @for (s of spots; track $index) {
+      <span
+        class="spot"
+        [style.left.%]="s.x"
+        [style.top.%]="s.y"
+        [style.width.px]="s.size"
+        [style.height.px]="s.size"
+        [style.--spot]="s.color"
+        [style.--dx.px]="s.dx"
+        [style.--dy.px]="s.dy"
+        [style.animation-duration.s]="s.dur"
+        [style.animation-delay.s]="s.delay"
+      ></span>
+    }
+  </div>
 
   <div class="container grid">
     <div class="text">

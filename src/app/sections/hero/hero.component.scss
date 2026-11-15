@@ -6,23 +6,33 @@
   --hero-ratio: 520 / 840;
 }
 
-// ---- Glow coral que segue o rato -----------------------------------------------
-.glow-layer {
+// ---- Manchas de luz espalhadas (posições ao acaso no componente) ------------------
+.spots {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  overflow: hidden;
 }
 
-.glow {
+.spot {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 720px;
-  height: 720px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 65%);
-  transform: translate3d(70%, 40%, 0) translate(-50%, -50%);
+  background: radial-gradient(circle, var(--spot) 0%, transparent 68%);
+  transform: translate(-50%, -50%);
+  animation: drift ease-in-out infinite alternate;
   will-change: transform;
+}
+
+@keyframes drift {
+  to {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot {
+    animation: none;
+  }
 }
 
 .grid {
@@ -205,9 +215,6 @@
     top: 24px;
   }
 
-  .glow {
-    display: none;
-  }
 }
 
 // ---- Mobile: sem chips; foto 5:6 cortada pela dobra -------------------------------
