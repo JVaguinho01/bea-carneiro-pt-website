@@ -76,8 +76,9 @@ import { SocialLinksComponent } from '../../shared/social-links/social-links.com
       .stack {
         gap: var(--space-xl);
       }
+      /* mobile: nome (wordmark) → ícones → © e créditos */
       .base {
-        flex-direction: column;
+        flex-direction: column-reverse;
         align-items: flex-start;
       }
     }

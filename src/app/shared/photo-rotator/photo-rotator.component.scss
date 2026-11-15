@@ -5,6 +5,10 @@
 .frame {
   position: relative;
   width: 100%;
+  // deixa o scroll vertical da página; o deslize horizontal muda de foto
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 
   img {
     position: absolute;
@@ -12,8 +16,57 @@
     opacity: 0;
     transition: opacity var(--dur-slow) ease;
 
+    pointer-events: none;
+    -webkit-user-drag: none;
+
     &.is-active {
       opacity: 1;
+    }
+  }
+}
+
+// Margens clicáveis (só com rato): 22% de cada lado, seta aparece ao passar o rato.
+.edge {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: 22%;
+    padding: 0 var(--space-md);
+    cursor: pointer;
+
+    span {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 0.85);
+      color: var(--text-primary);
+      font-size: 1.75rem;
+      line-height: 1;
+      opacity: 0;
+      transition: opacity var(--dur-fast) ease;
+    }
+
+    &:hover span {
+      opacity: 1;
+    }
+
+    &--prev {
+      left: 0;
+    }
+
+    &--next {
+      right: 0;
+      justify-content: flex-end;
     }
   }
 }

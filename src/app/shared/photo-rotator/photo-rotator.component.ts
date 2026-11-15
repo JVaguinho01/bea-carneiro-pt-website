@@ -14,7 +14,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { MotionService } from '../../core/services/motion.service';
 
 /**
- * Fotos que rodam sozinhas (crossfade). Pausa ao passar o rato, quando sai do ecrã
+ * Fotos que rodam sozinhas (crossfade). Também mudam com swipe (toque) ou clique nas margens (rato). Pausa ao passar o rato, quando sai do ecrã
  * e com "reduzir movimento". Indicador: pontos (hero/sobre) ou barras de progresso (conquistas).
  */
 @Component({
@@ -30,7 +30,13 @@ import { MotionService } from '../../core/services/motion.service';
     '[style.--rotate-ms]': 'intervalMs() + "ms"',
   },
   template: `
-    <div class="frame photo" [style.aspect-ratio]="ratio()">
+    <div
+      class="frame photo"
+      [style.aspect-ratio]="ratio()"
+      (pointerdown)="onPointerDown($event)"
+      (pointerup)="onPointerUp($event)"
+      (pointercancel)="swipeStart = null"
+    >
       @for (p of photos(); track p.id; let i = $index) {
         <img
           [src]="p.src"
@@ -48,6 +54,11 @@ import { MotionService } from '../../core/services/motion.service';
         />
       }
       <ng-content />
+      @if (photos().length > 1) {
+        <!-- Computador: clicar na margem esquerda/direita da foto anda para trás/frente -->
+        <div class="edge edge--prev" aria-hidden="true" (click)="prev()"><span>&lsaquo;</span></div>
+        <div class="edge edge--next" aria-hidden="true" (click)="next()"><span>&rsaquo;</span></div>
+      }
       @if (indicator() === 'dots' && photos().length > 1) {
         <div class="rotation-dots dots" role="group" [attr.aria-label]="'common.photoOf' | t: { n: index() + 1, total: photos().length }">
           @for (p of photos(); track p.id; let i = $index) {
@@ -125,8 +136,30 @@ export class PhotoRotatorComponent {
   protected go(i: number): void {
     this.index.set(i);
   }
-
-  private next(): void {
+  protected next(): void {
     this.index.update(i => (i + 1) % this.photos().length);
+  }
+
+  protected prev(): void {
+    const n = this.photos().length;
+    this.index.update(i => (i - 1 + n) % n);
+  }
+
+  /** Tablet/telemóvel: deslizar o dedo na foto (esquerda → seguinte, direita → anterior). */
+  protected swipeStart: { x: number; y: number } | null = null;
+
+  protected onPointerDown(e: PointerEvent): void {
+    this.swipeStart = e.pointerType === 'mouse' ? null : { x: e.clientX, y: e.clientY };
+  }
+
+  protected onPointerUp(e: PointerEvent): void {
+    const s = this.swipeStart;
+    this.swipeStart = null;
+    if (!s || this.photos().length < 2) return;
+    const dx = e.clientX - s.x;
+    const dy = e.clientY - s.y;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    if (dx < 0) this.next();
+    else this.prev();
   }
 }

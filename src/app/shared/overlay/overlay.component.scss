@@ -74,11 +74,18 @@
   display: none;
 }
 
+.more-fade {
+  display: none;
+}
+
 // ---- Mobile: bottom sheet --------------------------------------------------
 @media (max-width: 767.98px) {
   .overlay {
     padding: 0;
     place-items: end stretch;
+    // a folha tem o seu próprio scroll; o <dialog> não pode ganhar scroll enquanto a folha
+    // sobe (translateY 100% → 0) ou é arrastada para baixo — era isso o scroll que aparecia e sumia
+    overflow: hidden;
   }
 
   .panel {
@@ -99,6 +106,12 @@
   .content {
     overflow-y: auto;
     overscroll-behavior: contain;
+    overflow-x: hidden; // nunca scroll horizontal
+    scrollbar-width: none; // o scroll vertical existe mas não se vê
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .handle {
@@ -115,6 +128,27 @@
       border-radius: 2px;
       background: var(--border-default);
     }
+  }
+
+  .more-fade {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 64px;
+    background: linear-gradient(to bottom, transparent, var(--bg-canvas));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 200ms ease;
+
+    &.is-visible {
+      opacity: 1;
+    }
+  }
+
+  .is-viewer .more-fade {
+    display: none;
   }
 
   // Visualizador de fotos em ecrã inteiro no mobile.

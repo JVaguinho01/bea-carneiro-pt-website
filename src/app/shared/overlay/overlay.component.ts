@@ -49,9 +49,11 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
           <span></span>
         </div>
         <button type="button" class="visually-hidden sr-close" (click)="close()">{{ 'common.close' | t }}</button>
-        <div class="content">
+        <div class="content" #content (scroll)="updateMore()">
           <ng-content />
         </div>
+        <!-- fade no fundo: só aparece quando há mais conteúdo para baixo (scroll interno invisível) -->
+        <div class="more-fade" [class.is-visible]="hasMore()" aria-hidden="true"></div>
       </div>
     </dialog>
   `,
@@ -65,10 +67,12 @@ export class OverlayComponent {
 
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private readonly panel = viewChild.required<ElementRef<HTMLElement>>('panel');
+  private readonly content = viewChild.required<ElementRef<HTMLElement>>('content');
   private readonly document = inject(DOCUMENT);
 
   protected readonly closing = signal(false);
   protected readonly dragOffset = signal(0);
+  protected readonly hasMore = signal(false);
   private dragStartY: number | null = null;
   private opener: HTMLElement | null = null;
 
@@ -83,10 +87,17 @@ export class OverlayComponent {
         this.document.body.classList.add('is-locked');
         el.scrollTop = 0;
         this.panel().nativeElement.querySelector<HTMLElement>('.content')?.scrollTo({ top: 0 });
+        requestAnimationFrame(() => this.updateMore());
       } else if (!this.open() && el.open) {
         this.finishClose();
       }
     });
+  }
+
+  /** Há conteúdo escondido por baixo? (mostra o fade no fundo da folha) */
+  protected updateMore(): void {
+    const c = this.content().nativeElement;
+    this.hasMore.set(c.scrollHeight - c.scrollTop - c.clientHeight > 8);
   }
 
   close(): void {
