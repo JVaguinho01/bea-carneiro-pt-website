@@ -20,5 +20,5 @@ export const environment = {
    * fica só no painel do EmailJS (Template → Settings), nunca aqui.
    * Vazio = formulário sem captcha.
    */
-  recaptchaSiteKey: '',
+  recaptchaSiteKey: '6LcvziAuAAAAADm-nET4-NZa0Ro-mRNb7e8VCrQZ',
 };
