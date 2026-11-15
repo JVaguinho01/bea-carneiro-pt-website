@@ -80,6 +80,13 @@
   }
 }
 
+// Telemóvel e tablet (toque): o cartão não sobe nem ganha sombra; só a foto amplia ao tocar.
+@media (hover: none) {
+  .card:active .card-photo img {
+    transform: scale(1.05);
+  }
+}
+
 .card:has(.link-arrow:focus-visible) {
   outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
@@ -105,6 +112,10 @@
 // ---- Mobile: carrossel com swipe ----------------------------------------------
 @media (max-width: 767.98px) {
   .carousel {
+    // como nos testemunhos: o carrossel vai até às bordas do ecrã e o cartão seguinte espreita
+    // à direita. (width:100% + margens negativas encurtava-o e cortava antes do fim.)
+    align-self: stretch;
+    width: auto;
     margin-inline: calc(-1 * var(--page-margin));
   }
 
