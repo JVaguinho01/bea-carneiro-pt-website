@@ -36,7 +36,8 @@
             <app-icon name="arrow-up-right" [size]="20" />
           </a>
           @if (cvUrl) {
-            <a [href]="cvUrl" class="btn btn--outline btn--block-mobile" target="_blank" rel="noopener" type="application/pdf">
+            <!-- download: descarrega o ficheiro diretamente, sem o abrir no browser -->
+            <a [href]="cvUrl" class="btn btn--outline btn--block-mobile" download="CV-Beatriz-Carneiro.pdf" type="application/pdf">
               {{ 'about.ctaCv' | t }}
               <app-icon name="download" [size]="20" />
             </a>

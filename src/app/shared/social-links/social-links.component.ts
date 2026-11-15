@@ -44,9 +44,11 @@ interface Channel {
       border-color: var(--text-inverse-secondary);
       color: var(--text-inverse);
     }
-    :host(.is-dark) .icon-btn:hover {
-      background: var(--text-inverse);
-      color: var(--text-primary);
+    @media (hover: hover) {
+      :host(.is-dark) .icon-btn:hover {
+        background: var(--text-inverse);
+        color: var(--text-primary);
+      }
     }
   `,
 })

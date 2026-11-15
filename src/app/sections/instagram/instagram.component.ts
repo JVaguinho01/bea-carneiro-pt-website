@@ -98,8 +98,11 @@ import { RevealDirective } from '../../shared/reveal/reveal.directive';
       aspect-ratio: 1;
       transition: transform 400ms var(--ease-out);
     }
-    .post:hover {
-      transform: rotate(var(--tilt, -2deg)) scale(1.02);
+    /* inclinação só no desktop com rato (em tablet e telemóvel não há hover) */
+    @media (hover: hover) and (pointer: fine) and (min-width: 1280px) {
+      .post:hover {
+        transform: rotate(var(--tilt, -2deg)) scale(1.02);
+      }
     }
     .swap {
       animation: swap-in 700ms ease both;

@@ -7,7 +7,6 @@ import { RecaptchaService } from '../../core/services/recaptcha.service';
 import { ScrollService } from '../../core/services/scroll.service';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { RevealDirective } from '../../shared/reveal/reveal.directive';
-import { SocialLinksComponent } from '../../shared/social-links/social-links.component';
 
 type Status = 'idle' | 'sending' | 'success' | SendResult | 'too-fast' | 'captcha';
 
@@ -29,7 +28,7 @@ const MAX_CHARS = 500;
  */
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, TranslatePipe, IconComponent, RevealDirective, SocialLinksComponent],
+  imports: [ReactiveFormsModule, TranslatePipe, IconComponent, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
@@ -80,7 +79,10 @@ export class ContactComponent {
         if (!e.isIntersecting) return;
         io?.disconnect();
         this.recaptcha
-          .render(el, t => this.captchaToken.set(t), this.i18n.lang())
+          .render(el, t => {
+            this.captchaToken.set(t);
+            if (t && this.status() === 'captcha') this.status.set('idle'); // tira o aviso ao marcar
+          }, this.i18n.lang())
           .then(id => (this.captchaId = id))
           .catch(() => this.status.set('error'));
       }, { rootMargin: '400px 0px' });
@@ -93,14 +95,26 @@ export class ContactComponent {
       const subject = this.scroll.contactSubject();
       if (subject) {
         this.form.controls.subject.setValue(subject);
-        this.form.controls.subject.markAsTouched();
         if (this.status() === 'success') this.status.set('idle');
       }
     });
   }
 
+  /**
+   * Os erros dos campos só aparecem depois de tentar enviar, e desaparecem ao fim de 5 s
+   * (voltam a aparecer numa nova tentativa). Sair de um campo vazio não mostra nada.
+   */
+  protected readonly showErrors = signal(false);
+  private errorsTimer?: ReturnType<typeof setTimeout>;
+
+  private flashErrors(): void {
+    this.showErrors.set(true);
+    clearTimeout(this.errorsTimer);
+    this.errorsTimer = setTimeout(() => this.showErrors.set(false), 5000);
+  }
+
   protected errorKey(ctrl: AbstractControl): { key: string; params?: Record<string, number> } | null {
-    if (!ctrl.touched || !ctrl.errors) return null;
+    if (!this.showErrors() || !ctrl.errors) return null;
     const e = ctrl.errors;
     if (e['required']) return { key: 'contact.form.errors.required' };
     if (ctrl === this.form.controls.email && e['pattern']) return { key: 'contact.form.errors.email' };
@@ -112,13 +126,22 @@ export class ContactComponent {
 
   protected async submit(): Promise<void> {
     if (this.status() === 'sending') return;
-    this.form.markAllAsTouched();
-    // garante que validadores "on blur" correm também com Enter
-    this.form.updateValueAndValidity();
-    if (this.form.invalid) {
-      document.querySelector<HTMLElement>('.contact-form [aria-invalid="true"]')?.focus();
+
+    // 1.º o "Não sou um robô": sem ele não se faz mais nada
+    if (this.captchaEnabled && !this.captchaToken()) {
+      this.status.set('captcha');
       return;
     }
+
+    // 2.º os campos: assinala os que faltam durante 5 s
+    this.form.updateValueAndValidity();
+    if (this.form.invalid) {
+      this.status.set('idle');
+      this.flashErrors();
+      setTimeout(() => document.querySelector<HTMLElement>('.contact-form [aria-invalid="true"]')?.focus());
+      return;
+    }
+    this.showErrors.set(false);
 
     const { website, ...msg } = this.form.getRawValue();
     if (website) {
@@ -128,11 +151,6 @@ export class ContactComponent {
     }
     if (Date.now() - this.startedAt < MIN_FILL_TIME) {
       this.status.set('too-fast');
-      return;
-    }
-
-    if (this.captchaEnabled && !this.captchaToken()) {
-      this.status.set('captcha');
       return;
     }
 

@@ -111,6 +111,7 @@ blockquote {
     display: flex;
     gap: var(--space-md);
     overflow-x: auto;
+    overflow-y: hidden; // só desliza na horizontal (sem scroll vertical dentro do carrossel)
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--page-margin);
     padding-inline: var(--page-margin);

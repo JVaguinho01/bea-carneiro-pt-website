@@ -11,10 +11,6 @@
   gap: var(--space-2xl);
 }
 
-.links-mobile {
-  display: none;
-}
-
 .form-card {
   padding: var(--space-2xl);
   background: var(--bg-surface);
@@ -174,14 +170,6 @@
 
   .row {
     grid-template-columns: 1fr;
-  }
-
-  .links-desktop {
-    display: none;
-  }
-
-  .links-mobile {
-    display: block;
   }
 }
 
