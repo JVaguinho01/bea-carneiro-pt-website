@@ -18,7 +18,8 @@ interface Spot {
   delay: number; // s
 }
 
-const SPOT_COLORS = ['var(--spot-coral)', 'var(--spot-green)', 'var(--spot-peach)'];
+// Uma só cor (coral); a intensidade varia um pouco para as manchas não ficarem iguais.
+const SPOT_COLORS = ['var(--spot-coral)', 'var(--spot-coral-soft)'];
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
 /**
