@@ -18,7 +18,7 @@ interface Spot {
   delay: number; // s
 }
 
-const SPOT_COLORS = ['var(--spot-coral)', 'var(--spot-green)', 'var(--spot-ivory)'];
+const SPOT_COLORS = ['var(--spot-coral)', 'var(--spot-green)', 'var(--spot-peach)'];
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
 /**
@@ -41,16 +41,36 @@ export class HeroComponent {
 
   protected readonly titleWords = computed(() => this.i18n.t('hero.title').split(' '));
 
-  /** 6 manchas em posições, tamanhos e cores ao acaso (mudam a cada visita). */
-  protected readonly spots: Spot[] = Array.from({ length: 6 }, (_, i) => ({
-    // espalha pelo ecrã: 3 colunas × 2 linhas, com variação dentro de cada zona
-    x: (i % 3) * 33 + rand(4, 29),
-    y: Math.floor(i / 3) * 50 + rand(5, 45),
-    size: rand(260, 560),
-    color: SPOT_COLORS[i % SPOT_COLORS.length],
-    dx: rand(-60, 60),
-    dy: rand(-50, 50),
-    dur: rand(14, 24),
-    delay: -rand(0, 20),
-  }));
+  /** 3 a 5 manchas (ao acaso) espalhadas por todo o hero; podem ficar por trás da foto. */
+  protected readonly spots: Spot[] = makeSpots();
+}
+
+function makeSpots(): Spot[] {
+  const count = 3 + Math.floor(Math.random() * 3); // 3, 4 ou 5
+  const colors = [...SPOT_COLORS].sort(() => Math.random() - 0.5);
+  const spots: Spot[] = [];
+  for (let i = 0; i < count; i++) {
+    // escolhe a posição mais afastada das manchas já colocadas (entre 12 candidatas),
+    // para ficarem espalhadas pelo ecrã todo e não amontoadas
+    let best = { x: 50, y: 50 };
+    let bestDist = -1;
+    for (let c = 0; c < 12; c++) {
+      const cand = { x: rand(5, 95), y: rand(8, 92) };
+      const d = spots.length ? Math.min(...spots.map(p => Math.hypot(p.x - cand.x, p.y - cand.y))) : 1;
+      if (d > bestDist) {
+        bestDist = d;
+        best = cand;
+      }
+    }
+    spots.push({
+      ...best,
+      size: rand(320, 620),
+      color: colors[i % colors.length],
+      dx: rand(-70, 70),
+      dy: rand(-60, 60),
+      dur: rand(14, 24),
+      delay: -rand(0, 20),
+    });
+  }
+  return spots;
 }
