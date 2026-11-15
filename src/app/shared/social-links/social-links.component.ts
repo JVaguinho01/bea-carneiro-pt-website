@@ -44,7 +44,7 @@ interface Channel {
       border-color: var(--text-inverse-secondary);
       color: var(--text-inverse);
     }
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
       :host(.is-dark) .icon-btn:hover {
         background: var(--text-inverse);
         color: var(--text-primary);

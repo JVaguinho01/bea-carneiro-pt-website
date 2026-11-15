@@ -28,7 +28,7 @@ export class App {
   /**
    * Em telemóvel/tablet, ao voltar ao site o link tocado ficava com foco e parecia "clicado".
    * Após o clique numa ação externa, tira-se o foco para o botão voltar ao estado normal.
-   * (O hover só existe em dispositivos com rato: ver @media (hover: hover) nos estilos.)
+   * (O hover só existe em dispositivos com rato: ver @media (hover: hover) and (pointer: fine) nos estilos.)
    */
   protected releaseExitLink(event: MouseEvent): void {
     const link = (event.target as Element | null)?.closest?.(EXIT_LINK);

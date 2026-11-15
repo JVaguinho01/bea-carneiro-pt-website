@@ -19,9 +19,12 @@
     transform 400ms var(--ease-out),
     box-shadow 400ms var(--ease-out);
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.4);
+  // só no desktop (≥ 1280px) e com rato: de tablet para baixo nunca sobe nem ganha sombra
+  @media (hover: hover) and (pointer: fine) and (min-width: 1280px) {
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.4);
+    }
   }
 }
 

@@ -31,15 +31,19 @@
     transform 400ms var(--ease-out),
     box-shadow 400ms var(--ease-out);
 
-  // hover só com rato: no toque não fica "preso" nem mostra a sombra cortada
-  @media (hover: hover) {
+  // Com rato: a foto amplia em qualquer largura.
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .card-photo img {
+      transform: scale(1.05);
+    }
+  }
+
+  // O cartão só sobe e ganha sombra no desktop (≥ 1280px) e com rato.
+  // De tablet para baixo nunca, mesmo com rato.
+  @media (hover: hover) and (pointer: fine) and (min-width: 1280px) {
     &:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-card);
-
-      .card-photo img {
-        transform: scale(1.05);
-      }
     }
   }
 }
@@ -74,14 +78,14 @@
   }
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .card:hover .link-arrow app-icon {
     transform: rotate(45deg);
   }
 }
 
 // Telemóvel e tablet (toque): o cartão não sobe nem ganha sombra; só a foto amplia ao tocar.
-@media (hover: none) {
+@media (pointer: coarse) {
   .card:active .card-photo img {
     transform: scale(1.05);
   }

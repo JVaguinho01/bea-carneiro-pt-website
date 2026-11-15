@@ -154,7 +154,7 @@
     transition: transform var(--dur-base) var(--ease-out);
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover app-icon {
       transform: translate(2px, -2px);
     }
@@ -168,7 +168,7 @@
     background: var(--brand-primary);
     color: var(--text-on-brand);
 
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
       &:hover {
         background: var(--brand-primary-hover);
       }
@@ -179,7 +179,7 @@
     border-color: var(--border-strong);
     color: var(--text-primary);
 
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
       &:hover {
         background: var(--bg-accent-soft);
       }
@@ -190,7 +190,7 @@
     background: var(--bg-accent-soft);
     color: var(--text-primary);
 
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
       &:hover {
         background: var(--ivory-300);
       }
@@ -222,7 +222,7 @@
     transition: transform var(--dur-base) var(--ease-out);
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover app-icon {
       transform: rotate(45deg);
     }
@@ -245,7 +245,7 @@
     background-color var(--dur-fast) ease,
     color var(--dur-fast) ease;
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
       background: var(--brand-primary);
       color: var(--text-on-brand);
