@@ -45,18 +45,22 @@ export class HeroComponent {
       const glow = this.glow()?.nativeElement;
       if (!glow || !this.motion.finePointer() || this.motion.reduced()) return;
       const host = this.section().nativeElement;
-      let tx = 0.7, ty = 0.4, x = tx, y = ty, raf = 0;
-      const loop = () => {
-        // segue o rato com atraso (interpolação)
-        x += (tx - x) * 0.06;
-        y += (ty - y) * 0.06;
-        glow.style.transform = `translate3d(${x * 100}%, ${y * 100}%, 0) translate(-50%, -50%)`;
+      // posição em píxeis dentro do hero (centro do brilho = ponta do rato)
+      let tx = host.clientWidth * 0.7, ty = host.clientHeight * 0.4, x = tx, y = ty, raf = 0;
+      let last = performance.now();
+      const loop = (now: number) => {
+        // segue o rato de perto, com um atraso curto (~80ms) e igual em qualquer ecrã (60/120Hz)
+        const k = 1 - Math.exp(-(now - last) / 80);
+        last = now;
+        x += (tx - x) * k;
+        y += (ty - y) * k;
+        glow.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
         raf = requestAnimationFrame(loop);
       };
       const onMove = (e: PointerEvent) => {
         const r = host.getBoundingClientRect();
-        tx = (e.clientX - r.left) / r.width;
-        ty = (e.clientY - r.top) / r.height;
+        tx = e.clientX - r.left;
+        ty = e.clientY - r.top;
       };
       host.addEventListener('pointermove', onMove, { passive: true });
       raf = requestAnimationFrame(loop);
