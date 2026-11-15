@@ -90,14 +90,14 @@
               id="cf-message"
               formControlName="message"
               rows="6"
-              maxlength="4000"
+              [attr.maxlength]="maxChars"
               (input)="onMessageInput($any($event.target).value)"
               [placeholder]="'contact.form.messagePlaceholder' | t"
               [attr.aria-invalid]="messageErr ? 'true' : null"
               [attr.aria-describedby]="messageErr ? 'cf-message-err cf-message-count' : 'cf-message-count'"
             ></textarea>
-            <p class="counter" id="cf-message-count" [class.is-over]="wordCount() > maxWords">
-              {{ 'contact.form.wordCount' | t: { n: wordCount(), max: maxWords } }}
+            <p class="counter" id="cf-message-count" [class.is-over]="charCount() >= maxChars">
+              {{ 'contact.form.charCount' | t: { n: charCount(), max: maxChars } }}
             </p>
             @if (messageErr) {
               <p class="error" id="cf-message-err">{{ messageErr.key | t: messageErr.params }}</p>

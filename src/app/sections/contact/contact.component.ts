@@ -18,13 +18,8 @@ const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[a-z]{2,}$/i;
 /** Nome: letras (com acentos), espaços, hífen, apóstrofo e ponto. */
 const NAME_RE = /^[\p{L}][\p{L} .'’-]*$/u;
 
-/** Limite de palavras da mensagem. */
-const MAX_WORDS = 500;
-const countWords = (v: string) => (v.trim() ? v.trim().split(/\s+/).length : 0);
-const maxWordsValidator = (max: number) => (c: AbstractControl) => {
-  const n = countWords(String(c.value ?? ''));
-  return n > max ? { maxwords: { max, actual: n } } : null;
-};
+/** Limite de caracteres da mensagem. */
+const MAX_CHARS = 500;
 
 /**
  * Contactos: formulário que envia o email diretamente (EmailJS).
@@ -48,11 +43,11 @@ export class ContactComponent {
   protected readonly configured = this.contact.configured;
   protected readonly status = signal<Status>('idle');
   private readonly startedAt = Date.now();
-  protected readonly maxWords = MAX_WORDS;
-  /** Contador de palavras em tempo real (o valor do formulário só atualiza ao sair do campo). */
-  protected readonly wordCount = signal(0);
+  protected readonly maxChars = MAX_CHARS;
+  /** Contador de caracteres em tempo real (o valor do formulário só atualiza ao sair do campo). */
+  protected readonly charCount = signal(0);
   protected onMessageInput(value: string): void {
-    this.wordCount.set(countWords(value));
+    this.charCount.set(value.length);
   }
 
   private readonly recaptcha = inject(RecaptchaService);
@@ -65,7 +60,7 @@ export class ContactComponent {
     name: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(80), Validators.pattern(NAME_RE)], updateOn: 'blur' }],
     email: ['', { validators: [Validators.required, Validators.maxLength(120), Validators.pattern(EMAIL_RE)], updateOn: 'blur' }],
     subject: ['', { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(120)], updateOn: 'blur' }],
-    message: ['', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(4000), maxWordsValidator(MAX_WORDS)], updateOn: 'blur' }],
+    message: ['', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(MAX_CHARS)], updateOn: 'blur' }],
     /** Honeypot: invisível para pessoas; se vier preenchido, é um bot. */
     website: [''],
   });
@@ -111,7 +106,6 @@ export class ContactComponent {
     if (ctrl === this.form.controls.email && e['pattern']) return { key: 'contact.form.errors.email' };
     if (e['pattern']) return { key: 'contact.form.errors.pattern' };
     if (e['minlength']) return { key: 'contact.form.errors.minlength', params: { n: e['minlength'].requiredLength } };
-    if (e['maxwords']) return { key: 'contact.form.errors.maxwords', params: { n: e['maxwords'].max } };
     if (e['maxlength']) return { key: 'contact.form.errors.maxlength', params: { n: e['maxlength'].requiredLength } };
     return null;
   }
@@ -152,7 +146,7 @@ export class ContactComponent {
     this.status.set(result === 'ok' ? 'success' : result);
     if (result === 'ok') {
       this.form.reset();
-      this.wordCount.set(0);
+      this.charCount.set(0);
       this.scroll.contactSubject.set(null);
     }
   }

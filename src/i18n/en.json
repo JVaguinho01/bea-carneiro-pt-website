@@ -341,11 +341,10 @@
         "email": "Please enter a valid email.",
         "minlength": "Please write at least {n} characters.",
         "maxlength": "Maximum {n} characters.",
-        "pattern": "Please use only letters, spaces and simple punctuation.",
-        "maxwords": "Maximum {n} words."
+        "pattern": "Please use only letters, spaces and simple punctuation."
       },
       "captcha": "Please confirm you are not a robot before sending.",
-      "wordCount": "{n} / {max} words"
+      "charCount": "{n} / {max} characters"
     }
   },
   "footer": {

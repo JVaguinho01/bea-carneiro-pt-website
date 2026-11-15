@@ -43,7 +43,7 @@ export class ContactService {
           from_name: clean(msg.name, 80),
           reply_to: clean(msg.email, 120),
           subject: clean(msg.subject, 120),
-          message: clean(msg.message, 2000, true),
+          message: clean(msg.message, 500, true),
           site_language: lang,
           // o EmailJS valida este token com a chave secreta do reCAPTCHA (definida no template)
           ...(captchaToken ? { 'g-recaptcha-response': captchaToken } : {}),
