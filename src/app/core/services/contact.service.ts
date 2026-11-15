@@ -8,7 +8,7 @@ export interface ContactMessage {
   message: string;
 }
 
-export type SendResult = 'ok' | 'rate-limited' | 'not-configured' | 'error';
+export type SendResult = 'ok' | 'rate-limited' | 'not-configured' | 'error' | 'captcha';
 
 const RATE_KEY = 'bc-contact-sent';
 const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
@@ -30,6 +30,8 @@ export class ContactService {
   async send(msg: ContactMessage, lang: string, captchaToken: string | null = null): Promise<SendResult> {
     if (!this.configured) return 'not-configured';
     if (this.isRateLimited()) return 'rate-limited';
+    // com reCAPTCHA ativo, nunca envia sem o token (a validação final é feita pelo EmailJS)
+    if (environment.recaptchaSiteKey && !captchaToken) return 'captcha';
 
     try {
       // Carregado só quando é preciso (não pesa no carregamento inicial).

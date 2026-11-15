@@ -112,10 +112,22 @@
 
           @if (captchaEnabled) {
             <div class="captcha" #captcha></div>
+            @if (!captchaToken()) {
+              <p class="t-small captcha-hint" id="cf-captcha-hint">{{ 'contact.form.captcha' | t }}</p>
+            }
           }
 
           <div class="submit-row">
-            <button type="submit" class="btn btn--primary btn--block-mobile" [disabled]="status() === 'sending'" [attr.aria-busy]="status() === 'sending'">
+            <!-- Sem o reCAPTCHA marcado o botão fica "desligado" (continua focável para mostrar o aviso) -->
+            <button
+              type="submit"
+              class="btn btn--primary btn--block-mobile"
+              [class.is-blocked]="captchaEnabled && !captchaToken()"
+              [attr.aria-disabled]="captchaEnabled && !captchaToken() ? 'true' : null"
+              [attr.aria-describedby]="captchaEnabled && !captchaToken() ? 'cf-captcha-hint' : null"
+              [disabled]="status() === 'sending'"
+              [attr.aria-busy]="status() === 'sending'"
+            >
               @if (status() === 'sending') {
                 <span class="spinner" aria-hidden="true"></span>{{ 'contact.form.sending' | t }}
               } @else {

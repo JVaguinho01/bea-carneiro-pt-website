@@ -201,3 +201,12 @@
 .captcha {
   min-height: 78px; // reserva o espaço da caixa do reCAPTCHA (sem saltos)
 }
+
+.captcha-hint {
+  margin-top: calc(-1 * var(--space-sm));
+}
+
+.btn.is-blocked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -58,7 +58,7 @@ export class ContactComponent {
   private readonly recaptcha = inject(RecaptchaService);
   protected readonly captchaEnabled = this.recaptcha.enabled;
   private readonly captchaEl = viewChild<ElementRef<HTMLElement>>('captcha');
-  private readonly captchaToken = signal<string | null>(null);
+  protected readonly captchaToken = signal<string | null>(null);
   private captchaId: number | null = null;
 
   protected readonly form = this.fb.nonNullable.group({
