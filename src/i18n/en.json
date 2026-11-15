@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "title": "Beatriz Carneiro Acro",
+    "description": "Beatriz Carneiro, former elite gymnast and acrobatic gymnastics coach. Workshops at your gym, personalised training for bases and tops, and online coaching."
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "backToTop": "Back to top",
+    "close": "Close",
+    "photoOf": "Photo {n} of {total}",
+    "showPhoto": "Show photo {n}",
+    "newTab": "(opens in a new tab)"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "home": "Beatriz Carneiro — home",
+    "about": "About",
+    "achievements": "Achievements",
+    "services": "Services",
+    "gallery": "Gallery",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "cta": "Get in touch",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "switchTo": "Switch to {lang}"
+  },
+  "hero": {
+    "badge": "Acro is my passion!",
+    "title": "More technique, more confidence.",
+    "text": "I help gymnasts and teams develop technical excellence, confidence and a lasting passion for acrobatic gymnastics. Workshops at your gym, personalised training for bases and tops, and online coaching.",
+    "ctaPrimary": "Book a session",
+    "ctaSecondary": "See services",
+    "chip1Title": "1 to 3-day workshops",
+    "chip1Text": "At your gym",
+    "chip2Title": "Live online sessions",
+    "chip2Text": "For teams and clubs",
+    "photos": [
+      "Beatriz talking to a group of gymnasts at a workshop",
+      "Beatriz helping a gymnast with a flexibility exercise",
+      "Beatriz spotting an acrobatic throw in the gym",
+      "Beatriz coaching a pair pyramid"
+    ]
+  },
+  "about": {
+    "statementStrong": "I turn years of high-performance training",
+    "statementMuted": "into a life dedicated to developing athletes.",
+    "overline": "About me",
+    "title": "Hi, I'm Bea.",
+    "p1": "I'm a passionate and dedicated acrobatic gymnastics coach with a lifelong connection to the sport. A former elite gymnast and now a coach at Acro Clube da Maia, I combine first-hand competitive experience with professional coaching skills to support athletes' technical development, discipline and motivation.",
+    "p2": "Throughout my journey I have developed strong leadership and communication skills and a deep commitment to excellence. I aim to inspire athletes to grow not only in performance, but also in confidence, resilience and love for the sport.",
+    "stats": [
+      {
+        "value": 1,
+        "suffix": "×",
+        "label": "World title"
+      },
+      {
+        "value": 3,
+        "suffix": "×",
+        "label": "Junior European Champion"
+      },
+      {
+        "value": 2,
+        "suffix": "×",
+        "label": "World Games"
+      }
+    ],
+    "ctaAchievements": "See achievements",
+    "ctaCv": "Download CV (PDF)",
+    "photos": [
+      "Beatriz wearing all of her medals",
+      "Beatriz hugging her partner after a routine",
+      "Beatriz and her partner on the World Games podium",
+      "Beatriz hugging her coach after competing"
+    ]
+  },
+  "achievements": {
+    "overline": "Achievements",
+    "title": "A career built on podiums.",
+    "text": "Years of competing at the highest level, now at the service of those who train with me.",
+    "listLabel": "Achievements timeline",
+    "photoAlt": "Competition photo: {title}",
+    "items": [
+      {
+        "year": "2026",
+        "title": "Bronze at the World Games",
+        "detail": "Chengdu, China · Women's pair, with Inês Faria"
+      },
+      {
+        "year": "2025",
+        "title": "European silver medalist",
+        "detail": "European Championships · silver medal"
+      },
+      {
+        "year": "2024",
+        "title": "World Cup gold",
+        "detail": "Maia · Portugal's first ever World Cup gold"
+      },
+      {
+        "year": "2023",
+        "title": "2× European Championships bronze",
+        "detail": "Senior category"
+      },
+      {
+        "year": "2022",
+        "title": "Silver at the World Games",
+        "detail": "Birmingham, USA · first Portuguese gymnast with 2 World Games podiums"
+      },
+      {
+        "year": "2021",
+        "title": "2× World silver medalist",
+        "detail": "World Championships · senior category"
+      },
+      {
+        "year": "2020",
+        "title": "World Champion and 3× Junior European Champion",
+        "detail": "Junior category · Women's pairs and groups"
+      }
+    ]
+  },
+  "services": {
+    "overline": "Services",
+    "title": "Training made for you.",
+    "text": "From working with whole teams to one-to-one coaching — in person or online.",
+    "learnMore": "Learn more",
+    "learnMoreAbout": "Learn more about {title}",
+    "cta": "Ask for information",
+    "carouselLabel": "Services",
+    "items": [
+      {
+        "id": "workshops",
+        "number": "01",
+        "title": "Gymnastics workshops",
+        "excerpt": "Boost your team's skills and confidence in a focused, hands-on day of training. Learning, challenging yourselves and having fun together in the gym!",
+        "photoAlt": "Beatriz leading a group session in a gym",
+        "panel": {
+          "label": "Service 01",
+          "title": "Gymnastics workshops",
+          "lead": "Workshops tailored to your team: Beatriz comes to your gym and leads a full day of training with your gymnasts.",
+          "listTitle": "What we work on",
+          "list": [
+            "Execution and performance quality",
+            "Physical conditioning",
+            "Building difficulty",
+            "Competition preparation"
+          ],
+          "facts": [
+            {
+              "title": "Format",
+              "text": "1, 2 or 3-day workshops at your club."
+            },
+            {
+              "title": "Who it's for",
+              "text": "Acrobatic gymnastics clubs and teams."
+            }
+          ],
+          "cta": "Ask about workshops",
+          "subject": "Gymnastics workshops"
+        }
+      },
+      {
+        "id": "personalizado",
+        "number": "02",
+        "title": "Personalised training",
+        "excerpt": "Build strong foundations. Train smarter, stronger and safer with sessions tailored to bases and tops.",
+        "photoAlt": "Beatriz supporting a gymnast in a handstand",
+        "panel": {
+          "label": "Service 02",
+          "title": "Personalised training — bases and tops",
+          "lead": "Private or small-group sessions designed for bases and tops who want to take the next step.",
+          "listTitle": "What we work on",
+          "list": [
+            "Strength, stability and flexibility",
+            "Technical precision",
+            "Mental performance strategies"
+          ],
+          "facts": [
+            {
+              "title": "Includes",
+              "text": "Video analysis with technical feedback, personalised follow-up and planning."
+            },
+            {
+              "title": "Format",
+              "text": "One-to-one or small groups."
+            }
+          ],
+          "cta": "Ask about personalised training",
+          "subject": "Personalised training — bases and tops"
+        }
+      },
+      {
+        "id": "online",
+        "number": "03",
+        "title": "Online coaching",
+        "excerpt": "Interactive online sessions that help athletes and coaches develop technique, confidence and team spirit, from your gym or from home.",
+        "photoAlt": "Beatriz giving instructions to gymnasts during training",
+        "panel": {
+          "label": "Service 03",
+          "title": "Online coaching",
+          "lead": "Take your team to the next level, straight from a laptop. Live, interactive sessions with real-time demonstrations of the techniques.",
+          "listTitle": "Topics",
+          "list": [
+            "Artistic expression and presentation",
+            "Flexibility",
+            "Handstands and levers",
+            "Block work",
+            "Dynamic dismounts"
+          ],
+          "facts": [
+            {
+              "title": "Includes",
+              "text": "Time for questions, feedback and discussion."
+            },
+            {
+              "title": "Who it's for",
+              "text": "Teams, clubs or regional groups."
+            }
+          ],
+          "cta": "Ask about online coaching",
+          "subject": "Online coaching"
+        }
+      }
+    ]
+  },
+  "gallery": {
+    "overline": "Gallery",
+    "title": "In motion.",
+    "more": "See more photos",
+    "showing": "Showing {shown} of {total} photos",
+    "open": "Open photo {n} full size",
+    "viewerLabel": "Photo viewer",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "alt": {
+      "competicao": "Beatriz Carneiro competing in acrobatic gymnastics",
+      "treino": "Beatriz Carneiro at an acrobatic gymnastics training session",
+      "pessoal": "Beatriz Carneiro outside the gym",
+      "retratos": "Portrait of Beatriz Carneiro"
+    },
+    "captions": {
+      "competicao": "Competition",
+      "treino": "Training",
+      "pessoal": "Everyday life",
+      "retratos": "Portrait"
+    }
+  },
+  "testimonials": {
+    "overline": "Testimonials",
+    "title": "What coaches say.",
+    "text": "Top coaches who have followed Bea's journey.",
+    "readMore": "Read more",
+    "readMoreFrom": "Read {name}'s full testimonial",
+    "panelLabel": "Testimonial",
+    "carouselLabel": "Testimonials",
+    "items": [
+      {
+        "name": "Lourenço França",
+        "role": "Head Acrobatic Gymnastics Coach · Acro Clube da Maia and Portugal National Team",
+        "quote": "Beatriz is a young coach who has carried into her new role many of the qualities she developed as a gymnast.",
+        "excerpt": "She is one of those athletes who only stops when the job is done (and this is a trait that may seem simple, but is truly distinctive). Determined and persistent, she faced very difficult moments throughout her gymnastics career.",
+        "full": [
+          "Beatriz is a young coach who has carried into her new role many of the qualities she developed as a gymnast. She is one of those athletes who only stops when the job is done (and this is a trait that may seem simple, but is truly distinctive).",
+          "Determined and persistent, she faced very difficult moments throughout her gymnastics career - challenges that would have led many others to quit. For her, however, they became fuel to strive for more. And indeed, she achieved it: World Champion and three-time Junior European Champion, Senior World silver medalist and Senior European silver medalist, as well as a medalist at two World Games over more than a decade of high-level competition. These are accomplishments within reach of very few in Acrobatic Gymnastics.",
+          "What is even more impressive is that these titles were achieved in different disciplines - Women's Pairs and Women's Groups - which is even rarer and more demanding. Throughout her career, she dealt with injuries, both her own and those of her partners (each presenting its own challenges). Yet, in the most difficult moments, she was the driving force that pushed the group forward.",
+          "These are the attributes she has carried into her new career as a coach, and which she continues to develop. Alongside her constant desire for learning, they are among the most important qualities any coach can aspire to have."
+        ]
+      },
+      {
+        "name": "João Ferreira",
+        "role": "Head Acrobatic Gymnastics Coach in Switzerland · AGG ACRO",
+        "quote": "A resilient, methodical athlete who is demanding of herself.",
+        "excerpt": "She has always shown an understanding that goals are not always immediate, respecting the process required to achieve them. At the beginning of her career as a coach, she combines her experience as an athlete with a solid background in Physical Education.",
+        "full": [
+          "A resilient, methodical athlete who is demanding of herself. She has always shown an understanding that goals are not always immediate, respecting the process required to achieve them. At the beginning of her career as a coach, she combines her experience as an athlete with a solid background in Physical Education, which is reflected in a conscious, structured and responsible approach, with a strong concern for building consistent technical and human foundations in the gymnasts she works with."
+        ]
+      },
+      {
+        "name": "Joana Patrocínio",
+        "role": "Head Acrobatic Gymnastics Coach in Switzerland · RLZO Akrobatik Turnen",
+        "quote": "Seeing Beatriz become a coach makes complete sense.",
+        "excerpt": "Her dedication to Acrobatic Gymnastics is immense and has been there for as long as anyone can remember. Now, it is only natural that she can pass on all her knowledge and values to the younger ones.",
+        "full": [
+          "Seeing Beatriz become a coach makes complete sense. Her dedication to Acrobatic Gymnastics is immense and has been there for as long as anyone can remember. Now, it is only natural that she can pass on all her knowledge and values to the younger ones - and to everyone who wants to learn from her."
+        ]
+      },
+      {
+        "name": "Yves Vander Donckt",
+        "role": "High-Performance Acrobatic Coach in Germany · Sportakrobatik Rechberghausen",
+        "quote": "Beatriz maintains very high personal standards and approaches training with discipline and determination.",
+        "excerpt": "Beatriz's ambition and expectations of herself are reflected in her training environment. She naturally brings intensity and focus, which are important qualities in high-performance settings.",
+        "full": [
+          "Beatriz maintains very high personal standards and approaches training with discipline and determination.",
+          "Beatriz's ambition and expectations of herself are reflected in her training environment. She naturally brings intensity and focus, which are important qualities in high-performance settings, although they can sometimes present challenges in more diverse team dynamics. Nevertheless, her dedication to excellence is undeniable.",
+          "Her competitive background includes participation in European Championships, World Championships, World Cups, and notably, she is a two-time World Games participant, an achievement that reflects a very high level of international recognition, as well as extensive stage experience in numerous shows. This breadth of experience is a significant asset that she brings to any environment.",
+          "Beatriz has developed her own approach through years of experience. Looking ahead, one of her key areas for growth will be continuing to expand her perspective and adapting her methods to suit different athletes, while maintaining the high standards she values. Importantly, she shows a clear willingness to learn, she is often the first to engage with new ideas, skills, or training methods."
+        ]
+      }
+    ]
+  },
+  "instagram": {
+    "handle": "@bea_carneiro3",
+    "title": "Follow my everyday life on Instagram.",
+    "cta": "Open Instagram",
+    "postLabel": "Open Beatriz's Instagram",
+    "alt": "Personal photo of Beatriz Carneiro, from Instagram"
+  },
+  "contact": {
+    "overline": "Contact",
+    "title": "Start your acro journey today.",
+    "text": "Get in touch for tailored workshops, personalised training for bases and tops, training camps and consulting.",
+    "channels": {
+      "instagram": "Instagram",
+      "email": "Send an email",
+      "phone": "Call",
+      "whatsapp": "WhatsApp"
+    },
+    "form": {
+      "title": "Send me a message",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "E.g.: Workshop for my club",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here…",
+      "honeypot": "Do not fill in this field",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "successTitle": "Message sent!",
+      "successText": "Thank you for getting in touch. I'll reply as soon as possible.",
+      "sendAnother": "Send another message",
+      "errorText": "The message could not be sent. Please try again or contact me by email.",
+      "rateLimited": "You have already sent several messages. Please try again in a few minutes.",
+      "tooFast": "Please wait a few seconds before sending.",
+      "notConfigured": "Message sending is not set up yet. Please contact me by email or WhatsApp.",
+      "errors": {
+        "required": "This field is required.",
+        "email": "Please enter a valid email.",
+        "minlength": "Please write at least {n} characters.",
+        "maxlength": "Maximum {n} characters.",
+        "pattern": "Please use only letters, spaces and simple punctuation."
+      }
+    }
+  },
+  "footer": {
+    "statement": "Years of training turned into a life of coaching.",
+    "wordmark": "Bea Carneiro",
+    "copyright": "© {year} Beatriz Carneiro · Acro Coaching",
+    "credit": "Website by",
+    "creditName": "Vaguinho",
+    "social": "Social and contact"
+  }
+}

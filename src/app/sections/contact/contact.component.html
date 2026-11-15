@@ -1,0 +1,134 @@
+<section id="contactos" class="section contact" aria-labelledby="contact-title">
+  <div class="container layout">
+    <div class="info" appReveal>
+      <div class="section-header">
+        <p class="t-overline">{{ 'contact.overline' | t }}</p>
+        <h2 id="contact-title" class="t-h1">{{ 'contact.title' | t }}</h2>
+        <p class="t-lead">{{ 'contact.text' | t }}</p>
+      </div>
+      <app-social-links class="links-desktop" />
+    </div>
+
+    <div class="form-card" appReveal [revealDelay]="120">
+      @if (status() === 'success') {
+        <div class="success" role="status" aria-live="polite">
+          <span class="check" aria-hidden="true"><app-icon name="check" [size]="32" [strokeWidth]="2.5" /></span>
+          <h3 class="t-h3">{{ 'contact.form.successTitle' | t }}</h3>
+          <p class="t-body">{{ 'contact.form.successText' | t }}</p>
+          <button type="button" class="btn btn--outline" (click)="reset()">{{ 'contact.form.sendAnother' | t }}</button>
+        </div>
+      } @else {
+        <form class="contact-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <h3 class="t-h3">{{ 'contact.form.title' | t }}</h3>
+
+          @if (!configured) {
+            <p class="notice" role="note">
+              <app-icon name="alert" [size]="20" />{{ 'contact.form.notConfigured' | t }}
+            </p>
+          }
+
+          <div class="row">
+            @let nameErr = errorKey(form.controls.name);
+            <div class="field">
+              <label for="cf-name">{{ 'contact.form.name' | t }}</label>
+              <input
+                id="cf-name"
+                type="text"
+                formControlName="name"
+                autocomplete="name"
+                maxlength="80"
+                [placeholder]="'contact.form.namePlaceholder' | t"
+                [attr.aria-invalid]="nameErr ? 'true' : null"
+                [attr.aria-describedby]="nameErr ? 'cf-name-err' : null"
+              />
+              @if (nameErr) {
+                <p class="error" id="cf-name-err">{{ nameErr.key | t: nameErr.params }}</p>
+              }
+            </div>
+
+            @let emailErr = errorKey(form.controls.email);
+            <div class="field">
+              <label for="cf-email">{{ 'contact.form.email' | t }}</label>
+              <input
+                id="cf-email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                inputmode="email"
+                maxlength="120"
+                [placeholder]="'contact.form.emailPlaceholder' | t"
+                [attr.aria-invalid]="emailErr ? 'true' : null"
+                [attr.aria-describedby]="emailErr ? 'cf-email-err' : null"
+              />
+              @if (emailErr) {
+                <p class="error" id="cf-email-err">{{ emailErr.key | t: emailErr.params }}</p>
+              }
+            </div>
+          </div>
+
+          @let subjectErr = errorKey(form.controls.subject);
+          <div class="field">
+            <label for="cf-subject">{{ 'contact.form.subject' | t }}</label>
+            <input
+              id="cf-subject"
+              type="text"
+              formControlName="subject"
+              maxlength="120"
+              [placeholder]="'contact.form.subjectPlaceholder' | t"
+              [attr.aria-invalid]="subjectErr ? 'true' : null"
+              [attr.aria-describedby]="subjectErr ? 'cf-subject-err' : null"
+            />
+            @if (subjectErr) {
+              <p class="error" id="cf-subject-err">{{ subjectErr.key | t: subjectErr.params }}</p>
+            }
+          </div>
+
+          @let messageErr = errorKey(form.controls.message);
+          <div class="field">
+            <label for="cf-message">{{ 'contact.form.message' | t }}</label>
+            <textarea
+              id="cf-message"
+              formControlName="message"
+              rows="6"
+              maxlength="2000"
+              [placeholder]="'contact.form.messagePlaceholder' | t"
+              [attr.aria-invalid]="messageErr ? 'true' : null"
+              [attr.aria-describedby]="messageErr ? 'cf-message-err' : null"
+            ></textarea>
+            @if (messageErr) {
+              <p class="error" id="cf-message-err">{{ messageErr.key | t: messageErr.params }}</p>
+            }
+          </div>
+
+          <!-- Honeypot anti-spam: escondido de pessoas e de leitores de ecrã -->
+          <div class="hp" aria-hidden="true">
+            <label for="cf-website">{{ 'contact.form.honeypot' | t }}</label>
+            <input id="cf-website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn--primary btn--block-mobile" [disabled]="status() === 'sending'" [attr.aria-busy]="status() === 'sending'">
+              @if (status() === 'sending') {
+                <span class="spinner" aria-hidden="true"></span>{{ 'contact.form.sending' | t }}
+              } @else {
+                {{ 'contact.form.submit' | t }}
+                <app-icon name="arrow-up-right" [size]="20" />
+              }
+            </button>
+          </div>
+
+          <div aria-live="assertive" class="status-msg">
+            @switch (status()) {
+              @case ('error') { <p class="error">{{ 'contact.form.errorText' | t }}</p> }
+              @case ('rate-limited') { <p class="error">{{ 'contact.form.rateLimited' | t }}</p> }
+              @case ('too-fast') { <p class="error">{{ 'contact.form.tooFast' | t }}</p> }
+              @case ('not-configured') { <p class="error">{{ 'contact.form.notConfigured' | t }}</p> }
+            }
+          </div>
+        </form>
+      }
+    </div>
+
+    <app-social-links class="links-mobile" />
+  </div>
+</section>

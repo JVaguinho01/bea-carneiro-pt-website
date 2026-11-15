@@ -1,0 +1,249 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--section-gap);
+}
+
+.carousel {
+  width: 100%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+  align-items: stretch; // todos os cartões com a mesma altura
+}
+
+.card {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  transition:
+    transform 400ms var(--ease-out),
+    box-shadow 400ms var(--ease-out);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card);
+
+    .card-photo img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.card-photo {
+  aspect-ratio: 4 / 3;
+
+  img {
+    transition: transform 600ms var(--ease-out);
+  }
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: 0 var(--space-md) var(--space-xs);
+
+  // "Saber mais" fica sempre no fundo do cartão
+  .link-arrow {
+    margin-top: auto;
+
+    // o cartão inteiro é clicável: a área do botão estende-se a todo o cartão
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-xl);
+    }
+  }
+}
+
+.card:hover .link-arrow app-icon {
+  transform: rotate(45deg);
+}
+
+.card:has(.link-arrow:focus-visible) {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.dashes {
+  display: none;
+}
+
+// ---- Tablet: 2 colunas; deitado (≥1024 landscape) 3 colunas -----------------
+@media (max-width: 1279.98px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// ---- Mobile: carrossel com swipe ----------------------------------------------
+@media (max-width: 767.98px) {
+  .carousel {
+    margin-inline: calc(-1 * var(--page-margin));
+  }
+
+  .cards {
+    display: flex;
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--page-margin);
+    padding-inline: var(--page-margin);
+    padding-bottom: var(--space-xs);
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .dashes {
+    display: flex;
+    gap: 6px;
+    padding: var(--space-md) var(--page-margin) 0;
+
+    span {
+      width: 12px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--border-default);
+      transition: width var(--dur-base) var(--ease-out), background-color var(--dur-base);
+
+      &.is-active {
+        width: 24px;
+        background: var(--text-primary);
+      }
+    }
+  }
+}
+
+// ---- Painel do serviço ------------------------------------------------------------
+.panel {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.panel-photo {
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+}
+
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-2xl);
+
+  .t-h2 {
+    font-size: clamp(1.75rem, 1.2rem + 1.5vw, 2.5rem);
+  }
+
+  .t-lead {
+    font-size: var(--fs-body-lg);
+  }
+}
+
+.panel-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  width: 100%;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+
+  li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--text-primary);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 8px;
+      height: 8px;
+      background: var(--brand-secondary);
+      border-radius: 1px;
+    }
+  }
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: 0;
+  padding: var(--space-lg);
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  align-self: start;
+
+  dd {
+    margin: 6px 0 0;
+  }
+}
+
+// Horizontal (landscape ≥ 1024): 2 colunas — foto à esquerda, conteúdo à direita.
+@media (orientation: landscape) and (min-width: 1024px) {
+  .panel {
+    grid-template-columns: 40% 1fr;
+  }
+
+  .panel-photo {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .panel-photo {
+    display: none;
+  }
+
+  .panel-body {
+    padding: var(--space-md) var(--page-margin) var(--space-xl);
+  }
+
+  .panel-cols {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}

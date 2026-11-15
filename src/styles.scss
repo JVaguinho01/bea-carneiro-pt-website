@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+// Estilos globais. Ordem: fontes → tema → tokens → base → utilitários.
+@use '@fontsource-variable/bricolage-grotesque';
+@use '@fontsource-variable/dm-sans';
+@use 'styles/themes/forest';
+@use 'styles/tokens';
+@use 'styles/base';
+@use 'styles/components';

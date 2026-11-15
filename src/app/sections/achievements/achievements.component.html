@@ -1,0 +1,49 @@
+<section id="conquistas" class="section section--inverse achievements" aria-labelledby="achievements-title">
+  <div class="container layout" [class.is-interactive]="interactive()">
+    <div class="side">
+      <div class="section-header" appReveal>
+        <p class="t-overline">{{ 'achievements.overline' | t }}</p>
+        <h2 id="achievements-title" class="t-h1">{{ 'achievements.title' | t }}</h2>
+        <p class="t-lead">{{ 'achievements.text' | t }}</p>
+      </div>
+
+      @if (interactive() && activePhotos().length) {
+        <app-photo-rotator
+          class="gallery"
+          [photos]="activePhotos()"
+          [intervalMs]="3500"
+          ratio="6 / 5"
+          indicator="bars"
+          sizes="480px"
+          [altParams]="{ title: activeTitle() }"
+          aria-live="polite"
+        />
+      }
+    </div>
+
+    <ol class="timeline" [attr.aria-label]="'achievements.listLabel' | t">
+      @for (item of items(); track item.year + item.title; let i = $index) {
+        <li class="entry" [class.is-active]="interactive() && active() === i" appReveal [revealDelay]="i * 60">
+          @if (interactive()) {
+            <button type="button" class="row" [attr.aria-pressed]="active() === i" (click)="select(i)">
+              <ng-container *ngTemplateOutlet="row; context: { $implicit: item }" />
+            </button>
+          } @else {
+            <div class="row">
+              <ng-container *ngTemplateOutlet="row; context: { $implicit: item }" />
+            </div>
+          }
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<ng-template #row let-item>
+  <span class="year t-h4">{{ item.year }}</span>
+  <span class="line" aria-hidden="true"><span class="dot"></span></span>
+  <span class="body">
+    <span class="title t-h3">{{ item.title }}</span>
+    <span class="detail">{{ item.detail }}</span>
+  </span>
+</ng-template>

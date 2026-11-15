@@ -1,0 +1,83 @@
+.about .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.statement .w {
+  color: var(--text-muted);
+  transition: color 400ms ease;
+
+  &.is-painted {
+    color: var(--text-primary);
+  }
+}
+
+.bio {
+  display: grid;
+  grid-template-columns: 520px minmax(0, 1fr);
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+// Números: o valor aparece por cima da legenda (dt/dd invertidos visualmente)
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xl);
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-xs);
+}
+
+.stat-value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-stat);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+@media (max-width: 1279.98px) {
+  .bio {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .photos {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .stats {
+    gap: var(--space-lg) var(--space-2xl);
+  }
+
+  .ctas {
+    flex-direction: column;
+  }
+}

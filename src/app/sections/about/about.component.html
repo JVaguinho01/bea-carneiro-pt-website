@@ -1,0 +1,48 @@
+<section id="sobre" class="section about" aria-labelledby="about-title">
+  <div class="container">
+    <p #statement class="t-display statement">
+      <!-- Leitores de ecrã leem a frase inteira; as palavras animadas são decorativas. -->
+      <span class="visually-hidden">{{ 'about.statementStrong' | t }} {{ 'about.statementMuted' | t }}</span>
+      <span aria-hidden="true">
+        @for (w of words(); track $index) {
+          <span class="w" [class.is-painted]="$index < strongCount() + painted()">{{ w }}</span>{{ ' ' }}
+        }
+      </span>
+    </p>
+
+    <div class="bio">
+      <app-photo-rotator class="photos" [photos]="photos" ratio="4 / 5" sizes="(max-width: 1279px) 100vw, 520px" />
+
+      <div class="text">
+        <div class="section-header" appReveal>
+          <p class="t-overline">{{ 'about.overline' | t }}</p>
+          <h2 id="about-title" class="t-h1">{{ 'about.title' | t }}</h2>
+          <p class="t-lead">{{ 'about.p1' | t }}</p>
+        </div>
+        <p class="t-body" appReveal [revealDelay]="100">{{ 'about.p2' | t }}</p>
+
+        <dl #statsEl class="stats" appReveal [revealDelay]="150">
+          @for (s of stats(); track $index; let i = $index) {
+            <div class="stat">
+              <dt class="stat-label">{{ s.label }}</dt>
+              <dd class="stat-value">{{ counts() ? counts()![i] : s.value }}{{ s.suffix }}</dd>
+            </div>
+          }
+        </dl>
+
+        <div class="ctas" appReveal [revealDelay]="200">
+          <a href="#conquistas" class="btn btn--outline btn--block-mobile" (click)="$event.preventDefault(); scroll.scrollTo('conquistas')">
+            {{ 'about.ctaAchievements' | t }}
+            <app-icon name="arrow-up-right" [size]="20" />
+          </a>
+          @if (cvUrl) {
+            <a [href]="cvUrl" class="btn btn--outline btn--block-mobile" target="_blank" rel="noopener" type="application/pdf">
+              {{ 'about.ctaCv' | t }}
+              <app-icon name="download" [size]="20" />
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

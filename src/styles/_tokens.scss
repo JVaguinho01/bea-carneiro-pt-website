@@ -1,0 +1,100 @@
+// =============================================================================
+// TOKENS (independentes do tema): tipografia, espaçamento, raios, layout, motion.
+// Espelham as variáveis do Figma (Design System). Os valores de layout mudam
+// por range: mobile < 768 · tablet 768–1279 · desktop ≥ 1280.
+// =============================================================================
+
+:root {
+  // ---- Tipos de letra (servidos localmente via @fontsource) -----------------
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'DM Sans Variable', 'DM Sans', system-ui, sans-serif;
+
+  // ---- Escala tipográfica (desktop; reduz nos ranges abaixo) ----------------
+  --fs-display: clamp(3rem, 1.4rem + 4.6vw, 6rem); // 96px
+  --fs-h1: 4rem; // 64
+  --fs-h2: 3rem; // 48
+  --fs-h3: 2rem; // 32
+  --fs-h4: 1.5rem; // 24
+  --fs-quote: 1.75rem; // 28
+  --fs-stat: 4.5rem; // 72
+  --fs-body-lg: 1.25rem; // 20
+  --fs-body: 1rem; // 16
+  --fs-small: 0.875rem; // 14
+  --fs-caption: 0.75rem; // 12
+  --fs-overline: 0.8125rem; // 13
+  --fs-wordmark: clamp(4rem, 1rem + 11vw, 12.25rem); // 196
+
+  // ---- Espaçamento ----------------------------------------------------------
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  // ---- Raios (pouco arredondado) -------------------------------------------
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-full: 4px; // botões
+  --radius-lg: 6px; // fotos
+  --radius-xl: 8px; // cartões e painéis
+
+  // ---- Layout ---------------------------------------------------------------
+  --container-max: 1200px;
+  --page-margin: max(40px, calc((100vw - var(--container-max)) / 2));
+  --section-padding: 160px;
+  --section-gap: var(--space-4xl);
+  --header-height: 88px;
+  --touch-target: 44px;
+
+  // ---- Motion ---------------------------------------------------------------
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 900ms;
+
+  // ---- Camadas --------------------------------------------------------------
+  --z-header: 50;
+  --z-fab: 60;
+  --z-menu: 80;
+  --z-overlay: 100;
+}
+
+// Tablet: 768–1279px
+@media (max-width: 1279.98px) {
+  :root {
+    --fs-display: 4rem; // Display → H1
+    --fs-h1: 3rem; // títulos de secção → H2
+    --fs-h2: 2.5rem;
+    --fs-stat: 3.5rem;
+    --fs-quote: 1.375rem;
+    --page-margin: 40px;
+    --section-padding: 96px;
+    --section-gap: var(--space-3xl);
+    --header-height: 80px;
+  }
+}
+
+// Mobile: < 768px
+@media (max-width: 767.98px) {
+  :root {
+    --fs-display: 2.5rem;
+    --fs-h1: 2rem;
+    --fs-h2: 1.75rem;
+    --fs-h3: 1.5rem;
+    --fs-h4: 1.25rem;
+    --fs-quote: 1.25rem;
+    --fs-stat: 2.75rem;
+    --fs-body-lg: 1rem;
+    --fs-wordmark: clamp(2.75rem, 0.5rem + 11vw, 4.5rem);
+    --page-margin: 20px;
+    --section-padding: 80px;
+    --section-gap: var(--space-2xl);
+    --header-height: 72px;
+  }
+}

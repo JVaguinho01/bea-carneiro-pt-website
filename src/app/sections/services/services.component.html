@@ -1,0 +1,97 @@
+<section id="servicos" class="section services" aria-labelledby="services-title">
+  <div class="container stack">
+    <div class="section-header" appReveal>
+      <p class="t-overline">{{ 'services.overline' | t }}</p>
+      <h2 id="services-title" class="t-h1">{{ 'services.title' | t }}</h2>
+      <p class="t-lead">{{ 'services.text' | t }}</p>
+    </div>
+
+    <div class="carousel">
+      <ul class="cards" appSnapCarousel #carousel="snapCarousel" [attr.aria-label]="'services.carouselLabel' | t">
+        @for (s of items(); track s.id; let i = $index) {
+          <li class="card" appReveal [revealDelay]="i * 100">
+            <div class="photo card-photo">
+              @if (photos[s.id]; as p) {
+                <img
+                  [src]="p.src"
+                  [attr.srcset]="p.srcSm + ' 640w, ' + p.src + ' ' + p.w + 'w'"
+                  sizes="(max-width: 767px) 85vw, (max-width: 1279px) 50vw, 380px"
+                  [width]="p.w"
+                  [height]="p.h"
+                  [alt]="s.photoAlt"
+                  [style.object-position]="p.focus"
+                  loading="lazy"
+                  decoding="async"
+                />
+              }
+            </div>
+            <div class="card-body">
+              <p class="t-overline">{{ s.number }}</p>
+              <h3 class="t-h3">{{ s.title }}</h3>
+              <p class="t-body">{{ s.excerpt }}</p>
+              <button
+                type="button"
+                class="link-arrow"
+                aria-haspopup="dialog"
+                [attr.aria-label]="'services.learnMoreAbout' | t: { title: s.title }"
+                (click)="open(i)"
+              >
+                {{ 'services.learnMore' | t }}
+                <app-icon name="arrow-up-right" [size]="18" />
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+      <div class="dashes" aria-hidden="true">
+        @for (s of items(); track s.id; let i = $index) {
+          <span [class.is-active]="carousel.index() === i"></span>
+        }
+      </div>
+    </div>
+
+    <a href="#contactos" class="btn btn--primary btn--block-mobile cta" (click)="$event.preventDefault(); scroll.goToContact()">
+      {{ 'services.cta' | t }}
+      <app-icon name="arrow-up-right" [size]="20" />
+    </a>
+  </div>
+</section>
+
+<app-overlay [open]="openIndex() !== null" [label]="openItem()?.panel?.title ?? ''" (closed)="close()">
+  @if (openItem(); as s) {
+    <article class="panel">
+      <div class="panel-photo photo">
+        @if (photos[s.id]; as p) {
+          <img [src]="p.src" [width]="p.w" [height]="p.h" [alt]="s.photoAlt" [style.object-position]="p.focus" />
+        }
+      </div>
+      <div class="panel-body">
+        <p class="t-overline">{{ s.panel.label }}</p>
+        <h2 class="t-h2">{{ s.panel.title }}</h2>
+        <p class="t-lead">{{ s.panel.lead }}</p>
+        <div class="panel-cols">
+          <div>
+            <h3 class="t-h4">{{ s.panel.listTitle }}</h3>
+            <ul class="bullets">
+              @for (b of s.panel.list; track b) {
+                <li>{{ b }}</li>
+              }
+            </ul>
+          </div>
+          <dl class="facts">
+            @for (f of s.panel.facts; track f.title) {
+              <div>
+                <dt class="t-overline">{{ f.title }}</dt>
+                <dd>{{ f.text }}</dd>
+              </div>
+            }
+          </dl>
+        </div>
+        <button type="button" class="btn btn--primary btn--block-mobile" (click)="askAbout(s)">
+          {{ s.panel.cta }}
+          <app-icon name="arrow-up-right" [size]="20" />
+        </button>
+      </div>
+    </article>
+  }
+</app-overlay>

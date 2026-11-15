@@ -1,0 +1,82 @@
+:host {
+  display: block;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+
+  img {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--dur-slow) ease;
+
+    &.is-active {
+      opacity: 1;
+    }
+  }
+}
+
+.dots {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-lg);
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+// Barras de progresso (conquistas): enchem durante o tempo de cada foto.
+.bars {
+  display: flex;
+  gap: 6px;
+  margin-top: var(--space-md);
+
+  button {
+    position: relative;
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border-default);
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -12px 0;
+    }
+
+    span {
+      position: absolute;
+      inset: 0;
+      transform-origin: left;
+      transform: scaleX(0);
+      background: var(--text-brand-inverse);
+    }
+
+    &.is-done span {
+      transform: scaleX(1);
+    }
+
+    &.is-active span {
+      animation: fill var(--rotate-ms) linear forwards;
+    }
+
+    &.is-active.is-paused span {
+      animation-play-state: paused;
+    }
+  }
+}
+
+@keyframes fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bars button.is-active span {
+    animation: none;
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,76 @@
+<div class="bar container-bar">
+  <a href="#inicio" class="logo-link" [attr.aria-label]="'nav.home' | t" (click)="go('top', $event)">
+    <app-logo [height]="40" />
+  </a>
+
+  <nav class="links" [attr.aria-label]="'nav.label' | t">
+    <ul>
+      @for (l of links; track l.id) {
+        <li>
+          <a
+            [href]="'#' + l.id"
+            [class.is-active]="active() === l.id"
+            [attr.aria-current]="active() === l.id ? 'true' : null"
+            (click)="go(l.id, $event)"
+            >{{ l.key | t }}</a
+          >
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="actions">
+    <app-lang-switch />
+    <a href="#contactos" class="btn btn--primary cta" (click)="go('contactos', $event)">
+      {{ 'nav.cta' | t }}
+      <app-icon name="arrow-up-right" [size]="20" />
+    </a>
+    <button
+      #menuButton
+      type="button"
+      class="menu-btn"
+      [attr.aria-label]="'nav.openMenu' | t"
+      aria-haspopup="dialog"
+      [attr.aria-expanded]="menuOpen()"
+      (click)="openMenu()"
+    >
+      <app-icon name="menu" />
+    </button>
+  </div>
+</div>
+
+<!-- Menu em ecrã inteiro (tablet e mobile) -->
+<dialog #menu class="menu" [attr.aria-label]="'nav.label' | t" (cancel)="onMenuCancel($event)">
+  <div class="menu-top">
+    <a href="#inicio" class="logo-link" [attr.aria-label]="'nav.home' | t" (click)="go('top', $event)">
+      <app-logo [height]="36" class="logo-inverse" />
+    </a>
+    <div class="menu-top-actions">
+      <app-lang-switch tone="dark" />
+      <button type="button" class="menu-close" [attr.aria-label]="'nav.closeMenu' | t" (click)="closeMenu()">
+        <app-icon name="close" />
+      </button>
+    </div>
+  </div>
+
+  <nav [attr.aria-label]="'nav.label' | t">
+    <ol class="menu-links">
+      @for (l of links; track l.id; let i = $index) {
+        <li>
+          <a [href]="'#' + l.id" (click)="go(l.id, $event)">
+            <span class="num">0{{ i + 1 }}</span>
+            <span class="t-h2">{{ l.key | t }}</span>
+          </a>
+        </li>
+      }
+    </ol>
+  </nav>
+
+  <div class="menu-bottom">
+    <a href="#contactos" class="btn btn--soft btn--block-mobile" (click)="go('contactos', $event)">
+      {{ 'nav.cta' | t }}
+      <app-icon name="arrow-up-right" [size]="20" />
+    </a>
+    <app-social-links tone="dark" />
+  </div>
+</dialog>

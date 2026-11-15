@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "title": "Beatriz Carneiro Acro",
+    "description": "Beatriz Carneiro, ex-ginasta de alto rendimento e treinadora de ginástica acrobática. Workshops no teu ginásio, treino personalizado para bases e volantes e coaching online."
+  },
+  "common": {
+    "skipToContent": "Saltar para o conteúdo",
+    "backToTop": "Voltar ao topo",
+    "close": "Fechar",
+    "photoOf": "Foto {n} de {total}",
+    "showPhoto": "Mostrar foto {n}",
+    "newTab": "(abre num separador novo)"
+  },
+  "nav": {
+    "label": "Navegação principal",
+    "home": "Beatriz Carneiro — início",
+    "about": "Sobre",
+    "achievements": "Conquistas",
+    "services": "Serviços",
+    "gallery": "Galeria",
+    "testimonials": "Testemunhos",
+    "contact": "Contactos",
+    "cta": "Fala comigo",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "language": "Idioma",
+    "switchTo": "Mudar para {lang}"
+  },
+  "hero": {
+    "badge": "Acro é a minha paixão!",
+    "title": "Mais técnica, mais confiança.",
+    "text": "Ajudo ginastas e equipas a desenvolver excelência técnica, confiança e uma paixão duradoura pela ginástica acrobática. Workshops no teu ginásio, treino personalizado para bases e volantes e coaching online.",
+    "ctaPrimary": "Marcar treino",
+    "ctaSecondary": "Ver serviços",
+    "chip1Title": "Workshops de 1 a 3 dias",
+    "chip1Text": "No teu ginásio",
+    "chip2Title": "Sessões online ao vivo",
+    "chip2Text": "Para equipas e clubes",
+    "photos": [
+      "A Beatriz a conversar com um grupo de ginastas num workshop",
+      "A Beatriz a ajudar uma ginasta num exercício de flexibilidade",
+      "A Beatriz a acompanhar um lançamento acrobático no ginásio",
+      "A Beatriz a orientar uma pirâmide de pares"
+    ]
+  },
+  "about": {
+    "statementStrong": "Transformo anos de treino de alto rendimento",
+    "statementMuted": "numa vida dedicada a formar atletas.",
+    "overline": "Sobre mim",
+    "title": "Olá, sou a Bea.",
+    "p1": "Sou treinadora de ginástica acrobática, apaixonada e dedicada, com uma ligação de uma vida a este desporto. Ex-ginasta de alto rendimento e atualmente treinadora no Acro Clube da Maia, junto a experiência de competição em primeira mão à competência profissional de treino, para apoiar o desenvolvimento técnico, a disciplina e a motivação dos atletas.",
+    "p2": "Ao longo do meu percurso desenvolvi fortes capacidades de liderança e comunicação, e um compromisso profundo com a excelência. Procuro inspirar os atletas a crescer não só no desempenho, mas também na confiança, na resiliência e no amor pelo desporto.",
+    "stats": [
+      {
+        "value": 1,
+        "suffix": "×",
+        "label": "Título mundial"
+      },
+      {
+        "value": 3,
+        "suffix": "×",
+        "label": "Campeã Europeia Júnior"
+      },
+      {
+        "value": 2,
+        "suffix": "×",
+        "label": "World Games"
+      }
+    ],
+    "ctaAchievements": "Ver conquistas",
+    "ctaCv": "Descarregar CV (PDF)",
+    "photos": [
+      "A Beatriz com todas as suas medalhas ao peito",
+      "A Beatriz abraçada à parceira depois de uma prova",
+      "A Beatriz e a parceira no pódio dos World Games",
+      "A Beatriz abraçada ao treinador depois de competir"
+    ]
+  },
+  "achievements": {
+    "overline": "Conquistas",
+    "title": "Uma carreira feita de pódios.",
+    "text": "Anos de competição ao mais alto nível, agora ao serviço de quem treina comigo.",
+    "listLabel": "Linha cronológica das conquistas",
+    "photoAlt": "Foto de competição: {title}",
+    "items": [
+      {
+        "year": "2026",
+        "title": "Bronze nos World Games",
+        "detail": "Chengdu, China · Pares femininos, com Inês Faria"
+      },
+      {
+        "year": "2025",
+        "title": "Vice-campeã Europeia",
+        "detail": "Campeonato da Europa · medalha de prata"
+      },
+      {
+        "year": "2024",
+        "title": "Ouro na Taça do Mundo",
+        "detail": "Maia · primeiro ouro de Portugal numa Taça do Mundo"
+      },
+      {
+        "year": "2023",
+        "title": "2× bronze no Campeonato da Europa",
+        "detail": "Escalão sénior"
+      },
+      {
+        "year": "2022",
+        "title": "Prata nos World Games",
+        "detail": "Birmingham, EUA · 1.ª ginasta portuguesa com 2 pódios nos World Games"
+      },
+      {
+        "year": "2021",
+        "title": "2× Vice-campeã do Mundo",
+        "detail": "Campeonatos do Mundo · escalão sénior"
+      },
+      {
+        "year": "2020",
+        "title": "Campeã do Mundo e 3× Campeã Europeia Júnior",
+        "detail": "Escalão júnior · Pares e Grupos femininos"
+      }
+    ]
+  },
+  "services": {
+    "overline": "Serviços",
+    "title": "Treino à tua medida.",
+    "text": "Do trabalho com equipas inteiras ao acompanhamento individual — presencial ou online.",
+    "learnMore": "Saber mais",
+    "learnMoreAbout": "Saber mais sobre {title}",
+    "cta": "Pedir informações",
+    "carouselLabel": "Serviços",
+    "items": [
+      {
+        "id": "workshops",
+        "number": "01",
+        "title": "Workshops de ginástica",
+        "excerpt": "Eleva as capacidades e a confiança da tua equipa num dia de treino focado e prático. Aprender, desafiar-se e divertir-se juntos no ginásio!",
+        "photoAlt": "A Beatriz a orientar um treino de grupo num ginásio",
+        "panel": {
+          "label": "Serviço 01",
+          "title": "Workshops de ginástica",
+          "lead": "Workshops à medida para a tua equipa: a Beatriz vai ao teu ginásio e orienta um dia completo de treino com os teus ginastas.",
+          "listTitle": "O que trabalhamos",
+          "list": [
+            "Execução e qualidade de performance",
+            "Condição física",
+            "Construção de dificuldade",
+            "Preparação para competição"
+          ],
+          "facts": [
+            {
+              "title": "Formato",
+              "text": "Workshops de 1, 2 ou 3 dias, no teu clube."
+            },
+            {
+              "title": "Para quem",
+              "text": "Clubes e equipas de ginástica acrobática."
+            }
+          ],
+          "cta": "Pedir informações sobre workshops",
+          "subject": "Workshops de ginástica"
+        }
+      },
+      {
+        "id": "personalizado",
+        "number": "02",
+        "title": "Treino personalizado",
+        "excerpt": "Constrói bases sólidas. Treina de forma mais inteligente, forte e segura, com sessões à medida para bases e volantes.",
+        "photoAlt": "A Beatriz a apoiar uma ginasta num pino",
+        "panel": {
+          "label": "Serviço 02",
+          "title": "Treino personalizado — bases e volantes",
+          "lead": "Sessões privadas ou em pequenos grupos, pensadas para bases e volantes que querem dar o próximo passo.",
+          "listTitle": "O que trabalhamos",
+          "list": [
+            "Força, estabilidade e flexibilidade",
+            "Precisão técnica",
+            "Estratégias de performance mental"
+          ],
+          "facts": [
+            {
+              "title": "Inclui",
+              "text": "Análise de vídeo com feedback técnico, acompanhamento e planeamento personalizados."
+            },
+            {
+              "title": "Formato",
+              "text": "Individual ou em pequenos grupos."
+            }
+          ],
+          "cta": "Pedir informações sobre treino personalizado",
+          "subject": "Treino personalizado — bases e volantes"
+        }
+      },
+      {
+        "id": "online",
+        "number": "03",
+        "title": "Coaching online",
+        "excerpt": "Sessões online interativas que ajudam atletas e treinadores a desenvolver técnica, confiança e espírito de equipa, a partir do teu ginásio ou de casa.",
+        "photoAlt": "A Beatriz a dar indicações a ginastas durante um treino",
+        "panel": {
+          "label": "Serviço 03",
+          "title": "Coaching online",
+          "lead": "Leva a tua equipa ao próximo nível, a partir do portátil. Sessões ao vivo e interativas, com demonstração das técnicas em tempo real.",
+          "listTitle": "Temas",
+          "list": [
+            "Expressão artística e apresentação",
+            "Flexibilidade",
+            "Pinos e alavancas",
+            "Trabalho de blocos",
+            "Saídas dinâmicas"
+          ],
+          "facts": [
+            {
+              "title": "Inclui",
+              "text": "Tempo para perguntas, feedback e discussão."
+            },
+            {
+              "title": "Para quem",
+              "text": "Equipas, clubes ou grupos regionais."
+            }
+          ],
+          "cta": "Pedir informações sobre coaching online",
+          "subject": "Coaching online"
+        }
+      }
+    ]
+  },
+  "gallery": {
+    "overline": "Galeria",
+    "title": "Em movimento.",
+    "more": "Ver mais fotos",
+    "showing": "A mostrar {shown} de {total} fotos",
+    "open": "Abrir foto {n} em grande",
+    "viewerLabel": "Visualizador de fotos",
+    "prev": "Foto anterior",
+    "next": "Foto seguinte",
+    "alt": {
+      "competicao": "Beatriz Carneiro em competição de ginástica acrobática",
+      "treino": "Beatriz Carneiro num treino de ginástica acrobática",
+      "pessoal": "Beatriz Carneiro fora do ginásio",
+      "retratos": "Retrato de Beatriz Carneiro"
+    },
+    "captions": {
+      "competicao": "Competição",
+      "treino": "Treino",
+      "pessoal": "Dia a dia",
+      "retratos": "Retrato"
+    }
+  },
+  "testimonials": {
+    "overline": "Testemunhos",
+    "title": "O que dizem os treinadores.",
+    "text": "Treinadores de topo que acompanharam o percurso da Bea.",
+    "readMore": "Ler mais",
+    "readMoreFrom": "Ler o testemunho completo de {name}",
+    "panelLabel": "Testemunho",
+    "carouselLabel": "Testemunhos",
+    "items": [
+      {
+        "name": "Lourenço França",
+        "role": "Treinador principal · Acro Clube da Maia e Seleção Nacional",
+        "quote": "A Beatriz é uma treinadora jovem que trouxe para esta nova função muitas das qualidades que desenvolveu como ginasta.",
+        "excerpt": "É daquelas atletas que só param quando o trabalho está feito (e esta é uma característica que pode parecer simples, mas que é verdadeiramente distintiva). Determinada e persistente, enfrentou momentos muito difíceis ao longo da carreira de ginasta.",
+        "full": [
+          "A Beatriz é uma treinadora jovem que trouxe para esta nova função muitas das qualidades que desenvolveu como ginasta. É daquelas atletas que só param quando o trabalho está feito (e esta é uma característica que pode parecer simples, mas que é verdadeiramente distintiva).",
+          "Determinada e persistente, enfrentou momentos muito difíceis ao longo da carreira de ginasta, desafios que teriam levado muitos outros a desistir. Para ela, porém, tornaram-se combustível para lutar por mais. E conseguiu: Campeã do Mundo e três vezes Campeã Europeia Júnior, Vice-campeã do Mundo e Vice-campeã Europeia Sénior, e medalhada em dois World Games, ao longo de mais de uma década de competição ao mais alto nível. São conquistas ao alcance de muito poucos na Ginástica Acrobática.",
+          "Mais impressionante ainda é que estes títulos foram alcançados em disciplinas diferentes (Pares Femininos e Grupos Femininos), o que é ainda mais raro e exigente. Ao longo da carreira lidou com lesões, suas e das parceiras, cada uma com os seus próprios desafios. Ainda assim, nos momentos mais difíceis, foi ela a força que puxou o grupo para a frente.",
+          "São estes os atributos que trouxe para a nova carreira de treinadora e que continua a desenvolver. A par da vontade constante de aprender, estão entre as qualidades mais importantes a que qualquer treinador pode aspirar."
+        ]
+      },
+      {
+        "name": "João Ferreira",
+        "role": "Treinador principal · AGG Acro (Suíça)",
+        "quote": "Uma atleta resiliente, metódica e exigente consigo própria.",
+        "excerpt": "Sempre mostrou compreender que os objetivos nem sempre são imediatos, respeitando o processo necessário para os alcançar. No início da carreira de treinadora, junta a experiência de atleta a uma sólida formação em Educação Física.",
+        "full": [
+          "Uma atleta resiliente, metódica e exigente consigo própria. Sempre mostrou compreender que os objetivos nem sempre são imediatos, respeitando o processo necessário para os alcançar. No início da carreira de treinadora, junta a experiência de atleta a uma sólida formação em Educação Física, o que se reflete numa abordagem consciente, estruturada e responsável, com uma forte preocupação em construir bases técnicas e humanas consistentes nas ginastas com quem trabalha."
+        ]
+      },
+      {
+        "name": "Joana Patrocínio",
+        "role": "Treinadora principal · RLZO Akrobatik Turnen (Suíça)",
+        "quote": "Ver a Beatriz tornar-se treinadora faz todo o sentido.",
+        "excerpt": "A dedicação dela à Ginástica Acrobática é imensa e existe desde que há memória. Agora, é natural que possa passar todo o seu conhecimento e valores aos mais novos, e a todos os que quiserem aprender com ela.",
+        "full": [
+          "Ver a Beatriz tornar-se treinadora faz todo o sentido. A dedicação dela à Ginástica Acrobática é imensa e existe desde que há memória. Agora, é natural que possa passar todo o seu conhecimento e valores aos mais novos, e a todos os que quiserem aprender com ela."
+        ]
+      },
+      {
+        "name": "Yves Vander Donckt",
+        "role": "Treinador de alto rendimento · Sportakrobatik Rechberghausen (Alemanha)",
+        "quote": "A Beatriz mantém padrões pessoais muito elevados e encara o treino com disciplina e determinação.",
+        "excerpt": "A ambição e as expectativas que tem para si própria refletem-se no ambiente de treino. Traz naturalmente intensidade e foco, qualidades importantes em contextos de alto rendimento.",
+        "full": [
+          "A Beatriz mantém padrões pessoais muito elevados e encara o treino com disciplina e determinação.",
+          "A ambição e as expectativas que tem para si própria refletem-se no ambiente de treino. Traz naturalmente intensidade e foco, qualidades importantes em contextos de alto rendimento, embora por vezes possam ser um desafio em dinâmicas de equipa mais diversas. Ainda assim, a dedicação à excelência é inegável.",
+          "O seu percurso competitivo inclui Campeonatos da Europa, Campeonatos do Mundo e Taças do Mundo e, de forma notável, duas participações nos World Games, uma conquista que reflete um nível muito elevado de reconhecimento internacional, além de uma vasta experiência de palco em inúmeros espetáculos. Esta amplitude de experiência é uma mais-valia significativa que leva para qualquer contexto.",
+          "A Beatriz desenvolveu a sua própria abordagem ao longo de anos de experiência. No futuro, uma das principais áreas de crescimento será continuar a alargar a sua perspetiva e adaptar os métodos a diferentes atletas, mantendo os padrões elevados que valoriza. Importa sublinhar que mostra uma clara vontade de aprender: é muitas vezes a primeira a experimentar novas ideias, elementos ou métodos de treino."
+        ]
+      }
+    ]
+  },
+  "instagram": {
+    "handle": "@bea_carneiro3",
+    "title": "Segue o dia a dia no Instagram.",
+    "cta": "Abrir Instagram",
+    "postLabel": "Abrir o Instagram da Beatriz",
+    "alt": "Foto pessoal da Beatriz Carneiro, do Instagram"
+  },
+  "contact": {
+    "overline": "Contactos",
+    "title": "Começa hoje o teu percurso na acrobática.",
+    "text": "Fala comigo para workshops à medida, treino personalizado para bases e volantes, estágios de treino e consultoria.",
+    "channels": {
+      "instagram": "Instagram",
+      "email": "Enviar email",
+      "phone": "Ligar",
+      "whatsapp": "WhatsApp"
+    },
+    "form": {
+      "title": "Envia-me uma mensagem",
+      "name": "Nome",
+      "namePlaceholder": "O teu nome",
+      "email": "Email",
+      "emailPlaceholder": "o.teu@email.com",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Ex.: Workshop para o meu clube",
+      "message": "Mensagem",
+      "messagePlaceholder": "Escreve aqui a tua mensagem…",
+      "honeypot": "Não preenchas este campo",
+      "submit": "Enviar mensagem",
+      "sending": "A enviar…",
+      "successTitle": "Mensagem enviada!",
+      "successText": "Obrigada pelo contacto. Respondo assim que possível.",
+      "sendAnother": "Enviar outra mensagem",
+      "errorText": "Não foi possível enviar a mensagem. Tenta outra vez ou contacta-me por email.",
+      "rateLimited": "Já enviaste várias mensagens. Tenta novamente daqui a uns minutos.",
+      "tooFast": "Espera uns segundos antes de enviar.",
+      "notConfigured": "O envio de mensagens ainda não está configurado. Contacta-me por email ou WhatsApp.",
+      "errors": {
+        "required": "Este campo é obrigatório.",
+        "email": "Escreve um email válido.",
+        "minlength": "Escreve pelo menos {n} caracteres.",
+        "maxlength": "Máximo de {n} caracteres.",
+        "pattern": "Usa apenas letras, espaços e pontuação simples."
+      }
+    }
+  },
+  "footer": {
+    "statement": "Anos de treino transformados numa vida de coaching.",
+    "wordmark": "Bea Carneiro",
+    "copyright": "© {year} Beatriz Carneiro · Acro Coaching",
+    "credit": "Website por",
+    "creditName": "Vaguinho",
+    "social": "Redes e contactos"
+  }
+}

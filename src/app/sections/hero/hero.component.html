@@ -1,0 +1,47 @@
+<section #section id="inicio" class="hero" aria-labelledby="hero-title">
+  <div class="glow-layer" aria-hidden="true"><div #glow class="glow"></div></div>
+
+  <div class="container grid">
+    <div class="text">
+      <p class="badge"><span class="dot" aria-hidden="true"></span>{{ 'hero.badge' | t }}</p>
+
+      <h1 id="hero-title" class="t-display title">
+        @for (w of titleWords(); track $index) {
+          <span class="word"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+        }
+      </h1>
+
+      <p class="t-lead lead">{{ 'hero.text' | t }}</p>
+
+      <div class="ctas">
+        <a href="#contactos" class="btn btn--primary btn--block-mobile" (click)="$event.preventDefault(); scroll.goToContact()">
+          {{ 'hero.ctaPrimary' | t }}
+          <app-icon name="arrow-up-right" [size]="20" />
+        </a>
+        <a href="#servicos" class="btn btn--outline btn--block-mobile" (click)="$event.preventDefault(); scroll.scrollTo('servicos')">
+          {{ 'hero.ctaSecondary' | t }}
+        </a>
+      </div>
+    </div>
+
+    <div class="visual">
+      <app-photo-rotator
+        class="photo-wrap"
+        [photos]="photos"
+        ratio="var(--hero-ratio)"
+        sizes="(max-width: 1279px) 100vw, 520px"
+        [eager]="true"
+      />
+      <div class="chip chip--a" aria-hidden="true">
+        <span class="t-h4">{{ 'hero.chip1Title' | t }}</span>
+        <span class="chip-sub">{{ 'hero.chip1Text' | t }}</span>
+      </div>
+      <div class="chip chip--b" aria-hidden="true">
+        <span class="t-h4">{{ 'hero.chip2Title' | t }}</span>
+        <span class="chip-sub">{{ 'hero.chip2Text' | t }}</span>
+      </div>
+      <!-- Os chips são decorativos; a mesma informação está no texto do hero. -->
+      <div class="fade" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>

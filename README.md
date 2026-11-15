@@ -1,59 +1,53 @@
-# BeaPtWebsite
+# Beatriz Carneiro Acro — website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.7.
+Site de página única em **Angular 22** (só front-end, sem back-end nem base de dados).
 
-## Development server
-
-To start a local development server, run:
+## Correr localmente
 
 ```bash
-ng serve
+npm install        # só da primeira vez
+npm start          # abre em http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+No Windows, se o PowerShell bloquear o `npm`, usa `npm.cmd start`.
+No IntelliJ: *File › Open* nesta pasta e corre o script `start` do `package.json`.
 
-## Code scaffolding
+Build de produção: `npm run build` → pasta `dist/bea-pt-website/browser` (é isto que se publica).
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+> Node recomendado: 24 LTS (o Angular 22 não suporta oficialmente o Node 25).
+
+## Onde mexer
+
+| O quê | Onde |
+|---|---|
+| Cores do site (tema) | `src/styles/themes/_forest.scss` |
+| Tipografia, espaçamentos, raios, breakpoints | `src/styles/_tokens.scss` |
+| Classes partilhadas (botões, títulos…) | `src/styles/_components.scss` |
+| Textos PT / EN | `src/i18n/pt.json` e `src/i18n/en.json` |
+| Contactos, Instagram, CV, LinkedIn | `src/app/core/config/site.config.ts` |
+| EmailJS (formulário) | `src/environments/environment.ts` |
+| Que foto vai em cada secção | `src/app/data/content.ts` |
+| Ícones | `src/app/shared/icons/icons.ts` |
+
+### Criar outro tema
+1. Copia `src/styles/themes/_forest.scss` para `_novo.scss` e muda as cores (mantém os nomes das variáveis).
+2. Muda o seletor para `[data-theme='novo']` e importa-o em `src/styles.scss`.
+3. Em `src/index.html`, muda `data-theme="forest"` para `data-theme="novo"`.
+
+### Fotos
+As fotos estão em `public/images/<categoria>/` (`retratos`, `competicao`, `treino`, `pessoal`), cada uma com
+versão grande (`nome.webp`) e pequena (`nome-sm.webp`). Depois de acrescentar ou apagar fotos, corre:
 
 ```bash
-ng generate component component-name
+npm run photos
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+As fotos que não estão atribuídas a uma secção em `content.ts` aparecem automaticamente na Galeria.
 
-```bash
-ng generate --help
-```
+### Línguas
+A língua inicial é a guardada pelo visitante; senão a do browser (português → PT, qualquer outra → EN).
+Não há língua no URL. Todas as chaves existem nos dois ficheiros JSON.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Formulário de contacto (EmailJS)
+Ver `SECURITY.md` → secção EmailJS. Enquanto `environment.ts` estiver vazio, o formulário mostra um aviso
+e os contactos diretos (email, telefone, WhatsApp) continuam a funcionar.

@@ -1,0 +1,263 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: calc(var(--header-height) + 52px);
+  background: var(--bg-canvas);
+  --hero-ratio: 520 / 840;
+}
+
+// ---- Glow coral que segue o rato -----------------------------------------------
+.glow-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 65%);
+  transform: translate3d(70%, 40%, 0) translate(-50%, -50%);
+  will-change: transform;
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 560px;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  padding-top: 40px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-accent-soft);
+  font-weight: 700;
+  font-size: var(--fs-overline);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: rise var(--dur-reveal) var(--ease-out) both;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-primary);
+  }
+}
+
+// Título: palavra a palavra (slide-up + fade, stagger 60ms)
+.title .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+
+  > span {
+    display: inline-block;
+    animation: word-up 900ms var(--ease-out) both;
+    animation-delay: calc(150ms + var(--i) * 60ms);
+  }
+}
+
+.lead {
+  max-width: 34em;
+  animation: rise var(--dur-reveal) var(--ease-out) 450ms both;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  animation: rise var(--dur-reveal) var(--ease-out) 550ms both;
+}
+
+// ---- Foto ----------------------------------------------------------------------
+.visual {
+  position: relative;
+  // a foto passa a dobra do ecrã (~80px) e dissolve-se: pista de que há mais página
+  height: calc(100svh - var(--header-height) - 52px + 80px);
+  min-height: 560px;
+  max-height: 900px;
+}
+
+.photo-wrap {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  animation: photo-in 1200ms var(--ease-out) both;
+
+  ::ng-deep .frame {
+    height: 100%;
+    aspect-ratio: auto !important;
+  }
+
+  // o indicador fica acima do fade da dobra do ecrã
+  ::ng-deep .dots {
+    bottom: 120px;
+  }
+
+  @media (max-width: 767.98px) {
+    ::ng-deep .dots {
+      bottom: var(--space-lg);
+    }
+  }
+}
+
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, rgb(255 253 247 / 0), rgb(255 253 247 / 0.75) 55%, var(--bg-canvas));
+  pointer-events: none;
+}
+
+.chip {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+  animation: rise var(--dur-reveal) var(--ease-out) 700ms both; // só entra; depois fica parado
+
+  &--a {
+    left: 0;
+    top: 62%;
+  }
+
+  &--b {
+    right: -48px;
+    top: 12%;
+    animation-delay: 850ms;
+  }
+}
+
+.chip-sub {
+  font-size: var(--fs-caption);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+// ---- Tablet: empilhado, foto a toda a largura, chips dentro da foto -------------
+@media (max-width: 1279.98px) {
+  .hero {
+    --hero-ratio: 4 / 3;
+    padding-top: calc(var(--header-height) + 48px);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .text {
+    padding-top: 0;
+  }
+
+  .visual {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 4 / 3;
+  }
+
+  .photo-wrap {
+    left: 0;
+  }
+
+  .chip--a {
+    left: 24px;
+    top: auto;
+    bottom: 120px;
+  }
+
+  .chip--b {
+    right: 24px;
+    top: 24px;
+  }
+
+  .glow {
+    display: none;
+  }
+}
+
+// ---- Mobile: sem chips; foto 5:6 cortada pela dobra -------------------------------
+@media (max-width: 767.98px) {
+  .hero {
+    padding-top: calc(var(--header-height) + 32px);
+  }
+
+  .text {
+    gap: var(--space-lg);
+  }
+
+  .ctas {
+    width: 100%;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .visual {
+    aspect-ratio: 5 / 6;
+  }
+
+  .chip,
+  .fade {
+    display: none;
+  }
+}
+
+@keyframes word-up {
+  from {
+    transform: translateY(105%);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes photo-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: scale(1.1);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+  }
+}
+

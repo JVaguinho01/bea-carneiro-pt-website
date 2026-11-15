@@ -1,0 +1,191 @@
+.overlay {
+  // <dialog> ocupa o ecrã; o painel é posicionado dentro dele.
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 40px;
+  border: 0;
+  background: transparent;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: none;
+  place-items: center;
+
+  &[open] {
+    display: grid;
+  }
+
+  &::backdrop {
+    background: var(--bg-overlay);
+    animation: fade-in 200ms ease both;
+  }
+
+  &.is-closing::backdrop {
+    animation: fade-out 200ms ease both;
+  }
+}
+
+.is-viewer::backdrop {
+  background: rgb(15 42 31 / 0.94);
+}
+
+.panel {
+  position: relative;
+  outline: none;
+  width: min(1120px, 100%);
+  max-height: calc(100dvh - 80px); // limite de segurança (só aqui pode haver scroll)
+  overflow: auto;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-panel);
+  animation: panel-in 250ms var(--ease-out) both;
+
+  .is-closing & {
+    animation: panel-out 200ms ease both;
+  }
+}
+
+// Vertical (portrait) ou ecrãs < 1024: 1 coluna, mais estreito.
+@media (orientation: portrait), (max-width: 1023.98px) {
+  .panel {
+    width: min(760px, 100%);
+  }
+}
+
+.is-viewer .panel {
+  width: min(1200px, 100%);
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  .is-viewer .panel {
+    width: min(760px, 100%);
+  }
+}
+
+.handle {
+  display: none;
+}
+
+// ---- Mobile: bottom sheet --------------------------------------------------
+@media (max-width: 767.98px) {
+  .overlay {
+    padding: 0;
+    place-items: end stretch;
+  }
+
+  .panel {
+    width: 100%;
+    max-height: calc(100dvh - 48px);
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    overflow: hidden;
+    animation: sheet-in 300ms var(--ease-out) both;
+    transition: transform 200ms var(--ease-out);
+
+    .is-closing & {
+      animation: sheet-out 200ms ease both;
+    }
+  }
+
+  .content {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .handle {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    height: 32px;
+    touch-action: none;
+    cursor: grab;
+
+    span {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border-default);
+    }
+  }
+
+  // Visualizador de fotos em ecrã inteiro no mobile.
+  .is-viewer {
+    .panel {
+      max-height: 100dvh;
+      height: 100dvh;
+      border-radius: 0;
+      background: var(--bg-inverse);
+    }
+
+    .handle span {
+      background: var(--text-inverse-secondary);
+    }
+
+    .content {
+      flex: 1;
+      overflow: hidden;
+    }
+  }
+}
+
+.sr-close:focus-visible {
+  // fica visível quando chega pelo teclado
+  position: absolute !important;
+  top: 8px;
+  right: 8px;
+  width: auto;
+  height: auto;
+  clip: auto;
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  z-index: 3;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes panel-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sheet-out {
+  to {
+    transform: translateY(100%);
+  }
+}

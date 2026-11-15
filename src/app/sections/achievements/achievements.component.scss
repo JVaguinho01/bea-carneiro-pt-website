@@ -1,0 +1,134 @@
+.layout {
+  display: grid;
+  grid-template-columns: 480px minmax(0, 1fr);
+  gap: var(--space-4xl);
+  align-items: start;
+
+  &:not(.is-interactive) {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+
+  .is-interactive & {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+  }
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  border-bottom: 1px solid var(--border-inverse);
+}
+
+.row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 96px 16px minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+  padding: var(--space-lg);
+  text-align: left;
+  color: inherit;
+  transition: background-color var(--dur-base) ease;
+}
+
+button.row:hover {
+  background: rgb(255 255 255 / 0.04);
+}
+
+// Estado ativo: só cor e fundo, nada se desloca.
+.entry.is-active .row {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.year {
+  color: var(--text-inverse-secondary);
+  transition: color var(--dur-base) ease;
+
+  .is-active & {
+    color: var(--brand-secondary);
+  }
+}
+
+.line {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+
+  // traço contínuo entre entradas
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--space-lg));
+    bottom: calc(-1 * var(--space-lg) - 1px);
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: var(--border-inverse);
+  }
+}
+
+.dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-inverse);
+  border: 2px solid var(--forest-700);
+  transition:
+    background-color var(--dur-base) ease,
+    border-color var(--dur-base) ease,
+    box-shadow var(--dur-base) ease;
+
+  .is-active & {
+    background: var(--brand-secondary);
+    border-color: var(--brand-secondary);
+    box-shadow: 0 0 0 6px rgb(255 107 69 / 0.25); // halo (não ocupa espaço)
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.title {
+  color: var(--text-inverse);
+}
+
+.detail {
+  color: var(--text-inverse-secondary);
+}
+
+@media (max-width: 767.98px) {
+  .row {
+    grid-template-columns: 56px 12px minmax(0, 1fr);
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+  }
+
+  .year {
+    font-size: var(--fs-body);
+  }
+
+  .title {
+    font-size: var(--fs-h4);
+  }
+
+  .detail {
+    font-size: var(--fs-small);
+  }
+}

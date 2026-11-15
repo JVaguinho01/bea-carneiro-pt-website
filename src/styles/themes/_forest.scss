@@ -1,0 +1,73 @@
+// =============================================================================
+// TEMA "forest" — verde-floresta (primária) · marfim (secundária) · coral (terciária)
+// -----------------------------------------------------------------------------
+// É o ÚNICO sítio com cores. Os componentes só usam as variáveis semânticas
+// (var(--bg-canvas), var(--text-primary), …).
+//
+// Para criar outro tema:
+//   1. Copia este ficheiro para _<nome>.scss e muda os valores.
+//   2. Importa-o em src/styles.scss.
+//   3. Muda o atributo data-theme em src/index.html (ou THEME em site.config.ts).
+// Todas as combinações texto/fundo cumprem WCAG AA (≥ 4.5:1 texto normal).
+// =============================================================================
+
+:root,
+[data-theme='forest'] {
+  // ---- Primitivos (paleta) --------------------------------------------------
+  --forest-950: #0f2a1f;
+  --forest-900: #1f4a35;
+  --forest-800: #2c6148;
+  --forest-700: #3b7a5c;
+  --forest-200: #b9cdbf;
+  --forest-100: #dce6de;
+
+  --ivory-50: #fffdf7;
+  --ivory-100: #faf6ec;
+  --ivory-200: #f1ebdc;
+  --ivory-300: #e3dac4;
+
+  --coral-400: #ff8360;
+  --coral-500: #ff6b45;
+  --coral-700: #c23f1e;
+
+  --sage-600: #4a5e52;
+  --white: #ffffff;
+
+  // ---- Marca ----------------------------------------------------------------
+  --brand-primary: var(--forest-900);
+  --brand-primary-hover: var(--forest-950);
+  --brand-secondary: var(--coral-500);
+
+  // ---- Fundos ---------------------------------------------------------------
+  --bg-canvas: var(--ivory-50);
+  --bg-surface: var(--ivory-100);
+  --bg-accent-soft: var(--ivory-200);
+  --bg-elevated: var(--white);
+  --bg-brand: var(--forest-900);
+  --bg-inverse: var(--forest-950);
+  --bg-photo-placeholder: var(--forest-100);
+  --bg-overlay: rgb(15 42 31 / 0.6);
+
+  // ---- Texto ----------------------------------------------------------------
+  --text-primary: var(--forest-950);
+  --text-secondary: var(--sage-600);
+  --text-muted: var(--ivory-300); // só para texto decorativo grande (frase "pintada")
+  --text-brand: var(--coral-700);
+  --text-on-brand: var(--ivory-50);
+  --text-inverse: var(--ivory-50);
+  --text-inverse-secondary: var(--forest-200);
+  --text-brand-inverse: var(--coral-400);
+  --text-error: var(--coral-700);
+  --text-success: var(--forest-800);
+
+  // ---- Bordas ---------------------------------------------------------------
+  --border-default: var(--ivory-300);
+  --border-strong: var(--forest-800);
+  --border-inverse: var(--forest-800);
+  --focus-ring: var(--coral-500);
+
+  // ---- Efeitos --------------------------------------------------------------
+  --shadow-card: 0 16px 40px -8px rgb(10 15 33 / 0.12);
+  --shadow-panel: 0 24px 64px -12px rgb(10 15 33 / 0.35);
+  --glow-color: rgb(255 107 69 / 0.18);
+}

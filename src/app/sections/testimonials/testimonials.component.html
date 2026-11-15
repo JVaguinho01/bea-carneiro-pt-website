@@ -1,0 +1,64 @@
+<section id="testemunhos" class="section section--inverse testimonials" aria-labelledby="testimonials-title">
+  <div class="container stack">
+    <div class="section-header" appReveal>
+      <p class="t-overline">{{ 'testimonials.overline' | t }}</p>
+      <h2 id="testimonials-title" class="t-h1">{{ 'testimonials.title' | t }}</h2>
+      <p class="t-lead">{{ 'testimonials.text' | t }}</p>
+    </div>
+
+    <div class="carousel">
+      <ul class="cards" appSnapCarousel #carousel="snapCarousel" [attr.aria-label]="'testimonials.carouselLabel' | t">
+        @for (item of items(); track item.name; let i = $index) {
+          <li class="card" appReveal [revealDelay]="i * 100">
+            <figure class="card-content">
+              <blockquote>
+                <p class="quote">“{{ item.quote }}”</p>
+                <p class="excerpt">{{ item.excerpt }}</p>
+              </blockquote>
+              <button
+                type="button"
+                class="link-arrow link-arrow--brand"
+                aria-haspopup="dialog"
+                [attr.aria-label]="'testimonials.readMoreFrom' | t: { name: item.name }"
+                (click)="openIndex.set(i)"
+              >
+                {{ 'testimonials.readMore' | t }}
+                <app-icon name="arrow-up-right" [size]="18" />
+              </button>
+              <figcaption class="author">
+                <span class="avatar" aria-hidden="true">{{ initials(item.name) }}</span>
+                <span class="meta">
+                  <span class="name">{{ item.name }}</span>
+                  <span class="role">{{ item.role }}</span>
+                </span>
+              </figcaption>
+            </figure>
+          </li>
+        }
+      </ul>
+      <div class="dashes" aria-hidden="true">
+        @for (item of items(); track item.name; let i = $index) {
+          <span [class.is-active]="carousel.index() === i"></span>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-overlay [open]="openIndex() !== null" [label]="('testimonials.panelLabel' | t) + ' — ' + (openItem()?.name ?? '')" (closed)="openIndex.set(null)">
+  @if (openItem(); as item) {
+    <article class="panel">
+      <header class="panel-author">
+        <p class="t-overline">{{ 'testimonials.panelLabel' | t }}</p>
+        <span class="mark" aria-hidden="true">“</span>
+        <h2 class="t-h3">{{ item.name }}</h2>
+        <p class="t-small">{{ item.role }}</p>
+      </header>
+      <div class="panel-text">
+        @for (para of item.full; track $index) {
+          <p>{{ para }}</p>
+        }
+      </div>
+    </article>
+  }
+</app-overlay>

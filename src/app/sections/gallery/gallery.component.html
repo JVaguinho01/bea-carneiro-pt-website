@@ -1,0 +1,67 @@
+<section id="galeria" class="section section--surface gallery" aria-labelledby="gallery-title">
+  <div class="container stack">
+    <div class="section-header" appReveal>
+      <p class="t-overline">{{ 'gallery.overline' | t }}</p>
+      <h2 id="gallery-title" class="t-h1">{{ 'gallery.title' | t }}</h2>
+    </div>
+
+    <div class="masonry" role="list" [style.--cols]="columnCount()">
+      @for (col of columns(); track $index) {
+        <div class="col">
+          @for (cell of col; track cell.photo.id) {
+            <div
+              class="item"
+              role="listitem"
+              [class.is-new]="cell.index >= batchStart() && batchStart() > 0"
+              [style.--d]="(cell.index - batchStart()) * 40 + 'ms'"
+            >
+              <button type="button" class="tile photo" [attr.aria-label]="'gallery.open' | t: { n: cell.index + 1 }" aria-haspopup="dialog" (click)="open(cell.index)">
+                <!-- só a versão pequena (640px): é a mesma que é pré-carregada em "Ver mais fotos" -->
+                <img
+                  [src]="cell.photo.srcSm"
+                  [width]="cell.photo.w"
+                  [height]="cell.photo.h"
+                  [alt]="cell.photo.altKey | t"
+                  [attr.loading]="batchStart() > 0 ? 'eager' : 'lazy'"
+                  decoding="async"
+                />
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="more">
+      @if (shown() < all.length) {
+        <button type="button" class="btn btn--outline" [disabled]="loadingMore()" [attr.aria-busy]="loadingMore()" (click)="more()">
+          {{ 'gallery.more' | t }}
+          <app-icon name="arrow-up-right" [size]="20" />
+        </button>
+      }
+      <p class="t-small" aria-live="polite">{{ 'gallery.showing' | t: { shown: visible().length, total: all.length } }}</p>
+    </div>
+  </div>
+</section>
+
+<app-overlay [open]="viewerIndex() !== null" variant="viewer" [label]="'gallery.viewerLabel' | t" (closed)="close()">
+  @if (viewerPhoto(); as p) {
+    <figure class="viewer" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+      <div class="viewer-stage">
+        <button type="button" class="nav nav--prev" [attr.aria-label]="'gallery.prev' | t" (click)="step(-1)">
+          <app-icon name="arrow-left" />
+        </button>
+        @for (q of [p]; track q.id) {
+          <img class="viewer-img" [src]="q.src" [width]="q.w" [height]="q.h" [alt]="q.altKey | t" />
+        }
+        <button type="button" class="nav nav--next" [attr.aria-label]="'gallery.next' | t" (click)="step(1)">
+          <app-icon name="arrow-right" />
+        </button>
+      </div>
+      <figcaption class="caption">
+        <span>{{ 'gallery.captions.' + categoryOf(p) | t }}</span>
+        <span aria-live="polite">{{ 'common.photoOf' | t: { n: viewerIndex()! + 1, total: all.length } }}</span>
+      </figcaption>
+    </figure>
+  }
+</app-overlay>
