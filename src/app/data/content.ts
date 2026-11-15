@@ -39,10 +39,10 @@ export const HERO_PHOTOS = list([
 
 // ---- Sobre mim: fotos DA BEATRIZ (retrato com medalhas primeiro) -------------
 export const ABOUT_PHOTOS = list([
-  photo('retratos-03', 'about.photos.0', '50% 30%'),
+  photo('retratos-01', 'about.photos.0', '50% 30%'),
   photo('competicao-14', 'about.photos.1', '50% 30%'),
   photo('competicao-02', 'about.photos.2', '50% 30%'),
-  photo('competicao-34', 'about.photos.3', '50% 30%'),
+  photo('competicao-32', 'about.photos.3', '50% 30%'),
 ]);
 
 // ---- Serviços: 1 foto própria por serviço ------------------------------------
@@ -55,7 +55,7 @@ export const SERVICE_PHOTOS: Record<string, Photo | null> = {
 // ---- Conquistas: fotos de cada entrada da linha cronológica (mesma ordem) -----
 const ach = (ids: string[]) => list(ids.map(id => photo(id, 'achievements.photoAlt', '50% 35%')));
 export const ACHIEVEMENT_PHOTOS: Photo[][] = [
-  ach(['competicao-15', 'competicao-12', 'competicao-33']),
+  ach(['competicao-15', 'competicao-12', 'competicao-31']),
   ach(['competicao-24', 'competicao-25', 'competicao-26']),
   ach(['competicao-18', 'competicao-21', 'competicao-13']),
   ach(['competicao-27', 'competicao-28', 'competicao-08']),

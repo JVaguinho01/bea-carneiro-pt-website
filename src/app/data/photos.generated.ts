@@ -4,7 +4,7 @@ import { PhotoMeta } from './photo.model';
 export const PHOTOS: Record<'retratos' | 'competicao' | 'treino' | 'pessoal', PhotoMeta[]> = {
   "retratos": [
     {
-      "id": "retratos-03",
+      "id": "retratos-01",
       "w": 1024,
       "h": 1536
     }
@@ -151,47 +151,47 @@ export const PHOTOS: Record<'retratos' | 'competicao' | 'treino' | 'pessoal', Ph
       "h": 710
     },
     {
+      "id": "competicao-29",
+      "w": 1280,
+      "h": 1600
+    },
+    {
+      "id": "competicao-30",
+      "w": 1280,
+      "h": 1600
+    },
+    {
       "id": "competicao-31",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "competicao-32",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "competicao-33",
       "w": 1281,
       "h": 1600
     },
     {
-      "id": "competicao-34",
+      "id": "competicao-32",
       "w": 1289,
       "h": 1600
     },
     {
+      "id": "competicao-33",
+      "w": 1228,
+      "h": 902
+    },
+    {
+      "id": "competicao-34",
+      "w": 1228,
+      "h": 902
+    },
+    {
       "id": "competicao-35",
-      "w": 1228,
-      "h": 902
-    },
-    {
-      "id": "competicao-37",
-      "w": 1228,
-      "h": 902
-    },
-    {
-      "id": "competicao-38",
       "w": 1331,
       "h": 975
     },
     {
-      "id": "competicao-39",
+      "id": "competicao-36",
       "w": 1066,
       "h": 710
     },
     {
-      "id": "competicao-42",
+      "id": "competicao-37",
       "w": 842,
       "h": 549
     }
@@ -278,7 +278,7 @@ export const PHOTOS: Record<'retratos' | 'competicao' | 'treino' | 'pessoal', Ph
       "h": 1600
     },
     {
-      "id": "treino-18",
+      "id": "treino-17",
       "w": 1281,
       "h": 1600
     }
@@ -295,87 +295,37 @@ export const PHOTOS: Record<'retratos' | 'competicao' | 'treino' | 'pessoal', Ph
       "h": 1600
     },
     {
+      "id": "pessoal-03",
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "id": "pessoal-04",
+      "w": 1200,
+      "h": 1600
+    },
+    {
+      "id": "pessoal-05",
+      "w": 1280,
+      "h": 1600
+    },
+    {
+      "id": "pessoal-06",
+      "w": 1280,
+      "h": 1600
+    },
+    {
+      "id": "pessoal-07",
+      "w": 1280,
+      "h": 1600
+    },
+    {
       "id": "pessoal-08",
       "w": 1200,
       "h": 1600
     },
     {
-      "id": "pessoal-10",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-15",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-20",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-21",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-24",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-26",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-27",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-28",
-      "w": 1406,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-30",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-32",
-      "w": 1280,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-34",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-35",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-36",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-37",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-38",
-      "w": 1200,
-      "h": 1600
-    },
-    {
-      "id": "pessoal-41",
+      "id": "pessoal-09",
       "w": 1200,
       "h": 1600
     }
