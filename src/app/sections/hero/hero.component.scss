@@ -12,6 +12,10 @@
   inset: 0;
   pointer-events: none;
   overflow: hidden;
+  // as manchas desvanecem antes do fim do hero: nunca se vê um corte a direito
+  // na passagem para a secção seguinte
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
 }
 
 .spot {

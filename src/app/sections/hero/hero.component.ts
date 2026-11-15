@@ -55,7 +55,7 @@ function makeSpots(): Spot[] {
     let best = { x: 50, y: 50 };
     let bestDist = -1;
     for (let c = 0; c < 12; c++) {
-      const cand = { x: rand(5, 95), y: rand(8, 92) };
+      const cand = { x: rand(5, 95), y: rand(8, 80) };
       const d = spots.length ? Math.min(...spots.map(p => Math.hypot(p.x - cand.x, p.y - cand.y))) : 1;
       if (d > bestDist) {
         bestDist = d;
