@@ -15,4 +15,10 @@ export const environment = {
     templateId: 'template_2qdgr9v',
     publicKey: '7YXxUpixldRz7D3Kt',
   },
+  /**
+   * Google reCAPTCHA v2 ("Não sou um robô"). A SITE KEY é pública; a SECRET KEY
+   * fica só no painel do EmailJS (Template → Settings), nunca aqui.
+   * Vazio = formulário sem captcha.
+   */
+  recaptchaSiteKey: '',
 };

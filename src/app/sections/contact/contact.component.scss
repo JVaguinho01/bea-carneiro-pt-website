@@ -75,9 +75,29 @@
     }
   }
 
+  // Altura fixa, sem redimensionar; o texto a mais faz scroll por dentro (barra invisível)
   textarea {
+    height: 180px;
     min-height: 180px;
-    resize: vertical;
+    resize: none;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.counter {
+  align-self: flex-end;
+  font-size: var(--fs-caption);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+
+  &.is-over {
+    color: var(--text-error);
+    font-weight: 600;
   }
 }
 
@@ -176,4 +196,8 @@
     transform: scale(0.4);
     opacity: 0;
   }
+}
+
+.captcha {
+  min-height: 78px; // reserva o espaço da caixa do reCAPTCHA (sem saltos)
 }

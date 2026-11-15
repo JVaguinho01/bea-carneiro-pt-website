@@ -27,7 +27,7 @@ export class ContactService {
     environment.emailjs.serviceId && environment.emailjs.templateId && environment.emailjs.publicKey,
   );
 
-  async send(msg: ContactMessage, lang: string): Promise<SendResult> {
+  async send(msg: ContactMessage, lang: string, captchaToken: string | null = null): Promise<SendResult> {
     if (!this.configured) return 'not-configured';
     if (this.isRateLimited()) return 'rate-limited';
 
@@ -43,6 +43,8 @@ export class ContactService {
           subject: clean(msg.subject, 120),
           message: clean(msg.message, 2000, true),
           site_language: lang,
+          // o EmailJS valida este token com a chave secreta do reCAPTCHA (definida no template)
+          ...(captchaToken ? { 'g-recaptcha-response': captchaToken } : {}),
         },
         {
           publicKey: environment.emailjs.publicKey,

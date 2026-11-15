@@ -36,7 +36,7 @@ por isso a superfície de ataque é pequena. O que foi feito:
 A CSP já vai no HTML, mas estes cabeçalhos devem ser enviados pelo servidor/alojamento:
 
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+Content-Security-Policy: default-src 'self'; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.emailjs.com https://www.google.com/recaptcha/; frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 Strict-Transport-Security: max-age=31536000; includeSubDomains
 X-Content-Type-Options: nosniff
 X-Frame-Options: DENY

@@ -90,11 +90,15 @@
               id="cf-message"
               formControlName="message"
               rows="6"
-              maxlength="2000"
+              maxlength="4000"
+              (input)="onMessageInput($any($event.target).value)"
               [placeholder]="'contact.form.messagePlaceholder' | t"
               [attr.aria-invalid]="messageErr ? 'true' : null"
-              [attr.aria-describedby]="messageErr ? 'cf-message-err' : null"
+              [attr.aria-describedby]="messageErr ? 'cf-message-err cf-message-count' : 'cf-message-count'"
             ></textarea>
+            <p class="counter" id="cf-message-count" [class.is-over]="wordCount() > maxWords">
+              {{ 'contact.form.wordCount' | t: { n: wordCount(), max: maxWords } }}
+            </p>
             @if (messageErr) {
               <p class="error" id="cf-message-err">{{ messageErr.key | t: messageErr.params }}</p>
             }
@@ -105,6 +109,10 @@
             <label for="cf-website">{{ 'contact.form.honeypot' | t }}</label>
             <input id="cf-website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
           </div>
+
+          @if (captchaEnabled) {
+            <div class="captcha" #captcha></div>
+          }
 
           <div class="submit-row">
             <button type="submit" class="btn btn--primary btn--block-mobile" [disabled]="status() === 'sending'" [attr.aria-busy]="status() === 'sending'">
@@ -122,6 +130,7 @@
               @case ('error') { <p class="error">{{ 'contact.form.errorText' | t }}</p> }
               @case ('rate-limited') { <p class="error">{{ 'contact.form.rateLimited' | t }}</p> }
               @case ('too-fast') { <p class="error">{{ 'contact.form.tooFast' | t }}</p> }
+              @case ('captcha') { <p class="error">{{ 'contact.form.captcha' | t }}</p> }
               @case ('not-configured') { <p class="error">{{ 'contact.form.notConfigured' | t }}</p> }
             }
           </div>

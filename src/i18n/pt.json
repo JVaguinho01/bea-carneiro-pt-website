@@ -341,8 +341,11 @@
         "email": "Escreve um email válido.",
         "minlength": "Escreve pelo menos {n} caracteres.",
         "maxlength": "Máximo de {n} caracteres.",
-        "pattern": "Usa apenas letras, espaços e pontuação simples."
-      }
+        "pattern": "Usa apenas letras, espaços e pontuação simples.",
+        "maxwords": "Máximo de {n} palavras."
+      },
+      "captcha": "Confirma que não és um robô antes de enviar.",
+      "wordCount": "{n} / {max} palavras"
     }
   },
   "footer": {

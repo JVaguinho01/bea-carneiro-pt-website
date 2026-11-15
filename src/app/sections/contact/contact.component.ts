@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, effect, inject, signal, viewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { I18nService } from '../../core/i18n/i18n.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { ContactService, SendResult } from '../../core/services/contact.service';
+import { RecaptchaService } from '../../core/services/recaptcha.service';
 import { ScrollService } from '../../core/services/scroll.service';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { RevealDirective } from '../../shared/reveal/reveal.directive';
 import { SocialLinksComponent } from '../../shared/social-links/social-links.component';
 
-type Status = 'idle' | 'sending' | 'success' | SendResult | 'too-fast';
+type Status = 'idle' | 'sending' | 'success' | SendResult | 'too-fast' | 'captcha';
 
 /** Tempo mínimo (ms) entre abrir a página e enviar: bots preenchem tudo de imediato. */
 const MIN_FILL_TIME = 3000;
@@ -17,10 +18,19 @@ const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[a-z]{2,}$/i;
 /** Nome: letras (com acentos), espaços, hífen, apóstrofo e ponto. */
 const NAME_RE = /^[\p{L}][\p{L} .'’-]*$/u;
 
+/** Limite de palavras da mensagem. */
+const MAX_WORDS = 500;
+const countWords = (v: string) => (v.trim() ? v.trim().split(/\s+/).length : 0);
+const maxWordsValidator = (max: number) => (c: AbstractControl) => {
+  const n = countWords(String(c.value ?? ''));
+  return n > max ? { maxwords: { max, actual: n } } : null;
+};
+
 /**
  * Contactos: formulário que envia o email diretamente (EmailJS).
  * Valida ao sair de cada campo; estados a enviar / sucesso / erro no próprio formulário.
- * Anti-spam: campo isco escondido (honeypot), tempo mínimo de preenchimento e limite de envios.
+ * Anti-spam: campo isco escondido (honeypot), tempo mínimo de preenchimento, limite de envios
+ * e reCAPTCHA v2 (validado pelo EmailJS).
  */
 @Component({
   selector: 'app-contact',
@@ -38,17 +48,51 @@ export class ContactComponent {
   protected readonly configured = this.contact.configured;
   protected readonly status = signal<Status>('idle');
   private readonly startedAt = Date.now();
+  protected readonly maxWords = MAX_WORDS;
+  /** Contador de palavras em tempo real (o valor do formulário só atualiza ao sair do campo). */
+  protected readonly wordCount = signal(0);
+  protected onMessageInput(value: string): void {
+    this.wordCount.set(countWords(value));
+  }
+
+  private readonly recaptcha = inject(RecaptchaService);
+  protected readonly captchaEnabled = this.recaptcha.enabled;
+  private readonly captchaEl = viewChild<ElementRef<HTMLElement>>('captcha');
+  private readonly captchaToken = signal<string | null>(null);
+  private captchaId: number | null = null;
 
   protected readonly form = this.fb.nonNullable.group({
     name: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(80), Validators.pattern(NAME_RE)], updateOn: 'blur' }],
     email: ['', { validators: [Validators.required, Validators.maxLength(120), Validators.pattern(EMAIL_RE)], updateOn: 'blur' }],
     subject: ['', { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(120)], updateOn: 'blur' }],
-    message: ['', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(2000)], updateOn: 'blur' }],
+    message: ['', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(4000), maxWordsValidator(MAX_WORDS)], updateOn: 'blur' }],
     /** Honeypot: invisível para pessoas; se vier preenchido, é um bot. */
     website: [''],
   });
 
   constructor() {
+    // reCAPTCHA: desenha a caixa quando o formulário se aproxima do ecrã
+    // (e outra vez depois de "Enviar outra mensagem", porque o formulário é recriado).
+    const destroyRef = inject(DestroyRef);
+    let io: IntersectionObserver | undefined;
+    effect(() => {
+      const el = this.captchaEl()?.nativeElement;
+      io?.disconnect();
+      this.captchaId = null;
+      this.captchaToken.set(null);
+      if (!el || !this.captchaEnabled) return;
+      io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        io?.disconnect();
+        this.recaptcha
+          .render(el, t => this.captchaToken.set(t), this.i18n.lang())
+          .then(id => (this.captchaId = id))
+          .catch(() => this.status.set('error'));
+      }, { rootMargin: '400px 0px' });
+      io.observe(el);
+    });
+    destroyRef.onDestroy(() => io?.disconnect());
+
     // Assunto pré-preenchido quando se vem de um painel de serviço
     effect(() => {
       const subject = this.scroll.contactSubject();
@@ -67,6 +111,7 @@ export class ContactComponent {
     if (ctrl === this.form.controls.email && e['pattern']) return { key: 'contact.form.errors.email' };
     if (e['pattern']) return { key: 'contact.form.errors.pattern' };
     if (e['minlength']) return { key: 'contact.form.errors.minlength', params: { n: e['minlength'].requiredLength } };
+    if (e['maxwords']) return { key: 'contact.form.errors.maxwords', params: { n: e['maxwords'].max } };
     if (e['maxlength']) return { key: 'contact.form.errors.maxlength', params: { n: e['maxlength'].requiredLength } };
     return null;
   }
@@ -92,11 +137,22 @@ export class ContactComponent {
       return;
     }
 
+    if (this.captchaEnabled && !this.captchaToken()) {
+      this.status.set('captcha');
+      return;
+    }
+
     this.status.set('sending');
-    const result = await this.contact.send(msg, this.i18n.lang());
+    const result = await this.contact.send(msg, this.i18n.lang(), this.captchaToken());
+    if (result !== 'ok') {
+      // cada token só vale uma vez: pede nova verificação
+      this.recaptcha.reset(this.captchaId);
+      this.captchaToken.set(null);
+    }
     this.status.set(result === 'ok' ? 'success' : result);
     if (result === 'ok') {
       this.form.reset();
+      this.wordCount.set(0);
       this.scroll.contactSubject.set(null);
     }
   }
