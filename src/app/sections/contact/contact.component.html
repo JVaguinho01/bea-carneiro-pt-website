@@ -117,14 +117,13 @@
           }
 
           <div class="submit-row">
-            <!-- Sem o reCAPTCHA marcado o botão fica "desligado" (continua focável para mostrar o aviso) -->
+            <!-- Sem o reCAPTCHA marcado o botão fica desativado de verdade (não dá para clicar); o aviso fica só por cima -->
             <button
               type="submit"
               class="btn btn--primary btn--block-mobile"
               [class.is-blocked]="captchaEnabled && !captchaToken()"
-              [attr.aria-disabled]="captchaEnabled && !captchaToken() ? 'true' : null"
               [attr.aria-describedby]="captchaEnabled && !captchaToken() ? 'cf-captcha-hint' : null"
-              [disabled]="status() === 'sending'"
+              [disabled]="status() === 'sending' || (captchaEnabled && !captchaToken())"
               [attr.aria-busy]="status() === 'sending'"
             >
               @if (status() === 'sending') {
@@ -141,7 +140,6 @@
               @case ('error') { <p class="error">{{ 'contact.form.errorText' | t }}</p> }
               @case ('rate-limited') { <p class="error">{{ 'contact.form.rateLimited' | t }}</p> }
               @case ('too-fast') { <p class="error">{{ 'contact.form.tooFast' | t }}</p> }
-              @case ('captcha') { <p class="error">{{ 'contact.form.captcha' | t }}</p> }
               @case ('not-configured') { <p class="error">{{ 'contact.form.notConfigured' | t }}</p> }
             }
           </div>

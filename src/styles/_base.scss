@@ -107,3 +107,31 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+// ---- Sem seleção nem toque longo em todo o site (rato, touch e PCs com ecrã tátil) ----
+// Há botões para todas as ações (email, telefone, WhatsApp…), por isso nada precisa de ser
+// selecionado ou copiado. Só os campos do formulário continuam editáveis.
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body,
+body * {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none; // iOS: sem menu de copiar/guardar ao segurar
+}
+
+img,
+a {
+  -webkit-user-drag: none;
+}
+
+input,
+textarea,
+select,
+[contenteditable='true'] {
+  user-select: text;
+  -webkit-user-select: text;
+  -webkit-touch-callout: default;
+}

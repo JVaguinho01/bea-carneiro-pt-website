@@ -23,6 +23,73 @@
       opacity: 1;
     }
   }
+
+  // Setas / swipe: slide no sentido do gesto (a nova entra, a antiga sai empurrada).
+  &.is-slide img {
+    transition: none;
+
+    &.is-active {
+      animation: slide-in-next 450ms var(--ease-out) both;
+    }
+
+    &.is-leaving {
+      animation: slide-out-next 450ms var(--ease-out) both;
+    }
+  }
+
+  &.is-slide-prev img {
+    &.is-active {
+      animation-name: slide-in-prev;
+    }
+
+    &.is-leaving {
+      animation-name: slide-out-prev;
+    }
+  }
+}
+
+@keyframes slide-in-next {
+  from {
+    opacity: 1;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-out-next {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in-prev {
+  from {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-out-prev {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(100%);
+  }
 }
 
 // Margens clicáveis (só com rato): 22% de cada lado, seta aparece ao passar o rato.

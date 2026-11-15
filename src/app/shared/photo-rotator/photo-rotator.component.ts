@@ -32,6 +32,8 @@ import { MotionService } from '../../core/services/motion.service';
   template: `
     <div
       class="frame photo"
+      [class.is-slide]="slideDir() !== 0"
+      [class.is-slide-prev]="slideDir() === -1"
       [style.aspect-ratio]="ratio()"
       (pointerdown)="onPointerDown($event)"
       (pointerup)="onPointerUp($event)"
@@ -47,6 +49,7 @@ import { MotionService } from '../../core/services/motion.service';
           [alt]="altParams() ? (p.altKey | t: altParams()!) : (p.altKey | t)"
           [style.object-position]="p.focus || 'center'"
           [class.is-active]="i === index()"
+          [class.is-leaving]="slideDir() !== 0 && i === leaving()"
           [attr.aria-hidden]="i === index() ? null : 'true'"
           [attr.loading]="eager() && i === 0 ? 'eager' : 'lazy'"
           [attr.fetchpriority]="eager() && i === 0 ? 'high' : null"
@@ -56,8 +59,8 @@ import { MotionService } from '../../core/services/motion.service';
       <ng-content />
       @if (photos().length > 1) {
         <!-- Computador: clicar na margem esquerda/direita da foto anda para trás/frente -->
-        <div class="edge edge--prev" aria-hidden="true" (click)="prev()"><span>&lsaquo;</span></div>
-        <div class="edge edge--next" aria-hidden="true" (click)="next()"><span>&rsaquo;</span></div>
+        <div class="edge edge--prev" aria-hidden="true" (click)="slide(-1)"><span>&lsaquo;</span></div>
+        <div class="edge edge--next" aria-hidden="true" (click)="slide(1)"><span>&rsaquo;</span></div>
       }
       @if (indicator() === 'dots' && photos().length > 1) {
         <div class="rotation-dots dots" role="group" [attr.aria-label]="'common.photoOf' | t: { n: index() + 1, total: photos().length }">
@@ -133,16 +136,37 @@ export class PhotoRotatorComponent {
     destroyRef.onDestroy(() => clearTimeout(this.timer));
   }
 
+  /**
+   * Tipo de animação da última troca: 0 = fade (temporizador e pontos/barras);
+   * 1 / -1 = slide para a seguinte / anterior (setas no computador e swipe no toque).
+   */
+  protected readonly slideDir = signal<0 | 1 | -1>(0);
+  /** Foto que sai a deslizar durante o slide. */
+  protected readonly leaving = signal(-1);
+
+  /** Pontos/barras: fade. */
   protected go(i: number): void {
+    this.slideDir.set(0);
     this.index.set(i);
   }
-  protected next(): void {
+
+  /** Temporizador: fade. */
+  private next(): void {
+    this.slideDir.set(0);
     this.index.update(i => (i + 1) % this.photos().length);
   }
 
-  protected prev(): void {
+  /**
+   * Setas e swipe: slide no sentido do gesto, em carrossel infinito
+   * (depois da última vem a primeira, sempre na mesma direção, e vice-versa).
+   */
+  protected slide(dir: 1 | -1): void {
     const n = this.photos().length;
-    this.index.update(i => (i - 1 + n) % n);
+    if (n < 2) return;
+    if (this.motion.reduced()) return this.go((this.index() + dir + n) % n);
+    this.leaving.set(this.index());
+    this.slideDir.set(dir);
+    this.index.update(i => (i + dir + n) % n);
   }
 
   /** Tablet/telemóvel: deslizar o dedo na foto (esquerda → seguinte, direita → anterior). */
@@ -159,7 +183,6 @@ export class PhotoRotatorComponent {
     const dx = e.clientX - s.x;
     const dy = e.clientY - s.y;
     if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
-    if (dx < 0) this.next();
-    else this.prev();
+    this.slide(dx < 0 ? 1 : -1);
   }
 }
