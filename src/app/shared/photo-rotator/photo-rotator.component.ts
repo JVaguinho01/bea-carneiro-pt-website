@@ -57,9 +57,12 @@ import { MotionService } from '../../core/services/motion.service';
         />
       }
       <ng-content />
-      @if (photos().length > 1) {
-        <!-- Computador: clicar na margem esquerda/direita da foto anda para trás/frente -->
+      <!-- Computador: clicar na margem esquerda/direita da foto anda para trás/frente.
+           Carrossel finito: cada margem só existe se houver foto nesse sentido. -->
+      @if (index() > 0) {
         <div class="edge edge--prev" aria-hidden="true" (click)="slide(-1)"><span>&lsaquo;</span></div>
+      }
+      @if (index() < photos().length - 1) {
         <div class="edge edge--next" aria-hidden="true" (click)="slide(1)"><span>&rsaquo;</span></div>
       }
       @if (indicator() === 'dots' && photos().length > 1) {
@@ -157,16 +160,17 @@ export class PhotoRotatorComponent {
   }
 
   /**
-   * Setas e swipe: slide no sentido do gesto, em carrossel infinito
-   * (depois da última vem a primeira, sempre na mesma direção, e vice-versa).
+   * Setas e swipe: slide no sentido do gesto, em carrossel finito
+   * (na 1.ª foto não se recua, na última não se avança).
+   * O temporizador continua a voltar à 1.ª no fim, com fade.
    */
   protected slide(dir: 1 | -1): void {
-    const n = this.photos().length;
-    if (n < 2) return;
-    if (this.motion.reduced()) return this.go((this.index() + dir + n) % n);
+    const target = this.index() + dir;
+    if (target < 0 || target >= this.photos().length) return;
+    if (this.motion.reduced()) return this.go(target);
     this.leaving.set(this.index());
     this.slideDir.set(dir);
-    this.index.update(i => (i + dir + n) % n);
+    this.index.set(target);
   }
 
   /** Tablet/telemóvel: deslizar o dedo na foto (esquerda → seguinte, direita → anterior). */

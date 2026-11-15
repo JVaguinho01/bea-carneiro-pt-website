@@ -31,12 +31,15 @@
     transform 400ms var(--ease-out),
     box-shadow 400ms var(--ease-out);
 
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-card);
+  // hover só com rato: no toque não fica "preso" nem mostra a sombra cortada
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-card);
 
-    .card-photo img {
-      transform: scale(1.05);
+      .card-photo img {
+        transform: scale(1.05);
+      }
     }
   }
 }
@@ -71,8 +74,10 @@
   }
 }
 
-.card:hover .link-arrow app-icon {
-  transform: rotate(45deg);
+@media (hover: hover) {
+  .card:hover .link-arrow app-icon {
+    transform: rotate(45deg);
+  }
 }
 
 .card:has(.link-arrow:focus-visible) {
@@ -111,7 +116,10 @@
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--page-margin);
     padding-inline: var(--page-margin);
-    padding-bottom: var(--space-xs);
+    align-items: stretch; // todos os cartões com a altura do mais alto
+    // espaço para a sombra/contorno do cartão não ficar cortado em baixo
+    padding-block: var(--space-xs) var(--space-lg);
+    margin-bottom: calc(-1 * var(--space-md));
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -121,11 +129,8 @@
 
   .card {
     flex: 0 0 82%;
+    height: auto; // em flex, 100% não fixava a altura: cada cartão ficava com a sua
     scroll-snap-align: start;
-
-    &:hover {
-      transform: none;
-    }
   }
 
   .dashes {
