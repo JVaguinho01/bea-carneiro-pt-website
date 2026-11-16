@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-lg);
-  align-items: stretch; // todos os cartões com a mesma altura
+  align-items: stretch;
 }
 
 .card {
@@ -31,15 +31,12 @@
     transform 400ms var(--ease-out),
     box-shadow 400ms var(--ease-out);
 
-  // Com rato: a foto amplia em qualquer largura.
   @media (hover: hover) and (pointer: fine) {
     &:hover .card-photo img {
       transform: scale(1.05);
     }
   }
 
-  // O cartão só sobe e ganha sombra no desktop (≥ 1280px) e com rato.
-  // De tablet para baixo nunca, mesmo com rato.
   @media (hover: hover) and (pointer: fine) and (min-width: 1280px) {
     &:hover {
       transform: translateY(-8px);
@@ -64,11 +61,9 @@
   gap: var(--space-sm);
   padding: 0 var(--space-md) var(--space-xs);
 
-  // "Saber mais" fica sempre no fundo do cartão
   .link-arrow {
     margin-top: auto;
 
-    // o cartão inteiro é clicável: a área do botão estende-se a todo o cartão
     &::after {
       content: '';
       position: absolute;
@@ -84,7 +79,6 @@
   }
 }
 
-// Telemóvel e tablet (toque): o cartão não sobe nem ganha sombra; só a foto amplia ao tocar.
 @media (pointer: coarse) {
   .card:active .card-photo img {
     transform: scale(1.05);
@@ -100,7 +94,6 @@
   display: none;
 }
 
-// ---- Tablet: 2 colunas; deitado (≥1024 landscape) 3 colunas -----------------
 @media (max-width: 1279.98px) {
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -113,11 +106,8 @@
   }
 }
 
-// ---- Mobile: carrossel com swipe ----------------------------------------------
 @media (max-width: 767.98px) {
   .carousel {
-    // como nos testemunhos: o carrossel vai até às bordas do ecrã e o cartão seguinte espreita
-    // à direita. (width:100% + margens negativas encurtava-o e cortava antes do fim.)
     align-self: stretch;
     width: auto;
     margin-inline: calc(-1 * var(--page-margin));
@@ -127,12 +117,11 @@
     display: flex;
     gap: var(--space-md);
     overflow-x: auto;
-    overflow-y: hidden; // só desliza na horizontal (sem scroll vertical dentro do carrossel)
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--page-margin);
     padding-inline: var(--page-margin);
-    align-items: stretch; // todos os cartões com a altura do mais alto
-    // espaço para a sombra/contorno do cartão não ficar cortado em baixo
+    align-items: stretch;
     padding-block: var(--space-xs) var(--space-lg);
     margin-bottom: calc(-1 * var(--space-md));
     scrollbar-width: none;
@@ -144,7 +133,7 @@
 
   .card {
     flex: 0 0 82%;
-    height: auto; // em flex, 100% não fixava a altura: cada cartão ficava com a sua
+    height: auto;
     scroll-snap-align: start;
   }
 
@@ -168,7 +157,6 @@
   }
 }
 
-// ---- Painel do serviço ------------------------------------------------------------
 .panel {
   display: grid;
   grid-template-columns: 1fr;
@@ -241,7 +229,6 @@
   }
 }
 
-// Horizontal (landscape ≥ 1024): 2 colunas — foto à esquerda, conteúdo à direita.
 @media (orientation: landscape) and (min-width: 1024px) {
   .panel {
     grid-template-columns: 40% 1fr;

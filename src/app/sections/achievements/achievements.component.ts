@@ -12,14 +12,8 @@ interface Achievement {
   detail: string;
 }
 
-/** Ecrãs horizontais ≥ 1024px (desktop e tablet deitado): linha clicável + galeria. */
 const INTERACTIVE_QUERY = '(orientation: landscape) and (min-width: 1024px)';
 
-/**
- * Conquistas: linha cronológica (mais recente → mais antiga).
- * Desktop / tablet deitado: clicar numa entrada ativa-a (só muda cor, nada se mexe)
- * e a galeria mostra as fotos dela a rodar (3,5s). Tablet em pé e mobile: só lista.
- */
 @Component({
   selector: 'app-achievements',
   imports: [NgTemplateOutlet, TranslatePipe, PhotoRotatorComponent, RevealDirective],

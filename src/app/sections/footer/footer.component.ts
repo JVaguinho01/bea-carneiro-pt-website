@@ -4,7 +4,6 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { MotionService } from '../../core/services/motion.service';
 import { SocialLinksComponent } from '../../shared/social-links/social-links.component';
 
-/** Rodapé: frase, wordmark gigante que desliza com o scroll, créditos e ícones. */
 @Component({
   selector: 'app-footer',
   imports: [TranslatePipe, SocialLinksComponent],
@@ -31,7 +30,7 @@ import { SocialLinksComponent } from '../../shared/social-links/social-links.com
     .footer {
       background: var(--bg-canvas);
       border-top: 1px solid var(--border-default);
-      padding: var(--space-4xl) 0 calc(var(--space-2xl) + 72px); /* espaço para a seta flutuante */
+      padding: var(--space-4xl) 0 calc(var(--space-2xl) + 72px);
       overflow: hidden;
     }
     .stack {
@@ -76,7 +75,6 @@ import { SocialLinksComponent } from '../../shared/social-links/social-links.com
       .stack {
         gap: var(--space-xl);
       }
-      /* mobile: nome (wordmark) → ícones → © e créditos */
       .base {
         flex-direction: column-reverse;
         align-items: flex-start;

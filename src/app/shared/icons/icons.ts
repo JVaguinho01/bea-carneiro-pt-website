@@ -1,10 +1,3 @@
-// =============================================================================
-// Biblioteca de ícones do site (os mesmos do Design System do Figma).
-// Todos são de contorno, desenhados numa grelha de 24×24 e usam currentColor,
-// por isso a cor muda com CSS: <app-icon name="mail" class="text-brand" />.
-// Para acrescentar um ícone: junta aqui os "d" dos <path> e usa o nome.
-// =============================================================================
-
 export const ICONS = {
   'arrow-up-right': ['M7 7h10v10', 'M7 17 17 7'],
   'arrow-up': ['M12 19V5', 'm5 12 7-7 7 7'],
@@ -35,12 +28,6 @@ export const ICONS = {
   ],
   check: ['M20 6 9 17l-5-5'],
   alert: ['M12 8v4', 'M12 16h.01', 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z'],
-  image: [
-    'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z',
-    'M9 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
-    'm21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21',
-  ],
-  external: ['M15 3h6v6', 'M10 14 21 3', 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'],
 } as const satisfies Record<string, readonly string[]>;
 
 export type IconName = keyof typeof ICONS;

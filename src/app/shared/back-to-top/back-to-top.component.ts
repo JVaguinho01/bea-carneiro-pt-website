@@ -3,10 +3,6 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { ScrollService } from '../../core/services/scroll.service';
 import { IconComponent } from '../icons/icon.component';
 
-/**
- * Seta flutuante (canto inferior direito). Escondida no primeiro ecrã; aparece
- * (fade + subida 8px) depois de o hero sair do ecrã e esconde-se ao voltar ao topo.
- */
 @Component({
   selector: 'app-back-to-top',
   imports: [TranslatePipe, IconComponent],

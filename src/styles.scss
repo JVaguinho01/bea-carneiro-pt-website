@@ -1,7 +1,6 @@
-// Estilos globais. Ordem: fontes → tema → tokens → base → utilitários.
 @use '@fontsource-variable/bricolage-grotesque';
 @use '@fontsource-variable/dm-sans';
-@use 'styles/themes/forest';
+@use 'styles/colors';
 @use 'styles/tokens';
 @use 'styles/base';
 @use 'styles/components';

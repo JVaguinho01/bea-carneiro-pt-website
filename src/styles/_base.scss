@@ -1,5 +1,3 @@
-// Reset leve + tipografia base + acessibilidade.
-
 *,
 *::before,
 *::after {
@@ -10,8 +8,6 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
-  // Barra de scroll da página escondida (continua a fazer scroll com rato, teclado e toque).
-  // Assim abrir/fechar painéis não muda a largura da página (sem "saltos").
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -93,7 +89,6 @@ a {
   color: var(--text-primary);
 }
 
-// Reduzir movimento: sem scroll suave, sem animações longas.
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -108,9 +103,6 @@ a {
   }
 }
 
-// ---- Sem seleção nem toque longo em todo o site (rato, touch e PCs com ecrã tátil) ----
-// Há botões para todas as ações (email, telefone, WhatsApp…), por isso nada precisa de ser
-// selecionado ou copiado. Só os campos do formulário continuam editáveis.
 html {
   -webkit-tap-highlight-color: transparent;
 }
@@ -119,7 +111,7 @@ body,
 body * {
   user-select: none;
   -webkit-user-select: none;
-  -webkit-touch-callout: none; // iOS: sem menu de copiar/guardar ao segurar
+  -webkit-touch-callout: none;
 }
 
 img,

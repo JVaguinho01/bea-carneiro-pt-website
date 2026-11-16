@@ -1,5 +1,4 @@
 .overlay {
-  // <dialog> ocupa o ecrã; o painel é posicionado dentro dele.
   position: fixed;
   inset: 0;
   width: 100%;
@@ -37,7 +36,7 @@
   position: relative;
   outline: none;
   width: min(1120px, 100%);
-  max-height: calc(100dvh - 80px); // limite de segurança (só aqui pode haver scroll)
+  max-height: calc(100dvh - 80px);
   overflow: auto;
   background: var(--bg-canvas);
   color: var(--text-primary);
@@ -50,7 +49,6 @@
   }
 }
 
-// Vertical (portrait) ou ecrãs < 1024: 1 coluna, mais estreito.
 @media (orientation: portrait), (max-width: 1023.98px) {
   .panel {
     width: min(760px, 100%);
@@ -78,13 +76,10 @@
   display: none;
 }
 
-// ---- Mobile: bottom sheet --------------------------------------------------
 @media (max-width: 767.98px) {
   .overlay {
     padding: 0;
     place-items: end stretch;
-    // a folha tem o seu próprio scroll; o <dialog> não pode ganhar scroll enquanto a folha
-    // sobe (translateY 100% → 0) ou é arrastada para baixo — era isso o scroll que aparecia e sumia
     overflow: hidden;
   }
 
@@ -106,8 +101,8 @@
   .content {
     overflow-y: auto;
     overscroll-behavior: contain;
-    overflow-x: hidden; // nunca scroll horizontal
-    scrollbar-width: none; // o scroll vertical existe mas não se vê
+    overflow-x: hidden;
+    scrollbar-width: none;
 
     &::-webkit-scrollbar {
       display: none;
@@ -151,7 +146,6 @@
     display: none;
   }
 
-  // Visualizador de fotos em ecrã inteiro no mobile.
   .is-viewer {
     .panel {
       max-height: 100dvh;
@@ -172,7 +166,6 @@
 }
 
 .sr-close:focus-visible {
-  // fica visível quando chega pelo teclado
   position: absolute !important;
   top: 8px;
   right: 8px;

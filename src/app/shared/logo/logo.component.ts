@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { LOGO_PATH, LOGO_VIEWBOX } from './logo-path';
 
-/** Monograma "bc". A cor vem de currentColor (por omissão, brand-primary). */
 @Component({
   selector: 'app-logo',
   changeDetection: ChangeDetectionStrategy.OnPush,

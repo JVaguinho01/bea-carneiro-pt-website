@@ -1,9 +1,5 @@
 import { Directive, ElementRef, OnDestroy, afterNextRender, inject, input } from '@angular/core';
 
-/**
- * Revela o elemento ao entrar no ecrã (fade + subida). Uso: <div appReveal [revealDelay]="120">.
- * Respeita "reduzir movimento" (o CSS em _components.scss mostra logo o conteúdo).
- */
 @Directive({
   selector: '[appReveal]',
   host: {

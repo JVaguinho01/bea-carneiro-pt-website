@@ -1,4 +1,3 @@
-// FICHEIRO GERADO por scripts/generate-photo-manifest.mjs — não editar à mão.
 import { PhotoMeta } from './photo.model';
 
 export const PHOTOS: Record<'retratos' | 'competicao' | 'treino' | 'pessoal', PhotoMeta[]> = {

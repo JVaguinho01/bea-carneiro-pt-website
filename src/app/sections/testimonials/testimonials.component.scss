@@ -19,7 +19,6 @@
     transform 400ms var(--ease-out),
     box-shadow 400ms var(--ease-out);
 
-  // só no desktop (≥ 1280px) e com rato: de tablet para baixo nunca sobe nem ganha sombra
   @media (hover: hover) and (pointer: fine) and (min-width: 1280px) {
     &:hover {
       transform: translateY(-4px);
@@ -114,7 +113,7 @@ blockquote {
     display: flex;
     gap: var(--space-md);
     overflow-x: auto;
-    overflow-y: hidden; // só desliza na horizontal (sem scroll vertical dentro do carrossel)
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--page-margin);
     padding-inline: var(--page-margin);
@@ -158,7 +157,6 @@ blockquote {
   }
 }
 
-// ---- Painel com o testemunho completo ---------------------------------------
 .panel {
   display: grid;
   grid-template-columns: 1fr;
@@ -189,7 +187,6 @@ blockquote {
   line-height: 1.7;
 }
 
-// Horizontal: autor à esquerda, texto à direita
 @media (orientation: landscape) and (min-width: 1024px) {
   .panel {
     grid-template-columns: 300px 1fr;

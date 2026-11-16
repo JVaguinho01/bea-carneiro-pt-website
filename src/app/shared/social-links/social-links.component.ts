@@ -11,7 +11,6 @@ interface Channel {
   external: boolean;
 }
 
-/** Ícones de contacto: Instagram, email, telefone e WhatsApp (só ícones, com aria-label). */
 @Component({
   selector: 'app-social-links',
   imports: [TranslatePipe, IconComponent],

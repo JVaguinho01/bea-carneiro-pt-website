@@ -7,12 +7,6 @@ import { INSTAGRAM_PHOTOS } from '../../data/content';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
-/**
- * Instagram: fotos pessoais da Beatriz (guardadas no site, sem carregar nada do
- * Instagram — mais rápido e sem cookies de terceiros). Mostra 4 de cada vez, escolhidas
- * ao acaso, e a cada 3,5s uma delas troca por outra (crossfade). Clicar abre o perfil num
- * separador novo. O fundo expande a partir de um círculo ao entrar no ecrã.
- */
 @Component({
   selector: 'app-instagram',
   imports: [TranslatePipe, IconComponent, RevealDirective],
@@ -63,7 +57,6 @@ import { RevealDirective } from '../../shared/reveal/reveal.directive';
     .instagram {
       clip-path: circle(20% at 75% 50%);
       transition: clip-path 1200ms var(--ease-out);
-      /* o reveal global mexe na opacidade; aqui queremos o círculo */
       opacity: 1 !important;
       transform: none !important;
     }
@@ -98,7 +91,6 @@ import { RevealDirective } from '../../shared/reveal/reveal.directive';
       aspect-ratio: 1;
       transition: transform 400ms var(--ease-out);
     }
-    /* inclinação só no desktop com rato (em tablet e telemóvel não há hover) */
     @media (hover: hover) and (pointer: fine) and (min-width: 1280px) {
       .post:hover {
         transform: rotate(var(--tilt, -2deg)) scale(1.02);
@@ -149,7 +141,6 @@ export class InstagramComponent {
   private readonly pool: Photo[] = shuffle(INSTAGRAM_PHOTOS);
   protected readonly slots = signal<Photo[]>(this.pool.slice(0, 4));
   protected hovered = false;
-  /** Inclinação no hover: para a esquerda ou para a direita, ao acaso (2–3°). */
   protected readonly tilts = [0, 1, 2, 3].map(() => (Math.random() < 0.5 ? -1 : 1) * (2 + Math.random()));
 
   constructor() {
@@ -168,7 +159,7 @@ export class InstagramComponent {
         const unused = this.pool.filter(p => !current.includes(p));
         if (!unused.length) return;
         let slot = Math.floor(Math.random() * current.length);
-        if (slot === last) slot = (slot + 1) % current.length; // não troca a mesma duas vezes seguidas
+        if (slot === last) slot = (slot + 1) % current.length;
         last = slot;
         const next = unused[Math.floor(Math.random() * unused.length)];
         const img = new Image();

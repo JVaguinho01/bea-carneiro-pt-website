@@ -1,6 +1,5 @@
 import { DOCUMENT, Injectable, inject, signal } from '@angular/core';
 
-/** Estado de "reduzir movimento" e tipo de ponteiro, partilhado pelos componentes. */
 @Injectable({ providedIn: 'root' })
 export class MotionService {
   private readonly win = inject(DOCUMENT).defaultView;

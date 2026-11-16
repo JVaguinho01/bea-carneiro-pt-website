@@ -2,10 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { I18nService, LANGS, Lang } from '../../core/i18n/i18n.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
-/**
- * Seletor PT | EN. Troca o conteúdo sem recarregar, mantém o scroll e guarda a escolha
- * (não aparece no URL).
- */
 @Component({
   selector: 'app-lang-switch',
   imports: [TranslatePipe],
@@ -47,7 +43,6 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
       color: var(--text-secondary);
       transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
     }
-    /* área de toque de 44px sem mudar o desenho */
     button::after {
       content: '';
       position: absolute;
@@ -75,7 +70,6 @@ export class LangSwitchComponent {
   protected readonly langs = LANGS;
 
   protected select(lang: Lang): void {
-    // troca o conteúdo sem recarregar nem mexer no URL; o scroll mantém-se
     this.i18n.setLang(lang);
   }
 }

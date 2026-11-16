@@ -6,7 +6,6 @@ import { IconComponent } from '../../shared/icons/icon.component';
 import { OverlayComponent } from '../../shared/overlay/overlay.component';
 import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
-/** Quantas fotos se mostram no início, por range (desktop 12, tablet 9, mobile 8). */
 function initialCount(): number {
   const w = window.innerWidth;
   if (w < 768) return 8;
@@ -21,11 +20,6 @@ function columnsFor(): number {
   return 4;
 }
 
-/**
- * Galeria "Em movimento": arquivo de todas as fotos extra em masonry
- * (4 / 3 / 2 colunas). "Ver mais fotos" acrescenta 12. Clicar abre o visualizador
- * (setas, ← →, swipe no mobile; fecha a clicar fora, ESC ou a arrastar a pega).
- */
 @Component({
   selector: 'app-gallery',
   imports: [TranslatePipe, IconComponent, OverlayComponent, RevealDirective],
@@ -37,17 +31,10 @@ export class GalleryComponent {
   protected readonly all: Photo[] = GALLERY_PHOTOS;
   protected readonly shown = signal(initialCount());
   protected readonly visible = computed(() => this.all.slice(0, this.shown()));
-  /** Índice a partir do qual as fotos foram acrescentadas (para a cascata). */
   protected readonly batchStart = signal(0);
 
-  /** Nº de colunas por range: 4 desktop / tablet deitado, 3 tablet, 2 mobile. */
   protected readonly columnCount = signal(columnsFor());
 
-  /**
-   * Masonry em JavaScript: cada foto vai para a coluna mais baixa, pela ordem.
-   * As fotos já mostradas nunca mudam de coluna; as novas entram no fundo de todas
-   * as colunas ao mesmo tempo (com CSS columns tudo se reorganizava a cada lote).
-   */
   protected readonly columns = computed(() => {
     const n = this.columnCount();
     const cols: { photo: Photo; index: number }[][] = Array.from({ length: n }, () => []);
@@ -85,10 +72,6 @@ export class GalleryComponent {
 
   protected readonly loadingMore = signal(false);
 
-  /**
-   * Carrega e descodifica o próximo lote ANTES de o mostrar, para que as fotos
-   * apareçam todas ao mesmo tempo (em cascata) em vez de coluna a coluna.
-   */
   protected async more(): Promise<void> {
     if (this.loadingMore()) return;
     const from = this.shown();
@@ -98,7 +81,7 @@ export class GalleryComponent {
       this.all.slice(from, to).map(p => {
         const img = new Image();
         img.src = p.srcSm;
-        return img.decode().catch(() => undefined); // uma foto em falta não bloqueia as outras
+        return img.decode().catch(() => undefined);
       }),
     );
     this.batchStart.set(from);
@@ -125,7 +108,6 @@ export class GalleryComponent {
     return p.altKey.split('.').pop() ?? 'competicao';
   }
 
-  // Swipe no mobile
   protected onTouchStart(e: TouchEvent): void {
     this.touchX = e.touches[0]?.clientX ?? null;
   }

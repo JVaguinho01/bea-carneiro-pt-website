@@ -10,22 +10,12 @@ import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
 type Status = 'idle' | 'sending' | 'success' | SendResult | 'too-fast' | 'captcha';
 
-/** Tempo mínimo (ms) entre abrir a página e enviar: bots preenchem tudo de imediato. */
 const MIN_FILL_TIME = 3000;
-/** Email simples e robusto (o validador do Angular aceita "a@b"). */
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[a-z]{2,}$/i;
-/** Nome: letras (com acentos), espaços, hífen, apóstrofo e ponto. */
 const NAME_RE = /^[\p{L}][\p{L} .'’-]*$/u;
 
-/** Limite de caracteres da mensagem. */
 const MAX_CHARS = 500;
 
-/**
- * Contactos: formulário que envia o email diretamente (EmailJS).
- * Valida ao sair de cada campo; estados a enviar / sucesso / erro no próprio formulário.
- * Anti-spam: campo isco escondido (honeypot), tempo mínimo de preenchimento, limite de envios
- * e reCAPTCHA v2 (validado pelo EmailJS).
- */
 @Component({
   selector: 'app-contact',
   imports: [ReactiveFormsModule, TranslatePipe, IconComponent, RevealDirective],
@@ -43,7 +33,6 @@ export class ContactComponent {
   protected readonly status = signal<Status>('idle');
   private readonly startedAt = Date.now();
   protected readonly maxChars = MAX_CHARS;
-  /** Contador de caracteres em tempo real (o valor do formulário só atualiza ao sair do campo). */
   protected readonly charCount = signal(0);
   protected onMessageInput(value: string): void {
     this.charCount.set(value.length);
@@ -60,13 +49,10 @@ export class ContactComponent {
     email: ['', { validators: [Validators.required, Validators.maxLength(120), Validators.pattern(EMAIL_RE)], updateOn: 'blur' }],
     subject: ['', { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(120)], updateOn: 'blur' }],
     message: ['', { validators: [Validators.required, Validators.minLength(10), Validators.maxLength(MAX_CHARS)], updateOn: 'blur' }],
-    /** Honeypot: invisível para pessoas; se vier preenchido, é um bot. */
     website: [''],
   });
 
   constructor() {
-    // reCAPTCHA: desenha a caixa quando o formulário se aproxima do ecrã
-    // (e outra vez depois de "Enviar outra mensagem", porque o formulário é recriado).
     const destroyRef = inject(DestroyRef);
     let io: IntersectionObserver | undefined;
     effect(() => {
@@ -81,7 +67,7 @@ export class ContactComponent {
         this.recaptcha
           .render(el, t => {
             this.captchaToken.set(t);
-            if (t && this.status() === 'captcha') this.status.set('idle'); // tira o aviso ao marcar
+            if (t && this.status() === 'captcha') this.status.set('idle');
           }, this.i18n.lang())
           .then(id => (this.captchaId = id))
           .catch(() => this.status.set('error'));
@@ -90,7 +76,6 @@ export class ContactComponent {
     });
     destroyRef.onDestroy(() => io?.disconnect());
 
-    // Assunto pré-preenchido quando se vem de um painel de serviço
     effect(() => {
       const subject = this.scroll.contactSubject();
       if (subject) {
@@ -100,10 +85,6 @@ export class ContactComponent {
     });
   }
 
-  /**
-   * Os erros dos campos só aparecem depois de tentar enviar, e desaparecem ao fim de 5 s
-   * (voltam a aparecer numa nova tentativa). Sair de um campo vazio não mostra nada.
-   */
   protected readonly showErrors = signal(false);
   private errorsTimer?: ReturnType<typeof setTimeout>;
 
@@ -127,13 +108,11 @@ export class ContactComponent {
   protected async submit(): Promise<void> {
     if (this.status() === 'sending') return;
 
-    // 1.º o "Não sou um robô": sem ele não se faz mais nada
     if (this.captchaEnabled && !this.captchaToken()) {
       this.status.set('captcha');
       return;
     }
 
-    // 2.º os campos: assinala os que faltam durante 5 s
     this.form.updateValueAndValidity();
     if (this.form.invalid) {
       this.status.set('idle');
@@ -145,7 +124,6 @@ export class ContactComponent {
 
     const { website, ...msg } = this.form.getRawValue();
     if (website) {
-      // bot: finge sucesso e não envia nada
       this.status.set('success');
       return;
     }
@@ -157,7 +135,6 @@ export class ContactComponent {
     this.status.set('sending');
     const result = await this.contact.send(msg, this.i18n.lang(), this.captchaToken());
     if (result !== 'ok') {
-      // cada token só vale uma vez: pede nova verificação
       this.recaptcha.reset(this.captchaId);
       this.captchaToken.set(null);
     }

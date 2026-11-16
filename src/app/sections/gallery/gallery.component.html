@@ -16,7 +16,6 @@
               [style.--d]="(cell.index - batchStart()) * 40 + 'ms'"
             >
               <button type="button" class="tile photo" [attr.aria-label]="'gallery.open' | t: { n: cell.index + 1 }" aria-haspopup="dialog" (click)="open(cell.index)">
-                <!-- só a versão pequena (640px): é a mesma que é pré-carregada em "Ver mais fotos" -->
                 <img
                   [src]="cell.photo.srcSm"
                   [width]="cell.photo.w"

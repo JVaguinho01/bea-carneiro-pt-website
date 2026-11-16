@@ -13,11 +13,6 @@ declare global {
   }
 }
 
-/**
- * Google reCAPTCHA v2 (caixa "Não sou um robô"), carregado só quando o formulário
- * está perto do ecrã (não pesa no arranque nem traz cookies da Google a quem não o usa).
- * O token vai com a mensagem para o EmailJS, que o valida com a chave secreta.
- */
 @Injectable({ providedIn: 'root' })
 export class RecaptchaService {
   private readonly document = inject(DOCUMENT);
@@ -47,7 +42,6 @@ export class RecaptchaService {
     return this.load(lang).then(g =>
       g.render(el, {
         sitekey: environment.recaptchaSiteKey,
-        // segue o tema do site (modo escuro do sistema → widget escuro)
         theme: window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
         callback: (t: string) => onToken(t),
         'expired-callback': () => onToken(null),

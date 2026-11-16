@@ -71,7 +71,6 @@
     }
   }
 
-  // Altura fixa, sem redimensionar; o texto a mais faz scroll por dentro (barra invisível)
   textarea {
     height: 180px;
     min-height: 180px;
@@ -113,7 +112,6 @@
   font-size: var(--fs-small);
 }
 
-// Honeypot: fora do ecrã (não usar display:none — alguns bots ignoram esses campos)
 .hp {
   position: absolute;
   left: -10000px;
@@ -187,10 +185,8 @@
 }
 
 .captcha {
-  min-height: 78px; // reserva o espaço da caixa do reCAPTCHA (sem saltos)
+  min-height: 78px;
 
-  // Tema Dark: o widget escuro da Google traz um contorno claro de 1px dentro do iframe
-  // (não se pode estilizar). Cortamos esse 1px e pomos o nosso contorno com a cor do tema.
   @media (prefers-color-scheme: dark) {
     width: 302px;
     height: 76px;

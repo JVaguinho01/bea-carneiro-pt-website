@@ -13,10 +13,6 @@ import { Photo } from '../../data/photo.model';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { MotionService } from '../../core/services/motion.service';
 
-/**
- * Fotos que rodam sozinhas (crossfade). Também mudam com swipe (toque) ou clique nas margens (rato). Pausa ao passar o rato, quando sai do ecrã
- * e com "reduzir movimento". Indicador: pontos (hero/sobre) ou barras de progresso (conquistas).
- */
 @Component({
   selector: 'app-photo-rotator',
   imports: [TranslatePipe],
@@ -57,8 +53,6 @@ import { MotionService } from '../../core/services/motion.service';
         />
       }
       <ng-content />
-      <!-- Computador: clicar na margem esquerda/direita da foto anda para trás/frente.
-           Carrossel finito: cada margem só existe se houver foto nesse sentido. -->
       @if (index() > 0) {
         <div class="edge edge--prev" aria-hidden="true" (click)="slide(-1)"><span>&lsaquo;</span></div>
       }
@@ -116,7 +110,6 @@ export class PhotoRotatorComponent {
   private timer?: ReturnType<typeof setTimeout>;
 
   constructor() {
-    // Ao trocar de conjunto de fotos (ex.: outra conquista), recomeça na 1.ª.
     effect(() => {
       this.photos();
       this.index.set(0);
@@ -125,7 +118,7 @@ export class PhotoRotatorComponent {
     effect(() => {
       const shouldRun = this.inView() && !this.hovered() && !this.motion.reduced() && this.photos().length > 1;
       this.paused.set(!shouldRun);
-      this.index(); // reinicia o temporizador sempre que a foto muda
+      this.index();
       clearTimeout(this.timer);
       if (shouldRun) this.timer = setTimeout(() => this.next(), this.intervalMs());
     });
@@ -139,31 +132,19 @@ export class PhotoRotatorComponent {
     destroyRef.onDestroy(() => clearTimeout(this.timer));
   }
 
-  /**
-   * Tipo de animação da última troca: 0 = fade (temporizador e pontos/barras);
-   * 1 / -1 = slide para a seguinte / anterior (setas no computador e swipe no toque).
-   */
   protected readonly slideDir = signal<0 | 1 | -1>(0);
-  /** Foto que sai a deslizar durante o slide. */
   protected readonly leaving = signal(-1);
 
-  /** Pontos/barras: fade. */
   protected go(i: number): void {
     this.slideDir.set(0);
     this.index.set(i);
   }
 
-  /** Temporizador: fade. */
   private next(): void {
     this.slideDir.set(0);
     this.index.update(i => (i + 1) % this.photos().length);
   }
 
-  /**
-   * Setas e swipe: slide no sentido do gesto, em carrossel finito
-   * (na 1.ª foto não se recua, na última não se avança).
-   * O temporizador continua a voltar à 1.ª no fim, com fade.
-   */
   protected slide(dir: 1 | -1): void {
     const target = this.index() + dir;
     if (target < 0 || target >= this.photos().length) return;
@@ -173,7 +154,6 @@ export class PhotoRotatorComponent {
     this.index.set(target);
   }
 
-  /** Tablet/telemóvel: deslizar o dedo na foto (esquerda → seguinte, direita → anterior). */
   protected swipeStart: { x: number; y: number } | null = null;
 
   protected onPointerDown(e: PointerEvent): void {

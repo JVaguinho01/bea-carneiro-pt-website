@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { ICONS, IconName } from './icons';
 
-/**
- * Ícone SVG em linha. Herda a cor do texto (currentColor), por isso basta mudar
- * `color` no CSS do elemento pai ou do próprio <app-icon>.
- * Decorativo por omissão (aria-hidden); passa `label` para ícones com significado.
- */
 @Component({
   selector: 'app-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,

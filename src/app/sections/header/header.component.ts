@@ -21,10 +21,6 @@ interface NavLink {
   key: string;
 }
 
-/**
- * Cabeçalho fixo: esconde ao descer, volta ao subir; o link da secção visível fica marcado.
- * Desktop: links visíveis. Tablet/mobile: botão de menu que abre o menu em ecrã inteiro.
- */
 @Component({
   selector: 'app-header',
   imports: [TranslatePipe, LogoComponent, IconComponent, LangSwitchComponent, SocialLinksComponent],
@@ -62,7 +58,6 @@ export class HeaderComponent {
     afterNextRender(() => {
       const win = this.document.defaultView!;
 
-      // Esconder ao descer / mostrar ao subir
       let lastY = win.scrollY;
       let ticking = false;
       const onScroll = () => {
@@ -80,7 +75,6 @@ export class HeaderComponent {
       };
       win.addEventListener('scroll', onScroll, { passive: true });
 
-      // Link ativo = secção que ocupa a faixa central do ecrã
       const io = new IntersectionObserver(
         entries => {
           for (const e of entries) if (e.isIntersecting) this.active.set(e.target.id);

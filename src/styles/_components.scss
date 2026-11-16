@@ -1,6 +1,3 @@
-// Classes partilhadas (equivalentes aos componentes do Design System do Figma).
-
-// ---- Layout -----------------------------------------------------------------
 .container {
   width: 100%;
   max-width: calc(var(--container-max) + 2 * var(--page-margin));
@@ -10,7 +7,6 @@
 
 .section {
   padding-block: var(--section-padding);
-  // a secção encaixa no topo do ecrã; o cabeçalho flutua sobre o padding de cima
   scroll-margin-top: 0;
 
   &--inverse {
@@ -40,7 +36,6 @@
   border: 0;
 }
 
-// ---- Tipografia ---------------------------------------------------------------
 .t-display {
   font-family: var(--font-display);
   font-weight: 800;
@@ -119,7 +114,6 @@
   color: var(--text-secondary);
 }
 
-// ---- Cabeçalho de secção -------------------------------------------------------
 .section-header {
   display: flex;
   flex-direction: column;
@@ -127,7 +121,6 @@
   max-width: 720px;
 }
 
-// ---- Botões --------------------------------------------------------------------
 .btn {
   display: inline-flex;
   align-items: center;
@@ -200,7 +193,6 @@
   @media (max-width: 767.98px) {
     &--block-mobile {
       width: 100%;
-      // textos longos (ex.: "Pedir informações sobre …") quebram linha em vez de sair do ecrã
       white-space: normal;
       text-align: center;
       line-height: 1.3;
@@ -259,7 +251,6 @@
   }
 }
 
-// ---- Indicador de rotação de fotos ----------------------------------------------
 .rotation-dots {
   display: inline-flex;
   gap: 6px;
@@ -276,7 +267,6 @@
       width var(--dur-base) var(--ease-out),
       background-color var(--dur-base) ease;
 
-    // área de toque maior sem alterar o visual
     position: relative;
 
     &::after {
@@ -292,7 +282,6 @@
   }
 }
 
-// ---- Fotos ------------------------------------------------------------------------
 .photo {
   position: relative;
   overflow: hidden;
@@ -306,7 +295,6 @@
   }
 }
 
-// ---- Revelação ao entrar no ecrã (diretiva appReveal) --------------------------------
 .reveal {
   opacity: 0;
   transform: translateY(24px);

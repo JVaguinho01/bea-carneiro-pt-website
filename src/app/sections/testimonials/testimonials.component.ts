@@ -14,10 +14,6 @@ interface Testimonial {
   full: string[];
 }
 
-/**
- * Testemunhos: frase de destaque + excerto de 3 linhas + "Ler mais" que abre o texto
- * completo num painel (bottom sheet no mobile). Em EN mostra o texto original.
- */
 @Component({
   selector: 'app-testimonials',
   imports: [TranslatePipe, IconComponent, OverlayComponent, RevealDirective, SnapCarouselDirective],

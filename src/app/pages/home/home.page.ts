@@ -13,7 +13,6 @@ import { TestimonialsComponent } from '../../sections/testimonials/testimonials.
 import { BackToTopComponent } from '../../shared/back-to-top/back-to-top.component';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
-/** Página única. Atualiza lang, título e descrição sempre que a língua muda. */
 @Component({
   selector: 'app-home-page',
   imports: [

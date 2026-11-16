@@ -20,7 +20,7 @@ Build de produção: `npm run build` → pasta `dist/bea-pt-website/browser` (é
 
 | O quê | Onde |
 |---|---|
-| Cores do site (tema Light e Dark) | `src/styles/themes/_forest.scss` |
+| Cores do site (tema Light e Dark) | `src/styles/_colors.scss` (Light no `:root`, Dark no bloco `prefers-color-scheme: dark`) |
 | Tipografia, espaçamentos, raios, breakpoints | `src/styles/_tokens.scss` |
 | Classes partilhadas (botões, títulos…) | `src/styles/_components.scss` |
 | Textos PT / EN | `src/i18n/pt.json` e `src/i18n/en.json` |
@@ -28,11 +28,6 @@ Build de produção: `npm run build` → pasta `dist/bea-pt-website/browser` (é
 | EmailJS (formulário) | `src/environments/environment.ts` |
 | Que foto vai em cada secção | `src/app/data/content.ts` |
 | Ícones | `src/app/shared/icons/icons.ts` |
-
-### Criar outro tema
-1. Copia `src/styles/themes/_forest.scss` para `_novo.scss` e muda as cores (mantém os nomes das variáveis).
-2. Muda o seletor para `[data-theme='novo']` e importa-o em `src/styles.scss`.
-3. Em `src/index.html`, muda `data-theme="forest"` para `data-theme="novo"`.
 
 ### Fotos
 As fotos estão em `public/images/<categoria>/` (`retratos`, `competicao`, `treino`, `pessoal`), cada uma com

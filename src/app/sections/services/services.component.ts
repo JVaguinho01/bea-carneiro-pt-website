@@ -26,11 +26,6 @@ export interface Service {
   };
 }
 
-/**
- * Serviços: 3 cartões (carrossel com swipe no mobile). "Saber mais" abre o painel do
- * serviço; "Pedir informações sobre …" fecha o painel e leva aos Contactos com o
- * assunto já preenchido.
- */
 @Component({
   selector: 'app-services',
   imports: [TranslatePipe, IconComponent, OverlayComponent, RevealDirective, SnapCarouselDirective],
@@ -60,10 +55,8 @@ export class ServicesComponent {
   }
 
   protected askAbout(service: Service): void {
-    // fecha o painel de imediato (desbloqueia o scroll) e vai para os Contactos
     this.overlay().closeNow();
     this.close();
-    // o browser devolve o foco ao botão que abriu o <dialog>; o scroll vem logo a seguir
     setTimeout(() => this.scroll.goToContact(service.panel.subject), 60);
   }
 }

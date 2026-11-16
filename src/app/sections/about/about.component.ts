@@ -25,10 +25,6 @@ interface Stat {
   label: string;
 }
 
-/**
- * Sobre mim: a frase grande "pinta-se" palavra a palavra com o scroll; fotos da Beatriz
- * a rodar (4s); números contam de 0 até ao valor ao entrar no ecrã.
- */
 @Component({
   selector: 'app-about',
   imports: [TranslatePipe, IconComponent, PhotoRotatorComponent, RevealDirective],
@@ -49,7 +45,6 @@ export class AboutComponent {
     return [...strong, ...muted];
   });
   protected readonly strongCount = computed(() => this.i18n.t('about.statementStrong').split(' ').length);
-  /** Quantas palavras já estão "pintadas" (0 → todas). */
   protected readonly painted = signal(0);
 
   protected readonly stats = computed(() => this.i18n.get<Stat[]>('about.stats'));
@@ -68,14 +63,12 @@ export class AboutComponent {
         return;
       }
 
-      // Frase a pintar com o scroll
       const el = this.statement().nativeElement;
       let raf = 0;
       const update = () => {
         raf = 0;
         const r = el.getBoundingClientRect();
         const vh = win.innerHeight;
-        // começa quando o topo entra a 85% do ecrã e termina quando chega a 35%
         const progress = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.5)));
         this.painted.set(Math.round(progress * (this.words().length - this.strongCount())));
       };
@@ -85,7 +78,6 @@ export class AboutComponent {
       win.addEventListener('scroll', onScroll, { passive: true });
       update();
 
-      // Contadores
       this.counts.set(this.stats().map(() => 0));
       const io = new IntersectionObserver(([e]) => {
         if (!e.isIntersecting) return;

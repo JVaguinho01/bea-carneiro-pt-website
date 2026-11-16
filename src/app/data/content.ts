@@ -1,7 +1,3 @@
-// =============================================================================
-// Plano de fotos por secção (regra do Figma: cada foto aparece numa só secção;
-// a Galeria junta todas as que sobram). Mudar uma foto = mudar o id aqui.
-// =============================================================================
 import { Photo, PhotoMeta } from './photo.model';
 import { PHOTOS } from './photos.generated';
 
@@ -13,7 +9,6 @@ const ALL: Record<string, PhotoMeta & { category: Category }> = Object.fromEntri
 
 const used = new Set<string>();
 
-/** Monta uma foto a partir do id. Fotos que já não existem são ignoradas. */
 function photo(id: string, altKey: string, focus?: string): Photo | null {
   const meta = ALL[id];
   if (!meta) return null;
@@ -29,7 +24,6 @@ function photo(id: string, altKey: string, focus?: string): Photo | null {
 
 const list = (items: (Photo | null)[]) => items.filter((p): p is Photo => p !== null);
 
-// ---- Hero: 4 fotos de TREINO (o que a pessoa vai ter) ------------------------
 export const HERO_PHOTOS = list([
   photo('treino-01', 'hero.photos.0', '50% 40%'),
   photo('treino-02', 'hero.photos.1', '60% 50%'),
@@ -37,7 +31,6 @@ export const HERO_PHOTOS = list([
   photo('treino-13', 'hero.photos.3', '50% 35%'),
 ]);
 
-// ---- Sobre mim: fotos DA BEATRIZ (retrato com medalhas primeiro) -------------
 export const ABOUT_PHOTOS = list([
   photo('retratos-01', 'about.photos.0', '50% 30%'),
   photo('competicao-14', 'about.photos.1', '50% 30%'),
@@ -45,14 +38,12 @@ export const ABOUT_PHOTOS = list([
   photo('competicao-32', 'about.photos.3', '50% 30%'),
 ]);
 
-// ---- Serviços: 1 foto própria por serviço ------------------------------------
 export const SERVICE_PHOTOS: Record<string, Photo | null> = {
   workshops: photo('treino-10', 'services.items.0.photoAlt', '50% 40%'),
   personalizado: photo('treino-06', 'services.items.1.photoAlt', '50% 40%'),
   online: photo('treino-08', 'services.items.2.photoAlt', '50% 40%'),
 };
 
-// ---- Conquistas: fotos de cada entrada da linha cronológica (mesma ordem) -----
 const ach = (ids: string[]) => list(ids.map(id => photo(id, 'achievements.photoAlt', '50% 35%')));
 export const ACHIEVEMENT_PHOTOS: Photo[][] = [
   ach(['competicao-15', 'competicao-12', 'competicao-31']),
@@ -64,11 +55,8 @@ export const ACHIEVEMENT_PHOTOS: Photo[][] = [
   ach(['competicao-10', 'competicao-01', 'competicao-16']),
 ];
 
-// ---- Instagram: TODAS as fotos pessoais (vão alternando, 4 de cada vez) ----------
 export const INSTAGRAM_PHOTOS = list(PHOTOS.pessoal.map(p => photo(p.id, 'instagram.alt', '50% 35%')));
 
-// ---- Galeria: só carreira (competição e treino) que sobram; nada pessoal ---------
-// Os retratos e as fotos pessoais ficam de fora (a pedido do cliente).
 function remaining(cat: Category): Photo[] {
   return list(PHOTOS[cat].filter(p => !used.has(p.id)).map(p => photo(p.id, `gallery.alt.${cat}`)));
 }

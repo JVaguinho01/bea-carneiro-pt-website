@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-PT" data-theme="forest">
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8">
   <title>Beatriz Carneiro Acro</title>
@@ -10,13 +10,9 @@
   <meta name="theme-color" content="#0b1a13" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <!-- FASE DE TESTES: esconde o site dos motores de pesquisa. Remover quando o site for oficial. -->
+  <!-- TODO: remover quando o site for oficial (esconde o site dos motores de pesquisa durante os testes). -->
   <meta name="robots" content="noindex, nofollow">
-  <!--
-    Política de segurança de conteúdo (CSP): o browser só carrega scripts, estilos,
-    fontes e imagens do próprio site; os únicos pedidos externos são à API do EmailJS e ao reCAPTCHA da Google (só no formulário).
-    No alojamento final, enviar também estes cabeçalhos pelo servidor (ver SECURITY.md).
-  -->
+  <!-- TODO: no alojamento final, enviar também esta CSP e os outros cabeçalhos de segurança pelo servidor (ver SECURITY.md). -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.emailjs.com https://www.google.com/recaptcha/; frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Beatriz Carneiro Acro">
@@ -30,6 +26,5 @@
 </head>
 <body>
   <app-root></app-root>
-  <noscript>Este site precisa de JavaScript. Contacto: bcarneiro03@gmail.com · +351 930 400 713</noscript>
 </body>
 </html>

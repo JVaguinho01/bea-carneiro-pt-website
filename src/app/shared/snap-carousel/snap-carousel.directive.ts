@@ -1,10 +1,5 @@
 import { Directive, ElementRef, inject, signal } from '@angular/core';
 
-/**
- * Carrossel com swipe nativo (CSS scroll-snap) para o mobile. Só lê a posição
- * para saber qual cartão está visível (para os traços indicadores).
- * Uso: <ul appSnapCarousel #c="snapCarousel"> … {{ c.index() }}
- */
 @Directive({
   selector: '[appSnapCarousel]',
   exportAs: 'snapCarousel',

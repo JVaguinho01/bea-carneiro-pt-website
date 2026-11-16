@@ -6,28 +6,20 @@ import { HERO_PHOTOS } from '../../data/content';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { PhotoRotatorComponent } from '../../shared/photo-rotator/photo-rotator.component';
 
-/** Mancha de luz difusa no fundo do hero. */
 interface Spot {
-  x: number; // % da largura
-  y: number; // % da altura
-  size: number; // px
-  color: string; // variável CSS do tema
-  dx: number; // deriva (px)
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  dx: number;
   dy: number;
-  dur: number; // s
-  delay: number; // s
+  dur: number;
+  delay: number;
 }
 
-// Uma só cor (coral); a intensidade varia um pouco para as manchas não ficarem iguais.
 const SPOT_COLORS = ['var(--spot-coral)', 'var(--spot-coral-soft)'];
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
-/**
- * Hero: título revela palavra a palavra, fotos de treino a rodar (4s), chips fixos
- * sobre a foto e manchas de luz suaves espalhadas ao acaso por trás (derivam devagar;
- * paradas com "reduzir movimento"). Sem indicador de scroll: a foto passa a dobra do
- * ecrã e dissolve-se num fade.
- */
 @Component({
   selector: 'app-hero',
   imports: [TranslatePipe, IconComponent, PhotoRotatorComponent],
@@ -42,17 +34,14 @@ export class HeroComponent {
 
   protected readonly titleWords = computed(() => this.i18n.t('hero.title').split(' '));
 
-  /** 3 a 5 manchas (ao acaso) espalhadas por todo o hero; podem ficar por trás da foto. */
   protected readonly spots: Spot[] = makeSpots();
 }
 
 function makeSpots(): Spot[] {
-  const count = 3 + Math.floor(Math.random() * 3); // 3, 4 ou 5
+  const count = 3 + Math.floor(Math.random() * 3);
   const colors = [...SPOT_COLORS].sort(() => Math.random() - 0.5);
   const spots: Spot[] = [];
   for (let i = 0; i < count; i++) {
-    // escolhe a posição mais afastada das manchas já colocadas (entre 12 candidatas),
-    // para ficarem espalhadas pelo ecrã todo e não amontoadas
     let best = { x: 50, y: 50 };
     let bestDist = -1;
     for (let c = 0; c < 12; c++) {

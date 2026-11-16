@@ -1,7 +1,6 @@
 <section id="sobre" class="section about" aria-labelledby="about-title">
   <div class="container">
     <p #statement class="t-display statement">
-      <!-- Leitores de ecrã leem a frase inteira; as palavras animadas são decorativas. -->
       <span class="visually-hidden">{{ 'about.statementStrong' | t }} {{ 'about.statementMuted' | t }}</span>
       <span aria-hidden="true">
         @for (w of words(); track $index) {
@@ -36,7 +35,6 @@
             <app-icon name="arrow-up-right" [size]="20" />
           </a>
           @if (cvUrl) {
-            <!-- download: descarrega o ficheiro diretamente, sem o abrir no browser -->
             <a [href]="cvUrl" class="btn btn--outline btn--block-mobile" download="CV-Beatriz-Carneiro.pdf" type="application/pdf">
               {{ 'about.ctaCv' | t }}
               <app-icon name="download" [size]="20" />

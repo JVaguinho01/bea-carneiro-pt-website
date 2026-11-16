@@ -6,7 +6,6 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "photos": "node scripts/generate-photo-manifest.mjs"
   },
   "private": true,

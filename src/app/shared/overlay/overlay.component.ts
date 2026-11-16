@@ -12,16 +12,6 @@ import {
 } from '@angular/core';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
-/**
- * Painel sobre a página escurecida (serviços, testemunhos, visualizador de fotos).
- * Usa <dialog> nativo: foco preso dentro, ESC fecha, o resto da página fica inerte.
- *
- * - ≥ 768px: painel centrado. Layout pela orientação (CSS de cada conteúdo):
- *   horizontal (landscape ≥ 1024px) → 2 colunas; vertical → 1 coluna.
- *   Sem botão X: fecha com clique no fundo ou ESC (há um "Fechar" só para leitores de ecrã).
- * - < 768px: bottom sheet que sobe de baixo; fecha a arrastar a pega para baixo
- *   (mais de 30% da altura) ou a tocar no fundo. Pode ter scroll interno.
- */
 @Component({
   selector: 'app-overlay',
   imports: [TranslatePipe],
@@ -52,7 +42,6 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
         <div class="content" #content (scroll)="updateMore()">
           <ng-content />
         </div>
-        <!-- fade no fundo: só aparece quando há mais conteúdo para baixo (scroll interno invisível) -->
         <div class="more-fade" [class.is-visible]="hasMore()" aria-hidden="true"></div>
       </div>
     </dialog>
@@ -94,7 +83,6 @@ export class OverlayComponent {
     });
   }
 
-  /** Há conteúdo escondido por baixo? (mostra o fade no fundo da folha) */
   protected updateMore(): void {
     const c = this.content().nativeElement;
     this.hasMore.set(c.scrollHeight - c.scrollTop - c.clientHeight > 8);
@@ -107,7 +95,6 @@ export class OverlayComponent {
     setTimeout(() => this.closed.emit(), reduced ? 0 : 200);
   }
 
-  /** Fecha já, sem animação nem devolver o foco (usado antes de navegar para outra secção). */
   closeNow(): void {
     this.opener = null;
     if (this.dialog().nativeElement.open) this.finishClose();
@@ -123,16 +110,14 @@ export class OverlayComponent {
   }
 
   protected onCancel(event: Event): void {
-    event.preventDefault(); // ESC: anima o fecho em vez de fechar logo
+    event.preventDefault();
     this.close();
   }
 
   protected onBackdropClick(event: MouseEvent): void {
-    // O clique no ::backdrop chega ao próprio <dialog> (fora do painel).
     if (event.target === this.dialog().nativeElement) this.close();
   }
 
-  // ---- Arrastar a pega para fechar (mobile) ---------------------------------
   protected onDragStart(e: PointerEvent): void {
     this.dragStartY = e.clientY;
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
@@ -150,7 +135,7 @@ export class OverlayComponent {
     if (this.dragOffset() > height * 0.3) {
       this.close();
     } else {
-      this.dragOffset.set(0); // volta para cima
+      this.dragOffset.set(0);
     }
   }
 }

@@ -5,7 +5,6 @@
 .frame {
   position: relative;
   width: 100%;
-  // deixa o scroll vertical da página; o deslize horizontal muda de foto
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
@@ -24,7 +23,6 @@
     }
   }
 
-  // Setas / swipe: slide no sentido do gesto (a nova entra, a antiga sai empurrada).
   &.is-slide img {
     transition: none;
 
@@ -92,7 +90,6 @@
   }
 }
 
-// Margens clicáveis (só com rato): 22% de cada lado, seta aparece ao passar o rato.
 .edge {
   display: none;
 }
@@ -146,7 +143,6 @@
   z-index: 2;
 }
 
-// Barras de progresso (conquistas): enchem durante o tempo de cada foto.
 .bars {
   display: flex;
   gap: 6px;

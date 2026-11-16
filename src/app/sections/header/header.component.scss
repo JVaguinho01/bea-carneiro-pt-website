@@ -92,7 +92,6 @@
   color: var(--text-primary);
 }
 
-// ---- Tablet: links escondidos, hambúrguer + CTA ----------------------------------
 @media (max-width: 1279.98px) {
   .links {
     display: none;
@@ -103,7 +102,6 @@
   }
 }
 
-// ---- Mobile: só logo, PT|EN e menu -----------------------------------------------
 @media (max-width: 767.98px) {
   :host {
     padding-top: 12px;
@@ -122,7 +120,6 @@
   }
 }
 
-// ---- Menu em ecrã inteiro --------------------------------------------------------
 .menu {
   pointer-events: auto;
   position: fixed;

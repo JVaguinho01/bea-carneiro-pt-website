@@ -1,13 +1,6 @@
 /**
- * Configuração do EmailJS (envio do formulário sem back-end).
- *
- * Estes três valores são PÚBLICOS por natureza (ficam sempre visíveis no browser).
- * A segurança é feita no painel do EmailJS:
- *   - Account → Security → "Allowed origins": só o domínio do site (e http://localhost:4200 para testes).
- *   - Ativar o limite de pedidos e, se quiseres, o reCAPTCHA no template.
- * NUNCA pôr aqui a "Private Key" do EmailJS.
- *
- * Enquanto estiverem vazios, o formulário mostra uma mensagem a pedir contacto por email/WhatsApp.
+ * TODO: ao passar para as contas finais (email da Beatriz), trocar estes valores e, no painel do EmailJS,
+ * limitar "Allowed origins" ao domínio final do site. Nunca pôr aqui a Private Key do EmailJS.
  */
 export const environment = {
   emailjs: {
@@ -15,10 +8,5 @@ export const environment = {
     templateId: 'template_2qdgr9v',
     publicKey: '7YXxUpixldRz7D3Kt',
   },
-  /**
-   * Google reCAPTCHA v2 ("Não sou um robô"). A SITE KEY é pública; a SECRET KEY
-   * fica só no painel do EmailJS (Template → Settings), nunca aqui.
-   * Vazio = formulário sem captcha.
-   */
   recaptchaSiteKey: '6LcvziAuAAAAADm-nET4-NZa0Ro-mRNb7e8VCrQZ',
 };
