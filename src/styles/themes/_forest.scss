@@ -9,6 +9,10 @@
 //   2. Importa-o em src/styles.scss.
 //   3. Muda o atributo data-theme em src/index.html (ou THEME em site.config.ts).
 // Todas as combinações texto/fundo cumprem WCAG AA (≥ 4.5:1 texto normal).
+//
+// Light é o padrão. Se o sistema/browser do visitante estiver em modo escuro
+// (prefers-color-scheme: dark), aplica-se automaticamente o bloco DARK no fim
+// deste ficheiro. Espelha os modos Light/Dark da coleção "1 · Cores (tema)" do Figma.
 // =============================================================================
 
 :root,
@@ -47,6 +51,12 @@
   --bg-inverse: var(--forest-950);
   --bg-photo-placeholder: var(--forest-100);
   --bg-overlay: rgb(15 42 31 / 0.6);
+  --bg-viewer: rgb(15 42 31 / 0.94); // fundo do visualizador de fotos
+  --bg-header: rgb(255 255 255 / 0.82); // barra do cabeçalho (translúcida)
+  --bg-accent-soft-hover: var(--ivory-300);
+  // fade do hero (foto dissolve no fundo da página)
+  --fade-canvas-0: rgb(255 253 247 / 0);
+  --fade-canvas-75: rgb(255 253 247 / 0.75);
 
   // ---- Texto ----------------------------------------------------------------
   --text-primary: var(--forest-950);
@@ -64,6 +74,7 @@
   --border-default: var(--ivory-300);
   --border-strong: var(--forest-800);
   --border-inverse: var(--forest-800);
+  --border-hover: var(--forest-200); // campos do formulário em hover
   --focus-ring: var(--coral-500);
 
   // ---- Efeitos --------------------------------------------------------------
@@ -72,4 +83,75 @@
   // manchas de luz no fundo do hero
   --spot-coral: rgb(255 107 69 / 0.24);
   --spot-coral-soft: rgb(255 107 69 / 0.16);
+}
+
+// =============================================================================
+// DARK — aplica-se sozinho quando o sistema/browser está em modo escuro.
+// Mesmos nomes semânticos, outros valores (Figma: modo "Dark").
+// Fundos verde-noite, texto marfim, verde da marca mais claro e coral como acento.
+// Contraste: texto ≥ 10:1, coral ≥ 6:1, texto dos botões 6,6:1 (WCAG AA).
+// =============================================================================
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  [data-theme='forest'] {
+    color-scheme: dark;
+
+    // ---- Primitivos novos (só Dark) ---------------------------------------
+    --night-950: #07120d;
+    --night-900: #0b1a13;
+    --night-800: #10241b;
+    --night-700: #163024;
+    --night-600: #1f3d2f;
+    --night-500: #2d5240;
+    --forest-400: #6fa487;
+    --forest-300: #8fbea3;
+    --forest-925: #163828; // faixas escuras (Conquistas, Testemunhos)
+    --coral-900: #40201a;
+
+    // ---- Marca --------------------------------------------------------------
+    --brand-primary: var(--forest-400);
+    --brand-primary-hover: var(--forest-300);
+    --brand-secondary: var(--coral-500);
+
+    // ---- Fundos -------------------------------------------------------------
+    --bg-canvas: var(--night-900);
+    --bg-surface: var(--night-800);
+    --bg-accent-soft: var(--night-600);
+    --bg-accent-soft-hover: var(--night-500);
+    --bg-elevated: var(--night-700);
+    --bg-brand: var(--forest-400);
+    --bg-inverse: var(--forest-925);
+    --bg-photo-placeholder: var(--night-600);
+    --bg-overlay: rgb(7 18 13 / 0.72);
+    --bg-viewer: rgb(7 18 13 / 0.96);
+    --bg-header: rgb(22 48 36 / 0.82);
+    --fade-canvas-0: rgb(11 26 19 / 0);
+    --fade-canvas-75: rgb(11 26 19 / 0.75);
+
+    // ---- Texto --------------------------------------------------------------
+    --text-primary: var(--ivory-100);
+    --text-secondary: var(--forest-200);
+    --text-muted: var(--night-600);
+    --text-brand: var(--coral-400);
+    --text-on-brand: var(--night-950);
+    --text-inverse: var(--ivory-50);
+    --text-inverse-secondary: var(--forest-200);
+    --text-brand-inverse: var(--coral-400);
+    --text-error: var(--coral-400);
+    --text-success: var(--forest-300);
+
+    // ---- Bordas -------------------------------------------------------------
+    --border-default: var(--night-500);
+    --border-strong: var(--forest-400);
+    --border-inverse: var(--forest-800);
+    --border-hover: var(--forest-700);
+    --focus-ring: var(--coral-500);
+
+    // ---- Efeitos ------------------------------------------------------------
+    --shadow-card: 0 16px 40px -8px rgb(0 0 0 / 0.45);
+    --shadow-panel: 0 24px 64px -12px rgb(0 0 0 / 0.6);
+    --spot-coral: rgb(255 107 69 / 0.18);
+    --spot-coral-soft: rgb(255 107 69 / 0.12);
+  }
 }

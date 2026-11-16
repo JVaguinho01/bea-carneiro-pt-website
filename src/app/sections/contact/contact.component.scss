@@ -57,7 +57,7 @@
     }
 
     &:hover {
-      border-color: var(--forest-200);
+      border-color: var(--border-hover);
     }
 
     &:focus {
@@ -188,6 +188,21 @@
 
 .captcha {
   min-height: 78px; // reserva o espaço da caixa do reCAPTCHA (sem saltos)
+
+  // Tema Dark: o widget escuro da Google traz um contorno claro de 1px dentro do iframe
+  // (não se pode estilizar). Cortamos esse 1px e pomos o nosso contorno com a cor do tema.
+  @media (prefers-color-scheme: dark) {
+    width: 302px;
+    height: 76px;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 3px;
+    outline: 1px solid var(--border-default);
+
+    ::ng-deep > div {
+      margin: -1px;
+    }
+  }
 }
 
 .captcha-hint {

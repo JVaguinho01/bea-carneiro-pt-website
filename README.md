@@ -20,7 +20,7 @@ Build de produção: `npm run build` → pasta `dist/bea-pt-website/browser` (é
 
 | O quê | Onde |
 |---|---|
-| Cores do site (tema) | `src/styles/themes/_forest.scss` |
+| Cores do site (tema Light e Dark) | `src/styles/themes/_forest.scss` |
 | Tipografia, espaçamentos, raios, breakpoints | `src/styles/_tokens.scss` |
 | Classes partilhadas (botões, títulos…) | `src/styles/_components.scss` |
 | Textos PT / EN | `src/i18n/pt.json` e `src/i18n/en.json` |

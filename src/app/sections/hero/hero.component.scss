@@ -145,7 +145,7 @@
   right: 0;
   bottom: 0;
   height: 200px;
-  background: linear-gradient(to bottom, rgb(255 253 247 / 0), rgb(255 253 247 / 0.75) 55%, var(--bg-canvas));
+  background: linear-gradient(to bottom, var(--fade-canvas-0), var(--fade-canvas-75) 55%, var(--bg-canvas));
   pointer-events: none;
 }
 
