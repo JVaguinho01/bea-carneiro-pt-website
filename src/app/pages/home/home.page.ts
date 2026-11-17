@@ -11,6 +11,7 @@ import { InstagramComponent } from '../../sections/instagram/instagram.component
 import { ServicesComponent } from '../../sections/services/services.component';
 import { TestimonialsComponent } from '../../sections/testimonials/testimonials.component';
 import { BackToTopComponent } from '../../shared/back-to-top/back-to-top.component';
+import { ConsentCardComponent } from '../../shared/consent-card/consent-card.component';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 
 @Component({
@@ -28,6 +29,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
     ContactComponent,
     FooterComponent,
     BackToTopComponent,
+    ConsentCardComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
@@ -45,6 +47,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
     </main>
     <app-footer />
     <app-back-to-top />
+    <app-consent-card />
   `,
   styles: `
     main:focus {

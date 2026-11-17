@@ -97,6 +97,38 @@ button.row:hover {
   }
 }
 
+.is-coach .dot {
+  border-radius: 1px;
+  background: var(--forest-700);
+  transform: rotate(45deg);
+}
+
+.legend {
+  display: flex;
+  gap: var(--space-lg);
+  font-size: var(--fs-small);
+  color: var(--text-inverse-secondary);
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+}
+
+.mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--forest-700);
+
+  &--coach {
+    border-radius: 1px;
+    background: var(--forest-700);
+    transform: rotate(45deg);
+  }
+}
+
 .body {
   display: flex;
   flex-direction: column;

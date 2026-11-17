@@ -60,7 +60,7 @@ import { TranslatePipe } from '../../core/i18n/translate.pipe';
     }
     :host(.is-dark) button.is-active {
       background: var(--text-inverse);
-      color: var(--text-primary);
+      color: var(--bg-inverse);
     }
   `,
 })

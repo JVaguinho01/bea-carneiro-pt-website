@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, afterNextRe
 import { SITE } from '../../core/config/site.config';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { MotionService } from '../../core/services/motion.service';
+import { PreferencesService } from '../../core/services/preferences.service';
 import { SocialLinksComponent } from '../../shared/social-links/social-links.component';
 
 @Component({
@@ -19,6 +20,9 @@ import { SocialLinksComponent } from '../../shared/social-links/social-links.com
             <p>
               {{ 'footer.credit' | t }}
               <a [href]="authorUrl" target="_blank" rel="noopener noreferrer">{{ 'footer.creditName' | t }}</a>
+            </p>
+            <p>
+              <button type="button" class="link" (click)="prefs.reopen()">{{ 'consent.manage' | t }}</button>
             </p>
           </div>
           <app-social-links [attr.aria-label]="'footer.social' | t" />
@@ -65,8 +69,13 @@ import { SocialLinksComponent } from '../../shared/social-links/social-links.com
       font-size: var(--fs-small);
       color: var(--text-secondary);
     }
-    .credits a {
+    .credits a,
+    .link {
       color: var(--text-primary);
+    }
+    .link {
+      text-decoration: underline;
+      font-size: inherit;
     }
     @media (max-width: 767.98px) {
       .footer {
@@ -85,6 +94,7 @@ import { SocialLinksComponent } from '../../shared/social-links/social-links.com
 export class FooterComponent {
   protected readonly year = new Date().getFullYear();
   protected readonly authorUrl = SITE.authorUrl;
+  protected readonly prefs = inject(PreferencesService);
   private readonly wordmark = viewChild.required<ElementRef<HTMLElement>>('wordmark');
 
   constructor() {

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { I18nService } from '../../core/i18n/i18n.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { GALLERY_PHOTOS } from '../../data/content';
 import { Photo } from '../../data/photo.model';
@@ -28,6 +29,7 @@ function columnsFor(): number {
   styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent {
+  private readonly i18n = inject(I18nService);
   protected readonly all: Photo[] = GALLERY_PHOTOS;
   protected readonly shown = signal(initialCount());
   protected readonly visible = computed(() => this.all.slice(0, this.shown()));
@@ -104,8 +106,15 @@ export class GalleryComponent {
     this.viewerIndex.set((i + delta + n) % n);
   }
 
-  protected categoryOf(p: Photo): string {
-    return p.altKey.split('.').pop() ?? 'competicao';
+  protected caption(p: Photo): string {
+    if (p.achievement === undefined) return this.i18n.t('gallery.captions.treinos');
+    const item = this.i18n.get<{ year: string; title: string }[]>('achievements.items')[p.achievement];
+    return `${item.title} · ${item.year}`;
+  }
+
+  protected alt(p: Photo): string {
+    if (p.achievement === undefined) return this.i18n.t(p.altKey);
+    return this.i18n.t(p.altKey, { title: this.i18n.get<{ title: string }[]>('achievements.items')[p.achievement].title });
   }
 
   protected onTouchStart(e: TouchEvent): void {

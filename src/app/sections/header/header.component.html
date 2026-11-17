@@ -20,6 +20,7 @@
   </nav>
 
   <div class="actions">
+    <app-theme-switch class="bar-theme" />
     <app-lang-switch />
     <a href="#contactos" class="btn btn--primary cta" (click)="go('contactos', $event)">
       {{ 'nav.cta' | t }}
@@ -66,6 +67,10 @@
   </nav>
 
   <div class="menu-bottom">
+    <div class="menu-theme">
+      <span class="t-overline">{{ 'theme.label' | t }}</span>
+      <app-theme-switch tone="dark" />
+    </div>
     <a href="#contactos" class="btn btn--soft btn--block-mobile" (click)="go('contactos', $event)">
       {{ 'nav.cta' | t }}
       <app-icon name="arrow-up-right" [size]="20" />

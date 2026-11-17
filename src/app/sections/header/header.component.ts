@@ -15,6 +15,7 @@ import { LogoComponent } from '../../shared/logo/logo.component';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { LangSwitchComponent } from '../../shared/lang-switch/lang-switch.component';
 import { SocialLinksComponent } from '../../shared/social-links/social-links.component';
+import { ThemeSwitchComponent } from '../../shared/theme-switch/theme-switch.component';
 
 interface NavLink {
   id: Exclude<SectionId, 'top'>;
@@ -23,7 +24,7 @@ interface NavLink {
 
 @Component({
   selector: 'app-header',
-  imports: [TranslatePipe, LogoComponent, IconComponent, LangSwitchComponent, SocialLinksComponent],
+  imports: [TranslatePipe, LogoComponent, IconComponent, LangSwitchComponent, ThemeSwitchComponent, SocialLinksComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

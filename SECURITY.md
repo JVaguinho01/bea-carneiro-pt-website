@@ -10,6 +10,11 @@ por isso a superfície de ataque é pequena. O que foi feito:
   o único pedido externo permitido é `https://api.emailjs.com`. Sem `eval`, sem iframes, sem plugins.
 - **Fontes e imagens servidas localmente** (sem Google Fonts nem embeds do Instagram): sem cookies nem
   rastreio de terceiros.
+- **Armazenamento no browser (cookies / localStorage):** o tema (`bc-theme`) e o idioma (`bc-lang`) só ficam
+  guardados depois de o visitante aceitar o aviso; sem aceitar, valem apenas nessa visita. A resposta ao aviso
+  fica em `bc-consent` (necessário para não voltar a perguntar) e pode ser mudada em "Cookies e preferências" no
+  rodapé. O limite de envios do formulário (`localStorage`) e o reCAPTCHA da Google são estritamente necessários
+  (segurança contra spam) e não dependem do aviso. Sem cookies de publicidade nem de análise.
 - **Fotos sem metadados** (EXIF/GPS removidos na conversão para WebP).
 - **Angular** escapa todo o texto nos templates (proteção contra XSS); não se usa `innerHTML`.
 - **Links externos** com `rel="noopener noreferrer"`.

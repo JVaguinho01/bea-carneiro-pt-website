@@ -4,6 +4,7 @@ import { I18nService } from '../../core/i18n/i18n.service';
 import { TranslatePipe } from '../../core/i18n/translate.pipe';
 import { ContactService, SendResult } from '../../core/services/contact.service';
 import { RecaptchaService } from '../../core/services/recaptcha.service';
+import { ThemeService } from '../../core/services/theme.service';
 import { ScrollService } from '../../core/services/scroll.service';
 import { IconComponent } from '../../shared/icons/icon.component';
 import { RevealDirective } from '../../shared/reveal/reveal.directive';
@@ -39,6 +40,7 @@ export class ContactComponent {
   }
 
   private readonly recaptcha = inject(RecaptchaService);
+  protected readonly theme = inject(ThemeService);
   protected readonly captchaEnabled = this.recaptcha.enabled;
   private readonly captchaEl = viewChild<ElementRef<HTMLElement>>('captcha');
   protected readonly captchaToken = signal<string | null>(null);
@@ -56,11 +58,14 @@ export class ContactComponent {
     const destroyRef = inject(DestroyRef);
     let io: IntersectionObserver | undefined;
     effect(() => {
-      const el = this.captchaEl()?.nativeElement;
+      const host = this.captchaEl()?.nativeElement;
+      const theme = this.theme.resolved();
       io?.disconnect();
       this.captchaId = null;
       this.captchaToken.set(null);
-      if (!el || !this.captchaEnabled) return;
+      if (!host || !this.captchaEnabled) return;
+      const el = document.createElement('div');
+      host.replaceChildren(el);
       io = new IntersectionObserver(([e]) => {
         if (!e.isIntersecting) return;
         io?.disconnect();
@@ -68,11 +73,11 @@ export class ContactComponent {
           .render(el, t => {
             this.captchaToken.set(t);
             if (t && this.status() === 'captcha') this.status.set('idle');
-          }, this.i18n.lang())
+          }, this.i18n.lang(), theme)
           .then(id => (this.captchaId = id))
           .catch(() => this.status.set('error'));
       }, { rootMargin: '400px 0px' });
-      io.observe(el);
+      io.observe(host);
     });
     destroyRef.onDestroy(() => io?.disconnect());
 

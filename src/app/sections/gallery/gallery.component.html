@@ -20,7 +20,7 @@
                   [src]="cell.photo.srcSm"
                   [width]="cell.photo.w"
                   [height]="cell.photo.h"
-                  [alt]="cell.photo.altKey | t"
+                  [alt]="alt(cell.photo)"
                   [attr.loading]="batchStart() > 0 ? 'eager' : 'lazy'"
                   decoding="async"
                 />
@@ -50,15 +50,25 @@
         <button type="button" class="nav nav--prev" [attr.aria-label]="'gallery.prev' | t" (click)="step(-1)">
           <app-icon name="arrow-left" />
         </button>
-        @for (q of [p]; track q.id) {
-          <img class="viewer-img" [src]="q.src" [width]="q.w" [height]="q.h" [alt]="q.altKey | t" />
-        }
+        <div class="viewer-frame">
+          @for (q of [p]; track q.id) {
+            <img
+              #img
+              class="viewer-img"
+              [src]="q.src"
+              [width]="q.w"
+              [height]="q.h"
+              [alt]="alt(q)"
+              (load)="img.classList.add('is-loaded')"
+            />
+          }
+        </div>
         <button type="button" class="nav nav--next" [attr.aria-label]="'gallery.next' | t" (click)="step(1)">
           <app-icon name="arrow-right" />
         </button>
       </div>
       <figcaption class="caption">
-        <span>{{ 'gallery.captions.' + categoryOf(p) | t }}</span>
+        <span>{{ caption(p) }}</span>
         <span aria-live="polite">{{ 'common.photoOf' | t: { n: viewerIndex()! + 1, total: all.length } }}</span>
       </figcaption>
     </figure>

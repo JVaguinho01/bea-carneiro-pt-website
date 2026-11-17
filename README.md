@@ -20,7 +20,8 @@ Build de produção: `npm run build` → pasta `dist/bea-pt-website/browser` (é
 
 | O quê | Onde |
 |---|---|
-| Cores do site (tema Light e Dark) | `src/styles/_colors.scss` (Light no `:root`, Dark no bloco `prefers-color-scheme: dark`) |
+| Cores do site (tema Light e Dark) | `src/styles/_colors.scss` (Light no `:root`, Dark no mixin `dark`, aplicado pelo sistema ou por `data-theme`) |
+| Seletor de tema e aviso de cookies | `src/app/core/services/theme.service.ts`, `preferences.service.ts`, `public/theme-init.js` |
 | Tipografia, espaçamentos, raios, breakpoints | `src/styles/_tokens.scss` |
 | Classes partilhadas (botões, títulos…) | `src/styles/_components.scss` |
 | Textos PT / EN | `src/i18n/pt.json` e `src/i18n/en.json` |
@@ -30,14 +31,25 @@ Build de produção: `npm run build` → pasta `dist/bea-pt-website/browser` (é
 | Ícones | `src/app/shared/icons/icons.ts` |
 
 ### Fotos
-As fotos estão em `public/images/<categoria>/` (`retratos`, `competicao`, `treino`, `pessoal`), cada uma com
-versão grande (`nome.webp`) e pequena (`nome-sm.webp`). Depois de acrescentar ou apagar fotos, corre:
+As fotos estão em `public/images/`, uma pasta por sítio do site, cada foto com versão grande (`nome.webp`)
+e pequena (`nome-sm.webp`):
+
+| Pasta | Onde aparece |
+|---|---|
+| `inicio/` | Hero (fotos a rodar) |
+| `sobre-mim/` | Sobre mim |
+| `servicos/` | Um ficheiro por serviço: `servicos-workshops`, `servicos-personalizado`, `servicos-online` |
+| `conquistas/<ano-conquista>/` | Uma pasta por conquista (fotos dessa entrada da linha cronológica e da Galeria) |
+| `treinos/` | Só na Galeria (legenda "Treinos") |
+| `pessoais/` | Instagram |
+
+A Galeria mostra as fotos de todas as conquistas (legenda = nome e ano da conquista) e as de `treinos/`.
+A ordem das pastas das conquistas tem de ser a mesma das conquistas em `pt.json`/`en.json`
+(lista `ACHIEVEMENT_FOLDERS` em `src/app/data/content.ts`). Depois de acrescentar, mover ou apagar fotos, corre:
 
 ```bash
 npm run photos
 ```
-
-As fotos que não estão atribuídas a uma secção em `content.ts` aparecem automaticamente na Galeria.
 
 ### Línguas
 A língua inicial é a guardada pelo visitante; senão a do browser (português → PT, qualquer outra → EN).

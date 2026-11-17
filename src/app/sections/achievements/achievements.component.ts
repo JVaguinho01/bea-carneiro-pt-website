@@ -7,6 +7,7 @@ import { PhotoRotatorComponent } from '../../shared/photo-rotator/photo-rotator.
 import { RevealDirective } from '../../shared/reveal/reveal.directive';
 
 interface Achievement {
+  role: 'athlete' | 'coach';
   year: string;
   title: string;
   detail: string;

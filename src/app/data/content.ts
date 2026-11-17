@@ -1,66 +1,56 @@
 import { Photo, PhotoMeta } from './photo.model';
 import { PHOTOS } from './photos.generated';
 
-type Category = keyof typeof PHOTOS;
+export const ACHIEVEMENT_FOLDERS = [
+  '2025-world-games-bronze',
+  '2025-europeu-prata',
+  '2024-25-treinadora-campeoes-nacionais',
+  '2024-taca-do-mundo-ouro',
+  '2022-world-games-prata',
+  '2022-mundial-prata',
+  '2020-taca-do-mundo-prata',
+  '2018-mundial-junior-ouro',
+  '2017-europeu-junior-3-ouros',
+];
 
-const ALL: Record<string, PhotoMeta & { category: Category }> = Object.fromEntries(
-  (Object.keys(PHOTOS) as Category[]).flatMap(cat => PHOTOS[cat].map(p => [p.id, { ...p, category: cat }])),
-);
-
-const used = new Set<string>();
-
-function photo(id: string, altKey: string, focus?: string): Photo | null {
-  const meta = ALL[id];
-  if (!meta) return null;
-  used.add(id);
+function toPhoto(folder: string, meta: PhotoMeta, altKey: string, focus?: string, achievement?: number): Photo {
   return {
     ...meta,
-    src: `images/${meta.category}/${id}.webp`,
-    srcSm: `images/${meta.category}/${id}-sm.webp`,
+    src: `images/${folder}/${meta.id}.webp`,
+    srcSm: `images/${folder}/${meta.id}-sm.webp`,
     altKey,
     focus,
+    achievement,
   };
 }
 
-const list = (items: (Photo | null)[]) => items.filter((p): p is Photo => p !== null);
+function folder(name: string, altKey: (i: number) => string, focus?: string): Photo[] {
+  return (PHOTOS[name] ?? []).map((meta, i) => toPhoto(name, meta, altKey(i), focus));
+}
 
-export const HERO_PHOTOS = list([
-  photo('treino-01', 'hero.photos.0', '50% 40%'),
-  photo('treino-02', 'hero.photos.1', '60% 50%'),
-  photo('treino-03', 'hero.photos.2', '50% 30%'),
-  photo('treino-13', 'hero.photos.3', '50% 35%'),
-]);
+const indexedAlt = (key: string, count: number, fallback: string) => (i: number) => (i < count ? `${key}.${i}` : fallback);
 
-export const ABOUT_PHOTOS = list([
-  photo('retratos-01', 'about.photos.0', '50% 30%'),
-  photo('competicao-14', 'about.photos.1', '50% 30%'),
-  photo('competicao-02', 'about.photos.2', '50% 30%'),
-  photo('competicao-32', 'about.photos.3', '50% 30%'),
-]);
+export const HERO_PHOTOS = folder('inicio', indexedAlt('hero.photos', 4, 'gallery.alt.treinos'), '50% 40%');
 
+export const ABOUT_PHOTOS = folder('sobre-mim', indexedAlt('about.photos', 4, 'gallery.alt.sobreMim'), '50% 30%');
+
+const servicePhoto = (id: string, altKey: string) => {
+  const meta = PHOTOS['servicos']?.find(p => p.id === id);
+  return meta ? toPhoto('servicos', meta, altKey, '50% 40%') : null;
+};
 export const SERVICE_PHOTOS: Record<string, Photo | null> = {
-  workshops: photo('treino-10', 'services.items.0.photoAlt', '50% 40%'),
-  personalizado: photo('treino-06', 'services.items.1.photoAlt', '50% 40%'),
-  online: photo('treino-08', 'services.items.2.photoAlt', '50% 40%'),
+  workshops: servicePhoto('servicos-workshops', 'services.items.0.photoAlt'),
+  personalizado: servicePhoto('servicos-personalizado', 'services.items.1.photoAlt'),
+  online: servicePhoto('servicos-online', 'services.items.2.photoAlt'),
 };
 
-const ach = (ids: string[]) => list(ids.map(id => photo(id, 'achievements.photoAlt', '50% 35%')));
-export const ACHIEVEMENT_PHOTOS: Photo[][] = [
-  ach(['competicao-15', 'competicao-12', 'competicao-31']),
-  ach(['competicao-24', 'competicao-25', 'competicao-26']),
-  ach(['competicao-18', 'competicao-21', 'competicao-13']),
-  ach(['competicao-27', 'competicao-28', 'competicao-08']),
-  ach(['competicao-06', 'competicao-07', 'competicao-04']),
-  ach(['competicao-03', 'competicao-09', 'competicao-11']),
-  ach(['competicao-10', 'competicao-01', 'competicao-16']),
-];
+export const ACHIEVEMENT_PHOTOS: Photo[][] = ACHIEVEMENT_FOLDERS.map((slug, i) =>
+  (PHOTOS[`conquistas/${slug}`] ?? []).map(meta => toPhoto(`conquistas/${slug}`, meta, 'achievements.photoAlt', '50% 35%', i)),
+);
 
-export const INSTAGRAM_PHOTOS = list(PHOTOS.pessoal.map(p => photo(p.id, 'instagram.alt', '50% 35%')));
+export const INSTAGRAM_PHOTOS = folder('pessoais', () => 'instagram.alt', '50% 35%');
 
-function remaining(cat: Category): Photo[] {
-  return list(PHOTOS[cat].filter(p => !used.has(p.id)).map(p => photo(p.id, `gallery.alt.${cat}`)));
-}
-const pools = [remaining('competicao'), remaining('treino')];
+const pools = [...ACHIEVEMENT_PHOTOS, folder('treinos', () => 'gallery.alt.treinos')];
 const interleaved: Photo[] = [];
 for (let i = 0; pools.some(p => i < p.length); i++) {
   for (const pool of pools) if (pool[i]) interleaved.push(pool[i]);

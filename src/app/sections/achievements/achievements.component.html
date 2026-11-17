@@ -5,6 +5,10 @@
         <p class="t-overline">{{ 'achievements.overline' | t }}</p>
         <h2 id="achievements-title" class="t-h1">{{ 'achievements.title' | t }}</h2>
         <p class="t-lead">{{ 'achievements.text' | t }}</p>
+        <ul class="legend">
+          <li><span class="mark" aria-hidden="true"></span>{{ 'achievements.roles.athlete' | t }}</li>
+          <li><span class="mark mark--coach" aria-hidden="true"></span>{{ 'achievements.roles.coach' | t }}</li>
+        </ul>
       </div>
 
       @if (interactive() && activePhotos().length) {
@@ -23,7 +27,7 @@
 
     <ol class="timeline" [attr.aria-label]="'achievements.listLabel' | t">
       @for (item of items(); track item.year + item.title; let i = $index) {
-        <li class="entry" [class.is-active]="interactive() && active() === i" appReveal [revealDelay]="i * 60">
+        <li class="entry" [class.is-coach]="item.role === 'coach'" [class.is-active]="interactive() && active() === i" appReveal [revealDelay]="i * 60">
           @if (interactive()) {
             <button type="button" class="row" [attr.aria-pressed]="active() === i" (click)="select(i)">
               <ng-container *ngTemplateOutlet="row; context: { $implicit: item }" />
@@ -43,6 +47,7 @@
   <span class="year t-h4">{{ item.year }}</span>
   <span class="line" aria-hidden="true"><span class="dot"></span></span>
   <span class="body">
+    <span class="visually-hidden">{{ 'achievements.roles.' + item.role | t }}:</span>
     <span class="title t-h3">{{ item.title }}</span>
     <span class="detail">{{ item.detail }}</span>
   </span>

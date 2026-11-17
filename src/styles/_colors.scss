@@ -59,58 +59,70 @@
   --spot-coral-soft: rgb(255 107 69 / 0.16);
 }
 
+@mixin dark {
+  color-scheme: dark;
+
+  --night-950: #07120d;
+  --night-900: #0b1a13;
+  --night-800: #10241b;
+  --night-700: #163024;
+  --night-600: #1f3d2f;
+  --night-500: #2d5240;
+  --forest-400: #6fa487;
+  --forest-300: #8fbea3;
+  --forest-925: #163828;
+
+  --brand-primary: var(--forest-400);
+  --brand-primary-hover: var(--forest-300);
+  --brand-secondary: var(--coral-500);
+
+  --bg-canvas: var(--night-900);
+  --bg-surface: var(--night-800);
+  --bg-accent-soft: var(--night-600);
+  --bg-accent-soft-hover: var(--night-500);
+  --bg-elevated: var(--night-700);
+  --bg-brand: var(--forest-400);
+  --bg-inverse: var(--forest-925);
+  --bg-photo-placeholder: var(--night-600);
+  --bg-overlay: rgb(7 18 13 / 0.72);
+  --bg-viewer: rgb(7 18 13 / 0.96);
+  --bg-header: rgb(22 48 36 / 0.82);
+  --fade-canvas-0: rgb(11 26 19 / 0);
+  --fade-canvas-75: rgb(11 26 19 / 0.75);
+
+  --text-primary: var(--ivory-100);
+  --text-secondary: var(--forest-200);
+  --text-muted: var(--night-600);
+  --text-brand: var(--coral-400);
+  --text-on-brand: var(--night-950);
+  --text-inverse: var(--ivory-50);
+  --text-inverse-secondary: var(--forest-200);
+  --text-brand-inverse: var(--coral-400);
+  --text-error: var(--coral-400);
+  --text-success: var(--forest-300);
+
+  --border-default: var(--night-500);
+  --border-strong: var(--forest-400);
+  --border-inverse: var(--forest-800);
+  --border-hover: var(--forest-700);
+  --focus-ring: var(--coral-500);
+
+  --shadow-card: 0 16px 40px -8px rgb(0 0 0 / 0.45);
+  --shadow-panel: 0 24px 64px -12px rgb(0 0 0 / 0.6);
+  --spot-coral: rgb(255 107 69 / 0.18);
+  --spot-coral-soft: rgb(255 107 69 / 0.12);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-
-    --night-950: #07120d;
-    --night-900: #0b1a13;
-    --night-800: #10241b;
-    --night-700: #163024;
-    --night-600: #1f3d2f;
-    --night-500: #2d5240;
-    --forest-400: #6fa487;
-    --forest-300: #8fbea3;
-    --forest-925: #163828;
-
-    --brand-primary: var(--forest-400);
-    --brand-primary-hover: var(--forest-300);
-    --brand-secondary: var(--coral-500);
-
-    --bg-canvas: var(--night-900);
-    --bg-surface: var(--night-800);
-    --bg-accent-soft: var(--night-600);
-    --bg-accent-soft-hover: var(--night-500);
-    --bg-elevated: var(--night-700);
-    --bg-brand: var(--forest-400);
-    --bg-inverse: var(--forest-925);
-    --bg-photo-placeholder: var(--night-600);
-    --bg-overlay: rgb(7 18 13 / 0.72);
-    --bg-viewer: rgb(7 18 13 / 0.96);
-    --bg-header: rgb(22 48 36 / 0.82);
-    --fade-canvas-0: rgb(11 26 19 / 0);
-    --fade-canvas-75: rgb(11 26 19 / 0.75);
-
-    --text-primary: var(--ivory-100);
-    --text-secondary: var(--forest-200);
-    --text-muted: var(--night-600);
-    --text-brand: var(--coral-400);
-    --text-on-brand: var(--night-950);
-    --text-inverse: var(--ivory-50);
-    --text-inverse-secondary: var(--forest-200);
-    --text-brand-inverse: var(--coral-400);
-    --text-error: var(--coral-400);
-    --text-success: var(--forest-300);
-
-    --border-default: var(--night-500);
-    --border-strong: var(--forest-400);
-    --border-inverse: var(--forest-800);
-    --border-hover: var(--forest-700);
-    --focus-ring: var(--coral-500);
-
-    --shadow-card: 0 16px 40px -8px rgb(0 0 0 / 0.45);
-    --shadow-panel: 0 24px 64px -12px rgb(0 0 0 / 0.6);
-    --spot-coral: rgb(255 107 69 / 0.18);
-    --spot-coral-soft: rgb(255 107 69 / 0.12);
+  :root:not([data-theme='light']) {
+    @include dark;
   }
+}
+
+:root[data-theme='dark'] {
+  @include dark;
 }

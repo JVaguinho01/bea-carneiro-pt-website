@@ -84,41 +84,64 @@
     "photoAlt": "Foto de competição: {title}",
     "items": [
       {
-        "year": "2026",
+        "role": "athlete",
+        "year": "2025",
         "title": "Bronze nos World Games",
         "detail": "Chengdu, China · Pares femininos, com Inês Faria"
       },
       {
+        "role": "athlete",
         "year": "2025",
         "title": "Vice-campeã Europeia",
-        "detail": "Campeonato da Europa · medalha de prata"
+        "detail": "Campeonato da Europa · escalão sénior"
       },
       {
+        "role": "coach",
+        "year": "2024/25",
+        "title": "7 campeões nacionais juvenis",
+        "detail": "Treinadora da classe de competição (juvenis e juniores) · provas nacionais e internacionais"
+      },
+      {
+        "role": "athlete",
         "year": "2024",
         "title": "Ouro na Taça do Mundo",
         "detail": "Maia · primeiro ouro de Portugal numa Taça do Mundo"
       },
       {
-        "year": "2023",
-        "title": "2× bronze no Campeonato da Europa",
-        "detail": "Escalão sénior"
-      },
-      {
+        "role": "athlete",
         "year": "2022",
         "title": "Prata nos World Games",
-        "detail": "Birmingham, EUA · 1.ª ginasta portuguesa com 2 pódios nos World Games"
+        "detail": "Birmingham, EUA · Seleção Nacional"
       },
       {
-        "year": "2021",
-        "title": "2× Vice-campeã do Mundo",
-        "detail": "Campeonatos do Mundo · escalão sénior"
+        "role": "athlete",
+        "year": "2022",
+        "title": "Vice-campeã do Mundo",
+        "detail": "Campeonato do Mundo · escalão sénior"
       },
       {
+        "role": "athlete",
         "year": "2020",
-        "title": "Campeã do Mundo e 3× Campeã Europeia Júnior",
-        "detail": "Escalão júnior · Pares e Grupos femininos"
+        "title": "Prata na Taça do Mundo",
+        "detail": "Taça do Mundo · escalão sénior"
+      },
+      {
+        "role": "athlete",
+        "year": "2018",
+        "title": "Campeã do Mundo Júnior",
+        "detail": "Campeonato do Mundo · escalão júnior"
+      },
+      {
+        "role": "athlete",
+        "year": "2017",
+        "title": "3× Campeã Europeia Júnior",
+        "detail": "Campeonato da Europa · escalão júnior"
       }
-    ]
+    ],
+    "roles": {
+      "athlete": "Atleta",
+      "coach": "Treinadora"
+    }
   },
   "services": {
     "overline": "Serviços",
@@ -234,16 +257,11 @@
     "prev": "Foto anterior",
     "next": "Foto seguinte",
     "alt": {
-      "competicao": "Beatriz Carneiro em competição de ginástica acrobática",
-      "treino": "Beatriz Carneiro num treino de ginástica acrobática",
-      "pessoal": "Beatriz Carneiro fora do ginásio",
-      "retratos": "Retrato de Beatriz Carneiro"
+      "treinos": "Beatriz Carneiro num treino de ginástica acrobática",
+      "sobreMim": "Beatriz Carneiro"
     },
     "captions": {
-      "competicao": "Competição",
-      "treino": "Treino",
-      "pessoal": "Dia a dia",
-      "retratos": "Retrato"
+      "treinos": "Treinos"
     }
   },
   "testimonials": {
@@ -354,5 +372,18 @@
     "credit": "Website por",
     "creditName": "Vaguinho",
     "social": "Redes e contactos"
+  },
+  "theme": {
+    "label": "Tema",
+    "system": "Tema do sistema",
+    "light": "Tema claro",
+    "dark": "Tema escuro"
+  },
+  "consent": {
+    "title": "Lembrar as tuas preferências?",
+    "text": "Se aceitares, o tema e o idioma que escolheres ficam guardados neste navegador para a próxima visita. Não usamos cookies de publicidade nem de análise. O formulário de contacto usa o Google reCAPTCHA para travar spam.",
+    "accept": "Aceitar",
+    "decline": "Agora não",
+    "manage": "Cookies e preferências"
   }
 }

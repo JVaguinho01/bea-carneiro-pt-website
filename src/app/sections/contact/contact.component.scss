@@ -187,7 +187,7 @@
 .captcha {
   min-height: 78px;
 
-  @media (prefers-color-scheme: dark) {
+  &.is-dark {
     width: 302px;
     height: 76px;
     min-height: 0;

@@ -1,9 +1,8 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 
 const root = join(import.meta.dirname, '..');
 const imagesDir = join(root, 'public', 'images');
-const categories = ['retratos', 'competicao', 'treino', 'pessoal'];
 
 function webpSize(file) {
   const b = readFileSync(file);
@@ -17,17 +16,22 @@ function webpSize(file) {
 }
 
 const photos = {};
-for (const cat of categories) {
-  const files = readdirSync(join(imagesDir, cat)).filter(f => f.endsWith('.webp') && !f.endsWith('-sm.webp')).sort();
-  photos[cat] = files.map(f => {
-    const { w, h } = webpSize(join(imagesDir, cat, f));
-    return { id: f.replace('.webp', ''), w, h };
-  });
+function walk(dir) {
+  const entries = readdirSync(dir, { withFileTypes: true });
+  const files = entries.filter(e => e.isFile() && e.name.endsWith('.webp') && !e.name.endsWith('-sm.webp')).map(e => e.name).sort();
+  if (files.length) {
+    photos[relative(imagesDir, dir).split('\\').join('/')] = files.map(f => {
+      const { w, h } = webpSize(join(dir, f));
+      return { id: f.replace('.webp', ''), w, h };
+    });
+  }
+  for (const e of entries) if (e.isDirectory()) walk(join(dir, e.name));
 }
+walk(imagesDir);
 
 const out = `import { PhotoMeta } from './photo.model';
 
-export const PHOTOS: Record<'retratos' | 'competicao' | 'treino' | 'pessoal', PhotoMeta[]> = ${JSON.stringify(photos, null, 2)};
+export const PHOTOS: Record<string, PhotoMeta[]> = ${JSON.stringify(photos, null, 2)};
 `;
 writeFileSync(join(root, 'src', 'app', 'data', 'photos.generated.ts'), out);
 console.log(Object.entries(photos).map(([k, v]) => `${k}: ${v.length}`).join(', '));

@@ -38,11 +38,11 @@ export class RecaptchaService {
     return this.loading;
   }
 
-  render(el: HTMLElement, onToken: (token: string | null) => void, lang: string): Promise<number> {
+  render(el: HTMLElement, onToken: (token: string | null) => void, lang: string, theme: 'light' | 'dark'): Promise<number> {
     return this.load(lang).then(g =>
       g.render(el, {
         sitekey: environment.recaptchaSiteKey,
-        theme: window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+        theme,
         callback: (t: string) => onToken(t),
         'expired-callback': () => onToken(null),
         'error-callback': () => onToken(null),

@@ -109,7 +109,7 @@
           </div>
 
           @if (captchaEnabled) {
-            <div class="captcha" #captcha></div>
+            <div class="captcha" [class.is-dark]="theme.resolved() === 'dark'" #captcha></div>
             @if (!captchaToken()) {
               <p class="t-small captcha-hint" id="cf-captcha-hint">{{ 'contact.form.captcha' | t }}</p>
             }

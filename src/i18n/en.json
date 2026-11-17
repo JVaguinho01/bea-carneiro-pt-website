@@ -84,41 +84,64 @@
     "photoAlt": "Competition photo: {title}",
     "items": [
       {
-        "year": "2026",
+        "role": "athlete",
+        "year": "2025",
         "title": "Bronze at the World Games",
         "detail": "Chengdu, China · Women's pair, with Inês Faria"
       },
       {
+        "role": "athlete",
         "year": "2025",
         "title": "European silver medalist",
-        "detail": "European Championships · silver medal"
+        "detail": "European Championships · senior category"
       },
       {
+        "role": "coach",
+        "year": "2024/25",
+        "title": "7 youth national champions",
+        "detail": "Coach of the competition class (youth and juniors) · national and international events"
+      },
+      {
+        "role": "athlete",
         "year": "2024",
         "title": "World Cup gold",
         "detail": "Maia · Portugal's first ever World Cup gold"
       },
       {
-        "year": "2023",
-        "title": "2× European Championships bronze",
-        "detail": "Senior category"
-      },
-      {
+        "role": "athlete",
         "year": "2022",
         "title": "Silver at the World Games",
-        "detail": "Birmingham, USA · first Portuguese gymnast with 2 World Games podiums"
+        "detail": "Birmingham, USA · National Team"
       },
       {
-        "year": "2021",
-        "title": "2× World silver medalist",
+        "role": "athlete",
+        "year": "2022",
+        "title": "World silver medalist",
         "detail": "World Championships · senior category"
       },
       {
+        "role": "athlete",
         "year": "2020",
-        "title": "World Champion and 3× Junior European Champion",
-        "detail": "Junior category · Women's pairs and groups"
+        "title": "World Cup silver",
+        "detail": "World Cup · senior category"
+      },
+      {
+        "role": "athlete",
+        "year": "2018",
+        "title": "Junior World Champion",
+        "detail": "World Championships · junior category"
+      },
+      {
+        "role": "athlete",
+        "year": "2017",
+        "title": "3× Junior European Champion",
+        "detail": "European Championships · junior category"
       }
-    ]
+    ],
+    "roles": {
+      "athlete": "Athlete",
+      "coach": "Coach"
+    }
   },
   "services": {
     "overline": "Services",
@@ -234,16 +257,11 @@
     "prev": "Previous photo",
     "next": "Next photo",
     "alt": {
-      "competicao": "Beatriz Carneiro competing in acrobatic gymnastics",
-      "treino": "Beatriz Carneiro at an acrobatic gymnastics training session",
-      "pessoal": "Beatriz Carneiro outside the gym",
-      "retratos": "Portrait of Beatriz Carneiro"
+      "treinos": "Beatriz Carneiro at an acrobatic gymnastics training session",
+      "sobreMim": "Beatriz Carneiro"
     },
     "captions": {
-      "competicao": "Competition",
-      "treino": "Training",
-      "pessoal": "Everyday life",
-      "retratos": "Portrait"
+      "treinos": "Training"
     }
   },
   "testimonials": {
@@ -354,5 +372,18 @@
     "credit": "Website by",
     "creditName": "Vaguinho",
     "social": "Social and contact"
+  },
+  "theme": {
+    "label": "Theme",
+    "system": "System theme",
+    "light": "Light theme",
+    "dark": "Dark theme"
+  },
+  "consent": {
+    "title": "Remember your preferences?",
+    "text": "If you accept, the theme and language you choose are saved in this browser for your next visit. We don’t use advertising or analytics cookies. The contact form uses Google reCAPTCHA to stop spam.",
+    "accept": "Accept",
+    "decline": "Not now",
+    "manage": "Cookies & preferences"
   }
 }

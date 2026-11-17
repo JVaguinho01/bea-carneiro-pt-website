@@ -1,5 +1,6 @@
 import { DOCUMENT, Injectable, computed, inject, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { PreferencesService } from '../services/preferences.service';
 import pt from '../../../i18n/pt.json';
 import en from '../../../i18n/en.json';
 
@@ -8,13 +9,13 @@ export const LANGS: readonly Lang[] = ['pt', 'en'];
 
 type Dictionary = typeof pt;
 const DICTIONARIES: Record<Lang, Dictionary> = { pt, en };
-const STORAGE_KEY = 'bc-lang';
 
 @Injectable({ providedIn: 'root' })
 export class I18nService {
   private readonly document = inject(DOCUMENT);
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
+  private readonly prefs = inject(PreferencesService);
 
   readonly lang = signal<Lang>(this.detect());
   readonly dict = computed(() => DICTIONARIES[this.lang()]);
@@ -36,10 +37,7 @@ export class I18nService {
   setLang(lang: Lang): void {
     if (!LANGS.includes(lang)) return;
     this.lang.set(lang);
-    try {
-      localStorage.setItem(STORAGE_KEY, lang);
-    } catch {
-    }
+    this.prefs.set('bc-lang', lang);
     this.applyToDocument();
   }
 
@@ -52,11 +50,8 @@ export class I18nService {
   }
 
   detect(): Lang {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'pt' || saved === 'en') return saved;
-    } catch {
-    }
+    const saved = this.prefs.get('bc-lang');
+    if (saved === 'pt' || saved === 'en') return saved;
     const nav = this.document.defaultView?.navigator;
     const prefs = nav?.languages?.length ? nav.languages : [nav?.language ?? 'en'];
     return prefs.some(l => l.toLowerCase().startsWith('pt')) ? 'pt' : 'en';

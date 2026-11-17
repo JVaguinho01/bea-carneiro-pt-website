@@ -9,4 +9,5 @@ export interface Photo extends PhotoMeta {
   srcSm: string;
   altKey: string;
   focus?: string;
+  achievement?: number;
 }
