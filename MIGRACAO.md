@@ -32,4 +32,3 @@ Tudo o que está ligado a contas de teste fica em **dois ficheiros**:
 
 ## 5. Quando o site for oficial
 - Remover `<meta name="robots" content="noindex, nofollow">` em `src/index.html`.
-- Rever o crédito do rodapé (`authorUrl` em `site.config.ts`).

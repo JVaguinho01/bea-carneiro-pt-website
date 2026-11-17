@@ -4,9 +4,9 @@
  */
 export const environment = {
   emailjs: {
-    serviceId: 'service_9l0e7wh',
-    templateId: 'template_2qdgr9v',
-    publicKey: '7YXxUpixldRz7D3Kt',
+    serviceId: 'service_bea_carneiro_pt',
+    templateId: 'template_bea_carneiro_pt',
+    publicKey: 'FU3MZVA-3ynJMpBCr',
   },
-  recaptchaSiteKey: '6LcvziAuAAAAADm-nET4-NZa0Ro-mRNb7e8VCrQZ',
+  recaptchaSiteKey: '6Lf5BSUuAAAAAF-isYeRtSMERERPiuf7QRCq6fAB',
 };
